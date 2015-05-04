@@ -51,33 +51,44 @@ def writeParallelFiles(zhDir,enDir,zhSuf,enSuf):
             orSent = enSent
             orSuf = enSuf
         
-        orOut = open(presfile + orSuf,'w')
-        trOut = open(presfile + trSuf,'w')
+        orOut = open(str(i) + '_' + presfile + orSuf,'w')
+        trOut = open(str(i) + '_' + presfile + trSuf,'w')
+        orMapOut = open('mapping'+ '_' + presfile + orSuf,'w')
+        trMapOut = open('mapping'+ '_' + presfile + trSuf,'w')
             
         aFile = open(os.path.abspath(transdir + '/' + transdoc + '.parallel'))
         orLine = ''
         trLine = ''
         orMapPrev = -1
         trMapPrev = -1
+        parLine = 0
         for line in aFile:
             if not line.startswith('map'): continue
             s = line.split()
             orMap = int(s[1])
             trMap = int(s[2])
-#             if i == 1: 
-#                 print s
+            if i == 1: 
+                print s
 #                 print orMapPrev
 #                 print orMap
 #                 print trMapPrev
 #                 print trMap
             if orMap == orMapPrev:
                 trLine = trLine + ' ' + ' '.join(trSent[trMap])
+                for spT in range(len(trSent[trMap])):
+                    ppT = spT + 1 + ppTHeld
+                    trMapOut.write(str(parLine) + '_' + str(ppT) + ' ' + str(trMap) + '_' + str(spT) + '\n')
+                ppTHeld = ppT
 #                 if i == 1: 
 #                     print 'ONE'
 #                     print trLine
 #                     print orLine
             elif trMap == trMapPrev:
                 orLine = orLine + ' ' + ' '.join(orSent[orMap])
+                for spO in range(len(orSent[orMap])):
+                    ppO = spO + 1 + ppOHeld
+                    orMapOut.write(str(parLine) + '_' + str(ppO) + ' ' + str(orMap) + '_' + str(spO) + '\n')
+                ppOHeld = ppO
 #                 if i == 1: 
 #                     print 'TWO'
 #                     print trLine
@@ -89,8 +100,23 @@ def writeParallelFiles(zhDir,enDir,zhSuf,enSuf):
                 if len(orLine) > 0 and len(trLine) > 0:
                     orOut.write(orLine + '\n')
                     trOut.write(trLine + '\n')
+                    parLine += 1
                 orLine = ' '.join(orSent[orMap])
                 trLine = ' '.join(trSent[trMap])
+                #****here need to loop through each word in orSent[orMap] (the sentence being written this line)
+                #and record the parl line number that we're writing and the word position on that line, and link it to the sentence number
+                #(orMap) and word position in the sentence (i in the loop through the words)
+                # to get word position in parline, at end of loop through sentence words, keep last i, and if you later add to the line, 
+                #add the kept i to each new i 
+                for spO in range(len(orSent[orMap])):
+                    ppO = spO
+                    orMapOut.write(str(parLine) + '_' + str(ppO) + ' ' + str(orMap) + '_' + str(spO) + '\n')
+                ppOHeld = ppO
+                for spT in range(len(trSent[trMap])):
+                    ppT = spT
+                    trMapOut.write(str(parLine) + '_' + str(ppT) + ' ' + str(trMap) + '_' + str(spT) + '\n')
+                ppTHeld = ppT
+                #then do same for trSent[trMap] sentence
 #                 if i == 1:
 #                     print 'THREE'
 #                     print trLine
@@ -107,6 +133,8 @@ def writeParallelFiles(zhDir,enDir,zhSuf,enSuf):
         
         orOut.close()
         trOut.close()
+        orMapOut.close() 
+        trMapOut.close()
                 	            
 
             
@@ -121,8 +149,9 @@ def extractSentFromParse(file):
             if len(s) > 0:
                 sentences.append(s)
                 s = []
-        m = re.match('\s*(\(\-?[A-Z0-9]+\-?[A-Z0-9]*\-?\-?[A-Z0-9]*\-?\s)+([^\)]+).+',line)
-        if m: 
+        m = re.match('\s*(\(\-?[A-Z0-9\$\,\.\;\?]+\-?[A-Z0-9\$]*\-?\-?[A-Z0-9\$]*\-?\s)+([^\)]+).+',line)
+        n = re.match('.*\-NONE\- .*',line)
+        if m and not n: 
             word = m.group(2)
             s.append(word)
     sentences.append(s)
