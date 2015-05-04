@@ -51,8 +51,8 @@ def writeParallelFiles(zhDir,enDir,zhSuf,enSuf):
             orSent = enSent
             orSuf = enSuf
         
-        orOut = open(str(i) + '_' + presfile + orSuf,'w')
-        trOut = open(str(i) + '_' + presfile + trSuf,'w')
+        orOut = open('00' + str(i) + '_' + presfile + orSuf,'w')
+        trOut = open('00' + str(i) + '_' + presfile + trSuf,'w')
         orMapOut = open('mapping'+ '_' + presfile + orSuf,'w')
         trMapOut = open('mapping'+ '_' + presfile + trSuf,'w')
             
