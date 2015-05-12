@@ -1,0 +1,53 @@
+
+*******
+processAlignments.py
+*******
+
+This script processes all of the various layers of annotation, links them to the alignments, loads the word vector models and runs the experiment. (That is, it does everything that happened after getting alignments.) It outputs the p value and precision/recall/accuracy results, as well as a saved plot of the distribution over similarity scores for the two label groups, and a file showing which pairs were labeled incorrectly. 
+
+
+Example (this should work if run in this directory):
+
+
+python processAlignments.py 'parl' 'zh' 'en' 'berkeleyOutput' 'mappings' 'enmapfix' 'zhModels/zhModel3'
+
+
+
+Usage: 
+
+
+python processAlignments.py <parldir> <zh_annotdir> <en_annotdir> <aligndir> <mapping_dir> <mapfixdir> <word2vec model>
+
+
+
+parldir: directory containing the OntoNotes data converted to parallel files (parallel lines). This was the input to he Berkeley aligner.
+
+zh_annotdir: directory containing parse, parallel, and sense annotation layers for the Chinese OntoNotes data files.
+
+en_annotdir: directory containing parse, parallel, and sense annotation layers for the English OntoNotes data files. 
+
+aligndir: directory containing output of Berkeley aligner (training.* files). 
+
+mapping_dir: directory containing, for each OntoNotes file, a mapping between the sentence/word indices in the parl (Berkeley aligner input) files and the original files on which sense annotation positions are based.
+
+mapfixdir: this directory exists because of a bug in the code I used to produce the aligner input files, which caused an unanticipated mismatch between parl file positions and sense annotation positions on some lines. The files in this directory identify which positions in the English data are affected and allow me to correct accordingly.  
+
+word2vec model: this is the output of gensim after training on the monolingual Chinese data. In the example I’ve directed it to the model that was trained on slightly more data — there is also zhModel2, which was trained only on the BOLT data used for the alignments.
+
+
+*********
+writeParl.py
+*******
+
+I don’t think there’s any reason you would need to run this, but it is the script I used to generate the parallel files that were input to the Berkeley aligner. 
+
+Example: 
+
+
+python writeParl.py 'zh' 'en' '.zh' '.en'
+
+
+Usage:
+
+
+python writeParl.py <zh_annotdir> <en_annotdir> <zh file suffix> <en file suffix>
