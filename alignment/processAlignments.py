@@ -4,6 +4,7 @@
 import os, sys, re, itertools, gensim, numpy, math, scipy
 from scipy import stats
 from matplotlib import pyplot
+from sys import stdout
 
 
 class SenseObj(object):
@@ -13,8 +14,10 @@ class SenseObj(object):
     
 def runExperiment(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir,w2vmodel):
     
-    senseDict = combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir)
+    [senseDict,counts] = combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir)
+    print 'loading model'
     vecmodel = gensim.models.Word2Vec.load(os.path.abspath(w2vmodel))
+    print 'running experiment'
     pairs = []
     testi = 0
     for w,alignwdict in senseDict.items():
@@ -53,6 +56,9 @@ def runExperiment(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir,w2vm
     poly_tot = 0
     
     items_tot = 0
+    
+    synOut = open('syn_output.txt','w')
+    polyOut = open('poly_output.txt','w')
 
     for pair in pairs:
         try: vecmodel.similarity(pair[0][0],pair[1][0])
@@ -64,6 +70,7 @@ def runExperiment(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir,w2vm
             if pair[0][1] == pair[1][1]: 
                 label = 'syn'
                 syn_sim_list_ALL.append(sim)
+                synOut.write(pair[0][2] + ',' + pair[0][0] + ',' + pair[1][0] + ',' + str(sim) + ',' + label + ',' + str(counts[pair[0][0]]) + ',' + str(counts[pair[1][0]]) + '\n')
                 if items_tot % 10 == 0: test.append((sim, label, pair[0][0], pair[1][0], pair[0][2]))
                 else: 
                     syn_sim_list.append(sim)
@@ -71,10 +78,14 @@ def runExperiment(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir,w2vm
             else: 
                 label = 'poly'
                 poly_sim_list_ALL.append(sim)
+                polyOut.write(pair[0][2] + ',' + pair[0][0] + ',' + pair[1][0] + ',' + str(sim) + ',' + label + ',' + str(counts[pair[0][0]]) + ',' + str(counts[pair[1][0]]) + '\n')
                 if items_tot % 10 == 0: test.append((sim, label, pair[0][0],pair[1][0], pair[0][2]))
                 else: 
                     poly_sim_list.append(sim)
                     poly_tot += 1
+    
+    synOut.close()
+    polyOut.close()
                     
     print '\n'
     polymean = numpy.mean(poly_sim_list)
@@ -162,6 +173,7 @@ def runExperiment(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir,w2vm
 
 def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir):
 # def combineLayers():
+    print 'combining corpus layers'
     parldir = os.path.abspath(parldir)
     zh_annotdir = os.path.abspath(zh_annotdir)
     en_annotdir = os.path.abspath(en_annotdir)
@@ -180,11 +192,15 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir):
     
     #run cleanAlignments function and get alignments and numbers for the entire alignment corpus
     [translations,counts,num_alignments] = cleanAlignments(aligndir)
+    
+    enLemmaCounts = {}
 
     parlfiles = os.listdir(parldir)
     align_i = 0
     f_i = 0
     words = {}
+    wordfreqs = {}
+    inflections = {}
     
     ##iterate through parallel file pairs
     for f in parlfiles:
@@ -223,6 +239,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir):
         enSenseFile = open(os.path.join(en_annotdir,enID+'.sense'))
         enSenseLines = [e for e in enSenseFile.read().split('\n') if len(e) > 0]
         enSenseAnnotatedPos = {}
+        
         for s in enSenseLines:
             pos = s.split()[1]+ '_' + s.split()[2]
             lemma = s.split()[3]
@@ -230,6 +247,8 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir):
             else: sense = s.split()[5]
             thisSense = SenseObj(lemma,sense)
             enSenseAnnotatedPos[pos] = thisSense
+            if not enLemmaCounts.has_key(lemma): enLemmaCounts[lemma] = 0
+            enLemmaCounts[lemma] += 1
 #             if f_i < 2: print pos + '...' + enSenseAnnotatedPos[pos].lemma + ',' + enSenseAnnotatedPos[pos].sense
         enSenseFile.close()
         
@@ -294,6 +313,15 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir):
                     alignWordPos = int(parlAligns[enParlPos].split('_')[1])
                     alignWord = zhLine.split()[alignWordPos]
                     enWord = enLineWords[wp].lower()
+                    if lem[0] != enWord[0] and not re.match('(be|have)\-.*',lem): 
+                        print lem
+                        print enWord
+                        print enID
+                        print i
+                        print f
+                        print align_i
+                    if not inflections.has_key(lem): inflections[lem] = {}
+                    if not inflections[lem].has_key(enWord): inflections[lem][enWord] = counts[enWord]
                     if not translations[enWord].has_key(alignWord): break
                     
                     #filter by PMI and filter out pronouns and auxiliary/light verbs
@@ -313,15 +341,40 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir):
                     if not words.has_key(lem): words[lem] = {}
                     if not words[lem].has_key(alignWord): words[lem][alignWord] = []
                     words[lem][alignWord].append([sense, enParlPos])
+                    if not wordfreqs.has_key(lem): wordfreqs[lem] = {}
+                    if not wordfreqs[lem].has_key(alignWord): wordfreqs[lem][alignWord] = cZ
             parl_i += 1
             align_i += 1
         enParlFile.close()
         zhParlFile.close()
 #     print words.items()[1]
-    return words
+
+    enLemmaCtFile = open('enLemmaCt.txt','w')
+    for lem,ct in enLemmaCounts.items():
+        enLemmaCtFile.write(lem+','+str(ct)+'\n')
+    enLemmaCtFile.close()
+    transFreqFile = open('transFreq.txt','w')
+    for lem,transdict in wordfreqs.items():
+        transFreqFile.write(lem+';')
+        for trans,freq in transdict.items():
+            transFreqFile.write(trans+':'+str(freq)+',')
+        transFreqFile.write('\n')
+    transFreqFile.close()
+    inflectFile = open('inflections.txt','w')
+    for lem,enWordDict in inflections.items():
+        inflectFile.write(lem+',')
+        totct = 0
+        for inf,ct in enWordDict.items():
+            totct += ct
+        inflectFile.write(str(ct))
+        inflectFile.write('\n')
+    inflectFile.close()
+    
+    return [words,counts]
     
 def cleanAlignments(aligndir):
 
+    print 'getting alignment counts'
     alignDoc = open(os.path.join(os.path.abspath(aligndir),'training.align'))
     enAligndoc = open(os.path.join(os.path.abspath(aligndir),'training.tok.train.declass'))
     zhAligndoc = open(os.path.join(os.path.abspath(aligndir),'training.tok.ne.train.declass'))
@@ -336,6 +389,9 @@ def cleanAlignments(aligndir):
     counts = {}
     num_alignments = 0
     for i in range(len(alignLines)):
+        if i % 5000 == 0:
+            stdout.write('.')
+            stdout.flush()
         alignLine = alignLines[i].split()
         zhLine = zhAlignLines[i].split()
         enLine = enAlignLines[i].split()
@@ -353,6 +409,8 @@ def cleanAlignments(aligndir):
             if not translations.has_key(enWord): translations[enWord] = {}
             if not translations[enWord].has_key(zhWord): translations[enWord][zhWord] = 0
             translations[enWord][zhWord] += 1
+    print ''
+
     return [translations,counts,num_alignments]
     
 if __name__ == "__main__":

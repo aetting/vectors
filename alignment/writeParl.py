@@ -67,7 +67,7 @@ def writeParallelFiles(zhDir,enDir,zhSuf,enSuf):
             s = line.split()
             orMap = int(s[1])
             trMap = int(s[2])
-            if i == 1: 
+#             if i == 1: 
 #                 print s
 #                 print orMapPrev
 #                 print orMap
@@ -197,10 +197,11 @@ def extractSentFromParse(file):
             if len(s) > 0:
                 sentences.append(s)
                 s = []
-        m = re.match('\s*(\(\-?[A-Z0-9\$\,\.\;\?]+\-?[A-Z0-9\$]*\-?\-?[A-Z0-9\$]*\-?\s)+([^\)]+).+',line)
+#         m = re.match('\s*(\(\-?[A-Z0-9\$\,\.\;\?\:]+\-?[A-Z0-9\$]*\-?\-?[A-Z0-9\$]*\-?\s)+([^\)]+).+',line)
+        m = re.match('\s*.*\s([^\(\)]+)\)+',line)
         n = re.match('.*\-NONE\- .*',line)
         if m and not n: 
-            word = m.group(2)
+            word = m.group(1)
             s.append(word)
     sentences.append(s)
 
@@ -215,10 +216,11 @@ def extractSentFromParseFix(file):
             if len(s) > 0:
                 sentences.append(s)
                 s = []
-        m = re.match('\s*(\(\-?[A-Z0-9\$\,\.\;\?\:]+\-?[A-Z0-9\$]*\-?\-?[A-Z0-9\$]*\-?\s)+([^\)]+).+',line)
+#         m = re.match('\s*(\(\-?[A-Z0-9\$\,\.\;\?\:]+\-?[A-Z0-9\$]*\-?\-?[A-Z0-9\$]*\-?\s)+([^\)]+).+',line)
+        m = re.match('\s*.*\s([^\(\)]+)\)+',line)
         n = re.match('.*\-NONE\- .*',line)
         if m and not n: 
-            word = m.group(2)
+            word = m.group(1)
             s.append(word)
     sentences.append(s)
 
