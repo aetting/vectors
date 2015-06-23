@@ -1,15 +1,15 @@
 #!/bin/bash
 
 date=150430
-exp_dir=/Users/allysonettinger/Desktop/filterout
+exp_dir=/cliphomes/aetting/vectors/alignment/process
 
 lang_in=zh
 lang_out=en
 lang_pair=$lang_in-$lang_out
 
 ## experiment files
-train_dir=/Users/allysonettinger/Desktop/filtertest
-filtered=/Users/allysonettinger/Desktop/filtered
+train_dir=/fs/clip-scratch/aetting/bolt/zh-en
+filtered=/fs/clip-scratch/aetting/bolt/zh-en-proc
 
 cd $train_dir
 
@@ -19,8 +19,10 @@ for f in *.ne.*
 
 do
 
-pre=$(echo $f | awk -F '.ne.' '{print $1}')
-post=$(echo $f | awk -F '.ne.' '{print $2}')  
+echo $f
+
+pre=$(echo $f | awk -F '\\.ne\\.' '{print $1}')
+post=$(echo $f | awk -F '\\.ne\\.' '{print $2}')  
 
 output=$exp_dir/train.both
 # if [ ! -f $output ]; then
@@ -41,6 +43,11 @@ output2=$input_both.filt
 # fi
 
 $exp_dir/splitfilt.pl $input_both.filt $filtered/$pre.ne.$post $filtered/$pre.$post
+
+if [ ! -s $filtered/$pre.ne.$post ]; then
+    cp $train_dir/$pre.ne.$post $filtered/
+    cp $train_dir/$pre.$post $filtered/
+fi
 
 done
 

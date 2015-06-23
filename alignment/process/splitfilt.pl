@@ -11,7 +11,6 @@ while (<$ff>) {
  print $filef $sf;
  print $filef "\n";
  print $filee $se;
- print;
  }
 close $ff;
 close $filef;
