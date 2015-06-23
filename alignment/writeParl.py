@@ -201,7 +201,7 @@ def extractSentFromParse(file):
         m = re.match('\s*.*\s([^\(\)]+)\)+',line)
         n = re.match('.*\-NONE\- .*',line)
         if m and not n: 
-            word = m.group(1)
+            word = m.group(1).lower()
             s.append(word)
     sentences.append(s)
 
