@@ -8,8 +8,18 @@ lang_out=en
 lang_pair=$lang_in-$lang_out
 
 ## experiment files
-train_dir=/fs/clip-scratch/aetting/bolt/zh-en
-filtered=/fs/clip-scratch/aetting/bolt/zh-en-proc
+train_dir=/fs/clip-scratch/aetting/onto/parl
+filtered=/fs/clip-scratch/aetting/onto/parl-proc
+
+#tar xvfJ Zh-En.P3.tar.xz
+
+# cp Zh-En.P3/data/train/* zh-en/ 
+
+#rm zh-en/*UN*
+
+#for filename in *src.*; do mv $filename ${filename//src./}; done
+#for filename in *tgt.*; do mv $filename ${filename//tgt./}; done
+#for filename in *unseg.*; do mv $filename ${filename//unseg./}; done
 
 cd $train_dir
 
