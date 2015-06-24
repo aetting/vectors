@@ -12,9 +12,9 @@ class SenseObj(object):
         self.lemma = lemma
         self.sense = sense      
     
-def runExperiment(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
+def runExperiment(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir,w2vmodel):
     
-    [senseDict,counts] = combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir)
+    [senseDict,counts] = combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir)
     print 'loading model'
     vecmodel = gensim.models.Word2Vec.load(os.path.abspath(w2vmodel))
     print 'running experiment'
@@ -171,14 +171,14 @@ def runExperiment(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
 
 
 
-def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
+def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,mapfixdir):
 # def combineLayers():
     print 'combining corpus layers'
     parldir = os.path.abspath(parldir)
     zh_annotdir = os.path.abspath(zh_annotdir)
     en_annotdir = os.path.abspath(en_annotdir)
     mapdir = os.path.abspath(mapdir)
-#     mapfixdir = os.path.abspath(mapfixdir)
+    mapfixdir = os.path.abspath(mapfixdir)
 
     alignDoc = open(os.path.join(os.path.abspath(aligndir),'training.align'))
     enAligndoc = open(os.path.join(os.path.abspath(aligndir),'training.tok.train.declass'))
@@ -253,12 +253,12 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
         enSenseFile.close()
         
         ##create dict with entries for sentences that have length discrepancies between sense annotation and parallel files -- for fixing position mapping
-#         enMapFixFile = open(os.path.join(mapfixdir,zhID+'_enmapfix.txt'))
-#         enMapFixLines = [e for e in enMapFixFile.read().split('\n') if len(e) > 0]
-#         enMapFixes = {}
-#         for m in enMapFixLines:
-#             enMapFixes[m.split()[0]] = 1
-#         enMapFixFile.close()
+        enMapFixFile = open(os.path.join(mapfixdir,zhID+'_enmapfix.txt'))
+        enMapFixLines = [e for e in enMapFixFile.read().split('\n') if len(e) > 0]
+        enMapFixes = {}
+        for m in enMapFixLines:
+            enMapFixes[m.split()[0]] = 1
+        enMapFixFile.close()
     
         ##iterate through lines of parallel file pair
         parlAligns = {}
@@ -279,31 +279,29 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
             enAlLineWords = enAlignLines[align_i].split()
             zhAlLineWords = zhAlignLines[align_i].split()
             if len(enLineWords) != len(enAlLineWords) or len(zhLineWords) != len(zhAlLineWords):
-                print 'length mismatch'
-#                 print enLineWords
-#                 print enAlLineWords
-#                 print ' '.join(zhLineWords)
-#                 print ' '.join(zhAlLineWords)
+                print enLineWords
+                print len(enLineWords)
+                print enAlLineWords
+                print len(enAlLineWords)
+                print ' '.join(zhLineWords)
+                print len(zhLineWords)
+                print ' '.join(zhAlLineWords)
+                print len(zhAlLineWords)
                 print align_i
-                align_i += 1
-                parl_i += 1
-                continue
             
             offsetLine = 0
             
             ##iterate through words in line, locating corresponding word position used by sense annotation (using mapping fix if applicable)
-            skip = 0
             for wp in range(len(enLineWords)):
 #                 if f_i < 2: print enLineWords
                 enParlPos = str(parl_i) + '_' + str(wp)
-#                 if not enMaps.has_key(enParlPos): break
+                if not enMaps.has_key(enParlPos): break
                 enOrigPos = enMaps[enParlPos]
-#                 if enMapFixes.has_key(enOrigPos): offsetLine = 1
-#                 if offsetLine == 1:
-#                     newPos = int(enOrigPos.split('_')[1]) + 1
-#                     senPos = enOrigPos.split('_')[0] + '_' + str(newPos)
-#                 else: senPos = enOrigPos
-                senPos = enOrigPos
+                if enMapFixes.has_key(enOrigPos): offsetLine = 1
+                if offsetLine == 1:
+                    newPos = int(enOrigPos.split('_')[1]) + 1
+                    senPos = enOrigPos.split('_')[0] + '_' + str(newPos)
+                else: senPos = enOrigPos
                 
 
                 ##for positions with sense annotation, write to dict storing aligned word, sense annotation, and position in parallel file
@@ -313,17 +311,9 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
                     sense = enSenseAnnotatedPos[senPos].sense
                     if not parlAligns.has_key(enParlPos): continue
                     alignWordPos = int(parlAligns[enParlPos].split('_')[1])
-                    if enLineWords[wp] != enAlLineWords[wp] or zhLineWords[alignWordPos] != zhAlLineWords[alignWordPos]:
-                        print 'word mismatch'
-                        print enLineWords
-                        print enAlLineWords
-                        print ' '.join(zhLineWords)
-                        print ' '.join(zhAlLineWords)
-                        break
-                    alignWord = zhLineWords[alignWordPos]
-                    enWord = enLineWords[wp]
-#                     enWord = enLineWords[wp].lower()
-                    if lem[0] != enWord[0] and not enWord[0] == "'" and not re.match('(is|was|are|were|am|went)',enWord): 
+                    alignWord = zhLine.split()[alignWordPos]
+                    enWord = enLineWords[wp].lower()
+                    if lem[0] != enWord[0] and not re.match('(be|have)\-.*',lem): 
                         print lem
                         print enWord
                         print enID
@@ -332,15 +322,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
                         print align_i
                     if not inflections.has_key(lem): inflections[lem] = {}
                     if not inflections[lem].has_key(enWord): inflections[lem][enWord] = counts[enWord]
-                    if not translations[enWord].has_key(alignWord): 
-                        print 'trans key missing'
-                        print enWord
-                        print alignWord
-                        print enLine
-                        print enAlignLines[align_i]
-                        print ' '.join(zhLineWords)
-                        print ' '.join(zhAlLineWords)
-                        print alignLines[align_i]
+                    if not translations[enWord].has_key(alignWord): break
                     
                     #filter by PMI and filter out pronouns and auxiliary/light verbs
                     cE = counts[enWord]
@@ -416,11 +398,7 @@ def cleanAlignments(aligndir):
         for j in range(len(alignLine)):
             zhPos = int(alignLine[j].split('-')[0])
             enPos = int(alignLine[j].split('-')[1])
-            if zhPos >= len(zhLine) or enPos >= len(enLine): 
-                print zhLine
-                print enLine
-                print alignLine
-                break 
+            if zhPos >= len(zhLine) or enPos >= len(enLine): break 
             num_alignments += 1	
             zhWord = zhLine[zhPos]
             enWord = enLine[enPos]
@@ -436,7 +414,7 @@ def cleanAlignments(aligndir):
     return [translations,counts,num_alignments]
     
 if __name__ == "__main__":
-    runExperiment(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6])
+    runExperiment(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6],sys.argv[7])
 
 # if __name__ == "__main__":
 #     cleanAlignments('/Users/allysonettinger/Desktop/300k_align')
