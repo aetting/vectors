@@ -212,6 +212,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
         m = re.match('([0-9]+_)(.+)\.tok\.ne.+',f)
         if not m: continue
         print f
+        num=m.group(1)
         zhID = m.group(2)
         parlID = m.group(1) + m.group(2)
         trf = open(os.path.join(zh_annotdir,zhID + '.parallel'))
@@ -230,7 +231,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
         if len(enLines) != len(zhLines): print parlID + ': zh and en don\'t have same number of lines'
         
         ##create dict mapping sentence and word index in parallel file to (not yet corrected) positions in sense annotation (from parse trees)
-        enMapFile = open(os.path.join(mapdir,'mapping_'+zhID+'.tok.train.declass'))
+        enMapFile = open(os.path.join(mapdir,'mapping_'+num+zhID+'.tok.train.declass'))
         enMapLines = [e for e in enMapFile.read().split('\n') if len(e) > 0]
         enMaps = {}
         for m in enMapLines:
