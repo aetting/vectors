@@ -53,8 +53,8 @@ def writeParallelFiles(zhDir,enDir,zhSuf,enSuf):
         
         orOut = open('00' + str(i) + '_' + presfile + orSuf,'w')
         trOut = open('00' + str(i) + '_' + presfile + trSuf,'w')
-        orMapOut = open('mapping'+ '_' + presfile + orSuf,'w')
-        trMapOut = open('mapping'+ '_' + presfile + trSuf,'w')
+        orMapOut = open('mapping'+ '_' + '00' + str(i) + '_' + presfile + orSuf,'w')
+        trMapOut = open('mapping'+ '_' + '00' + str(i) + '_' + presfile + trSuf,'w')
             
         aFile = open(os.path.abspath(transdir + '/' + transdoc + '.parallel'))
         orLine = ''
