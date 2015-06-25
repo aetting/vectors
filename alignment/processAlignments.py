@@ -195,7 +195,8 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
     
     enLemmaCounts = {}
 
-    parlfiles = os.listdir(parldir)
+#     parlfiles = os.listdir(parldir)
+    parlfiles = ['0010_cnn_0003.tok.ne.train.declass','0011_cnn_0004.tok.ne.train.declass','0012_msnbc_0000.tok.ne.train.declass','0013_phoenix_0000.tok.ne.train.declass','0014_phoenix_0007.tok.ne.train.declass','0015_phoenix_0009.tok.ne.train.declass','0016_phoenix_0011.tok.ne.train.declass','001_cctv_0000.tok.ne.train.declass','002_cctv_0001.tok.ne.train.declass','003_cctv_0002.tok.ne.train.declass','004_cctv_0003.tok.ne.train.declass','005_cctv_0004.tok.ne.train.declass','006_cctv_0005.tok.ne.train.declass','007_cnn_0000.tok.ne.train.declass','008_cnn_0001.tok.ne.train.declass','009_cnn_0002.tok.ne.train.declass']
     align_i = 0
     f_i = 0
     words = {}
@@ -210,6 +211,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
         ##get parallel file IDs for this pair, and IDs of corresponding annotation files 
         m = re.match('([0-9]+_)(.+)\.tok\.ne.+',f)
         if not m: continue
+        print f
         zhID = m.group(2)
         parlID = m.group(1) + m.group(2)
         trf = open(os.path.join(zh_annotdir,zhID + '.parallel'))
@@ -279,12 +281,12 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
             enAlLineWords = enAlignLines[align_i].split()
             zhAlLineWords = zhAlignLines[align_i].split()
             if len(enLineWords) != len(enAlLineWords) or len(zhLineWords) != len(zhAlLineWords):
-                print 'length mismatch'
+#                 print 'length mismatch'
 #                 print enLineWords
 #                 print enAlLineWords
 #                 print ' '.join(zhLineWords)
 #                 print ' '.join(zhAlLineWords)
-                print align_i
+#                 print align_i
                 align_i += 1
                 parl_i += 1
                 continue
@@ -314,11 +316,11 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
                     if not parlAligns.has_key(enParlPos): continue
                     alignWordPos = int(parlAligns[enParlPos].split('_')[1])
                     if enLineWords[wp] != enAlLineWords[wp] or zhLineWords[alignWordPos] != zhAlLineWords[alignWordPos]:
-                        print 'word mismatch'
-                        print enLineWords
-                        print enAlLineWords
-                        print ' '.join(zhLineWords)
-                        print ' '.join(zhAlLineWords)
+#                         print 'word mismatch'
+#                         print enLineWords
+#                         print enAlLineWords
+#                         print ' '.join(zhLineWords)
+#                         print ' '.join(zhAlLineWords)
                         break
                     alignWord = zhLineWords[alignWordPos]
                     enWord = enLineWords[wp]
@@ -417,9 +419,9 @@ def cleanAlignments(aligndir):
             zhPos = int(alignLine[j].split('-')[0])
             enPos = int(alignLine[j].split('-')[1])
             if zhPos >= len(zhLine) or enPos >= len(enLine): 
-                print zhLine
-                print enLine
-                print alignLine
+#                 print zhLine
+#                 print enLine
+#                 print alignLine
                 break 
             num_alignments += 1	
             zhWord = zhLine[zhPos]
