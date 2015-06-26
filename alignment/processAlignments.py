@@ -20,6 +20,7 @@ def runExperiment(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     print 'running experiment'
     pairs = []
     testi = 0
+    pairs_added = 0
     for w,alignwdict in senseDict.items():
         if len(alignwdict) < 2: continue
         pivotlist = []
@@ -44,6 +45,7 @@ def runExperiment(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
         testi += 1
         for pair in pairIterator:
             pivotpairs.append(pair)
+            pairs_added += 1
 #             print ' '.join([pair[0][0],pair[0][1],pair[1][0],pair[1][1]])
         pairs += pivotpairs    
     
@@ -86,6 +88,7 @@ def runExperiment(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     
     synOut.close()
     polyOut.close()
+    print 'pairs added: ' + str(pairs_added)
                     
     print '\n'
     polymean = numpy.mean(poly_sim_list)
@@ -198,6 +201,8 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
 #     parlfiles = os.listdir(parldir)
     parlfiles = ['0010_cnn_0003.tok.ne.train.declass','0011_cnn_0004.tok.ne.train.declass','0012_msnbc_0000.tok.ne.train.declass','0013_phoenix_0000.tok.ne.train.declass','0014_phoenix_0007.tok.ne.train.declass','0015_phoenix_0009.tok.ne.train.declass','0016_phoenix_0011.tok.ne.train.declass','001_cctv_0000.tok.ne.train.declass','002_cctv_0001.tok.ne.train.declass','003_cctv_0002.tok.ne.train.declass','004_cctv_0003.tok.ne.train.declass','005_cctv_0004.tok.ne.train.declass','006_cctv_0005.tok.ne.train.declass','007_cnn_0000.tok.ne.train.declass','008_cnn_0001.tok.ne.train.declass','009_cnn_0002.tok.ne.train.declass']
     align_i = 0
+    lines_completed = 0
+    words_added = 0
     f_i = 0
     words = {}
     wordfreqs = {}
@@ -211,7 +216,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
         ##get parallel file IDs for this pair, and IDs of corresponding annotation files 
         m = re.match('([0-9]+_)(.+)\.tok\.ne.+',f)
         if not m: continue
-        print f
+#         print f
         num=m.group(1)
         zhID = m.group(2)
         parlID = m.group(1) + m.group(2)
@@ -362,10 +367,12 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
                     if not words.has_key(lem): words[lem] = {}
                     if not words[lem].has_key(alignWord): words[lem][alignWord] = []
                     words[lem][alignWord].append([sense, enParlPos])
+                    words_added += 1
                     if not wordfreqs.has_key(lem): wordfreqs[lem] = {}
                     if not wordfreqs[lem].has_key(alignWord): wordfreqs[lem][alignWord] = cZ
             parl_i += 1
             align_i += 1
+            lines_completed += 1
         enParlFile.close()
         zhParlFile.close()
 #     print words.items()[1]
@@ -383,13 +390,17 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
     transFreqFile.close()
     inflectFile = open('inflections.txt','w')
     for lem,enWordDict in inflections.items():
-        inflectFile.write(lem+',')
+        inflectFile.write(lem+'; ')
         totct = 0
         for inf,ct in enWordDict.items():
             totct += ct
-        inflectFile.write(str(ct))
+            inflectFile.write(inf+': '+str(ct)+',')
+        inflectFile.write(';'+str(totct))
         inflectFile.write('\n')
     inflectFile.close()
+    print 'lines completed: ' + str(lines_completed)
+    print 'all lines: ' + str(align_i)
+    print 'words added: ' + str(words_added)
     
     return [words,counts]
     
