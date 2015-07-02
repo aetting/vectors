@@ -3,7 +3,7 @@
 
 ### python classifyAlignments.py 'newparl' 'zh' 'en' '/Users/allysonettinger/Desktop/alignments/300k_align' 'newmap2' '/Users/allysonettinger/Desktop/zhModels/zhModel3'
 
-import os, sys, re, itertools, gensim, numpy, math, scipy, sklearn
+import os, sys, re, itertools, gensim, numpy, math, scipy, sklearn, operator
 from scipy import stats
 from matplotlib import pyplot
 from numpy import linalg
@@ -82,6 +82,38 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
 #             print ' '.join([pair[0][0],pair[0][1],pair[1][0],pair[1][1]])
         pairs += pivotpairs    
     
+    lemma_dist = {}
+    total = 0
+    for pair in pairs:
+        lem = pair[0][2]
+        w1 = pair[0][0]
+        w2 = pair[1][0]
+        try: vecmodel.similarity(w1,w2)
+        except: 
+            continue
+        else:
+            if not lemma_dist.has_key(lem): lemma_dist[lem] = 0
+            lemma_dist[lem] += 1
+            total += 1
+    sortedpairs = sorted(lemma_dist.items(), key=operator.itemgetter(1))
+    s_i = 0
+    test_tot = 0
+    lemma_set_assignments = {}
+    for lem,ct in sortedpairs:
+        s_i += 1
+        if s_i % 5 == 0 and test_tot < (float(total)/10):
+            lemma_set_assignments[lem] = 'test'
+            test_tot += ct
+        else: lemma_set_assignments[lem] = 'train'
+    print 'test set total: ' + str(test_tot)     
+    with open('lemmadist.txt','w') as lemmadistfile:
+        for lem,set in lemma_set_assignments.items():
+            if set == 'test': lemmadistfile.write(lem + ': ' + str(lemma_dist[lem]) + ': ' + set + '\n')
+        for lem,set in lemma_set_assignments.items():
+            if set == 'train': lemmadistfile.write(lem + ': ' + str(lemma_dist[lem]) + ': ' + set + '\n')
+    
+    print 'Total in lemma dist file: ' + str(total)
+    
     test = []
     syn_sim_list = []
     syn_sim_list_ALL = []
@@ -99,7 +131,6 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     
     synOut = open('syn_output.txt','w')
     polyOut = open('poly_output.txt','w')
-
     for pair in pairs:
         try: vecmodel.similarity(pair[0][0],pair[1][0])
         except: 
@@ -113,22 +144,23 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
             if pair[0][1] == pair[1][1]: 
                 label = 'syn'
                 syn_sim_list_ALL.append(sim)
-                synOut.write(','.join([lem,pair[0][0], pair[1][0],str(sim),label,str(counts[pair[0][0]]), str(counts[pair[1][0]])]) + '\n')
+                synOut.write(','.join([lem,w1, w2,str(sim),label,str(counts[w1]), str(counts[w2])]) + '\n')
                 if items_tot % 10 == 0: 
-                    test.append((sim, label, pair[0][0], pair[1][0], pair[0][2]))
+                    test.append((sim, label, w1, w2, lem))
                 else: 
                     syn_sim_list.append(sim)
                     syn_tot += 1
             else: 
                 label = 'poly'
                 poly_sim_list_ALL.append(sim)
-                polyOut.write(','.join([lem, pair[0][0], pair[1][0], str(sim), label, str(counts[pair[0][0]]), str(counts[pair[1][0]])]) + '\n')
+                polyOut.write(','.join([lem, w1, w2, str(sim), label, str(counts[w1]), str(counts[w2])]) + '\n')
                 if items_tot % 10 == 0: 
-                    test.append((sim, label, pair[0][0],pair[1][0], pair[0][2]))
+                    test.append((sim, label, w1,w2, lem))
                 else: 
                     poly_sim_list.append(sim)
                     poly_tot += 1
-                    
+            
+            ##extract two types of entropy (totals based on Ontonotes stuff, versus totals based on whole alignment training set)        
             if not entropies.has_key(lem): 
                 LT_total = 0
                 LT_entropy = 0
@@ -150,7 +182,8 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
 #                 print 'ENTROPY: ' + lem
 #                 print entropies[lem][0]
 #                 print entropies[lem][1]
-             
+
+            ##extract dimensionwise similarity feature 
             dimensions = []
             norm_A = numpy.linalg.norm(vecmodel[w1])
             norm_B = numpy.linalg.norm(vecmodel[w2])
@@ -164,8 +197,9 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
             featureset = [sim,inflectot[lem],transnums[lem],entropies[lem][0],entropies[lem][1]]
             featureset += dimensions
             
-            ##create input for SVM. currently set to set aside every tenth item for test set (next step try dividing by word/lemma type)      
-            if items_tot % 10 == 0:
+            ##create input for SVM. every tenth item, or divide by lemmas      
+#             if items_tot % 10 == 0:
+            if lemma_set_assignments[lem] == 'test':
                 X_test.append(featureset)
 #                 X_test.append([sim])
                 Y_test.append(label)
@@ -177,7 +211,8 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     synOut.close()
     polyOut.close()
     
-    print 'pairs added: ' + str(pairs_added)
+    print 'pairs added pre word2vec filtering: ' + str(pairs_added)
+    print 'pairs added after word2vec filtering: ' + str(items_tot)
                     
     print '\n'
     polymean = numpy.mean(poly_sim_list)
