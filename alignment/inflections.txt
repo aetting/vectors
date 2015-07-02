@@ -1,1471 +1,1477 @@
-number-n; number: 18776,numbers: 2570,;21346
-listen-v; listening: 720,listened: 350,listen: 1325,;2395
-struggle-n; struggle: 1895,;1895
-formation-n; formation: 1273,;1273
-struggle-v; struggling: 770,struggle: 1895,struggled: 235,struggles: 397,;3297
-list-n; list: 5471,;5471
-counsel-n; counseling: 305,counsel: 332,;637
-indication-n; indication: 553,;553
-unity-n; unity: 3179,;3179
-wield-v; wield: 58,wielding: 59,;117
-underestimate-v; underestimate: 132,;132
-use-n; use: 18435,;18435
-deceive-v; deceiving: 97,;97
-class-n; classes: 2166,class: 4802,;6968
-prove-v; proves: 305,proved: 1071,proven: 830,prove: 848,;3054
-thank-v; thanking: 87,thank: 2741,;2828
-writing-n; writing: 2333,;2333
-use-v; using: 6306,use: 18435,used: 11795,uses: 1986,;38522
-definition-n; definition: 589,;589
-promotion-n; promotion: 3801,;3801
-penalty-n; penalty: 1508,;1508
-impose-v; imposing: 508,imposed: 1636,;2144
-rid-v; rid: 427,;427
-split-v; split: 966,;966
-ticket-n; ticket: 1312,;1312
-seize-v; seized: 2191,seize: 717,;2908
-warning-n; warning: 2509,;2509
-single-n; single: 3327,;3327
-last-v; last: 38122,lasted: 491,;38613
-live-v; living: 6407,live: 5671,lived: 1329,lives: 4077,;17484
-accounting-n; accounting: 2252,;2252
-help-n; help: 16424,;16424
-scream-v; screaming: 75,;75
-owner-n; owners: 2275,;2275
-affect-v; affecting: 660,affect: 2410,affected: 5454,affects: 482,;9006
-notion-n; notion: 247,;247
-unite-v; unite: 848,;848
-help-v; helping: 2089,helped: 2465,helps: 1088,help: 16424,;22066
-award-n; awards: 2371,;2371
-contribution-n; contribution: 2264,;2264
-arrange-v; arranging: 474,arrange: 715,;1189
-hurt-v; hurt: 1286,;1286
-facilitate-v; facilitate: 3242,;3242
-hire-v; hiring: 434,hired: 485,;919
-donate-v; donated: 877,;877
-rush-n; rush: 770,;770
-killing-n; killing: 2947,;2947
-wash-v; wash: 554,washed: 291,;845
-persist-v; persisted: 182,;182
-die-v; die: 1210,dying: 379,died: 4822,;6411
-evidence-n; evidence: 2562,;2562
-step-v; step: 6168,steps: 2865,;9033
-session-n; session: 9260,;9260
-solution-n; solution: 7742,;7742
-problem-n; problem: 9798,problems: 12140,;21938
-town-n; town: 3763,towns: 926,;4689
-haunt-v; haunting: 33,;33
-recognize-v; recognize: 1387,recognizing: 296,recognized: 1674,recognizes: 468,;3825
-acknowledge-v; acknowledges: 168,acknowledged: 773,acknowledge: 351,;1292
-effect-n; effect: 5570,effects: 2319,;7889
-nothing-n; nothing: 4940,;4940
-describe-v; describe: 575,;575
-effect-v; effect: 5570,;5570
-risk-n; risk: 4933,;4933
-escape-v; escaped: 317,escape: 849,;1166
-injury-n; injuries: 1347,;1347
-door-n; door: 1768,doors: 709,;2477
-medicine-n; medicine: 4379,;4379
-recommend-v; recommend: 548,;548
-survive-v; survive: 883,survived: 383,;1266
-strike-v; struck: 942,strikes: 1340,;2282
-twist-v; twisted: 116,;116
-sign-n; signing: 3202,signs: 2239,sign: 3627,;9068
-overcome-v; overcome: 1360,;1360
-sign-v; signed: 10828,;10828
-past-n; past: 16618,;16618
-indulge-v; indulging: 40,;40
-center-n; center: 10036,centers: 1937,;11973
-toss-v; toss: 52,;52
-receive-v; receive: 2700,received: 6526,receiving: 1278,;10504
-belong-v; belonged: 179,belong: 552,;731
-show-n; show: 7493,;7493
-make-v; making: 6788,make: 17788,made: 23146,makes: 2745,;50467
-suggest-v; suggested: 1873,suggests: 837,suggesting: 303,suggest: 782,;3795
-limit-v; limited: 5426,;5426
-lead-v; leads: 749,led: 5924,lead: 4613,;11286
-show-v; shown: 2237,shows: 3818,showing: 1493,showed: 3473,show: 7493,;18514
-afford-v; afford: 955,;955
-oil-n; oil: 16552,;16552
-connection-n; connection: 2048,;2048
-hang-v; hang: 1004,;1004
-reputation-n; reputation: 1079,;1079
-spend-v; spending: 3533,spend: 2020,spent: 2232,;7785
-work-n; work: 27158,works: 6449,;33607
-decade-n; decades: 3231,decade: 2854,;6085
-laugh-v; laughing: 267,laughed: 154,;421
-work-v; worked: 2841,work: 27158,working: 9260,works: 6449,;45708
-be-v; be: 127389,'s: 212372,being: 9979,is: 232824,am: 10322,been: 46966,'re: 3825,are: 128524,were: 54638,'m: 5714,was: 98546,;931099
-retire-v; retiring: 189,retire: 420,;609
-top-n; top: 9369,;9369
-attack-v; attack: 6621,attacking: 529,attacked: 1404,;8554
-account-v; accounting: 2252,account: 4275,accounts: 2229,;8756
-good-n; good: 20054,;20054
-regret-n; regret: 921,;921
-director-n; director: 12503,;12503
-accomplish-v; accomplished: 487,;487
-regret-v; regret: 921,;921
-rub-v; rub: 76,;76
-rally-v; rallied: 248,;248
-task-n; task: 3892,;3892
-file-v; file: 1227,filed: 1036,;2263
-history-n; history: 10811,;10811
-motive-n; motive: 298,;298
-city-n; city: 15964,cities: 6344,;22308
-predator-n; predators: 45,;45
-cost-v; cost: 5506,costing: 155,;5661
-option-n; option: 964,options: 1363,;2327
-hole-n; hole: 423,;423
-comment-n; comment: 2144,comments: 1783,;3927
-cost-n; cost: 5506,;5506
-critic-n; critic: 342,;342
-trip-n; trip: 4737,;4737
-click-v; click: 406,;406
-insist-v; insisted: 1160,insist: 437,;1597
-cite-v; cite: 127,;127
-network-n; network: 6479,networks: 2488,;8967
-indicate-v; indicate: 691,indicated: 1961,indicating: 385,;3037
-argue-v; arguing: 273,argue: 412,;685
-boil-v; boil: 193,;193
-detain-v; detained: 1281,;1281
-tour-n; tour: 5532,;5532
-mobilize-v; mobilize: 312,mobilized: 311,;623
-compel-v; compel: 81,;81
-expression-n; expression: 1923,;1923
-communicate-v; communicate: 619,;619
-tour-v; tour: 5532,touring: 224,;5756
-marketing-n; marketing: 3200,;3200
-justify-v; justify: 229,;229
-appear-v; appeared: 1564,appears: 1011,appear: 1842,;4417
-record-n; record: 7234,records: 2244,;9478
-thought-n; thoughts: 808,;808
-prevent-v; prevented: 382,prevent: 4349,;4731
-control-n; control: 11799,;11799
-control-v; control: 11799,controlling: 771,;12570
-obtain-v; obtained: 1594,;1594
-force-n; force: 11365,forces: 11340,;22705
-anxiety-n; anxiety: 408,;408
-money-n; money: 12729,;12729
-force-v; forced: 2052,force: 11365,forces: 11340,;24757
-nation-n; nation: 7424,;7424
-persuade-v; persuade: 497,;497
-single-v; single: 3327,;3327
-crime-n; crime: 3998,;3998
-raise-v; raised: 2714,raise: 3937,raising: 2061,;8712
-enjoy-v; enjoy: 2950,enjoyed: 1287,;4237
-tune-v; tuning: 118,;118
-give-v; giving: 2262,gave: 3277,given: 5586,gives: 1566,give: 8006,;20697
-bury-v; bury: 134,buried: 583,;717
-contact-v; contact: 7992,contacted: 529,;8521
-contact-n; contact: 7992,;7992
-separate-v; separate: 2287,separates: 60,;2347
-expect-v; expected: 11255,expecting: 526,expect: 2244,;14025
-involve-v; involved: 4040,involves: 724,;4764
-day-n; days: 12492,day: 22870,;35362
-condemn-v; condemned: 1660,condemning: 334,;1994
-activate-v; activated: 162,;162
-pipeline-n; pipeline: 1216,;1216
-copy-v; copied: 168,;168
-curse-v; cursing: 80,;80
-lock-v; locking: 49,;49
-relay-v; relayed: 66,;66
-toll-n; toll: 1166,;1166
-favour-v; favors: 234,;234
-capture-v; captured: 856,;856
-part-n; part: 12102,parts: 3902,;16004
-resign-v; resigned: 675,resign: 890,;1565
-range-v; ranging: 787,;787
-beat-v; beat: 1860,beating: 617,;2477
-star-n; star: 2457,;2457
-victim-n; victims: 2917,;2917
-beat-n; beat: 1860,;1860
-remove-v; removed: 1081,remove: 1251,;2332
-mourn-v; mourned: 59,mourning: 304,;363
-body-n; body: 4429,;4429
-cry-v; cry: 490,crying: 348,cried: 245,;1083
-share-v; shared: 1559,sharing: 1227,share: 6256,;9042
-cry-n; cry: 490,;490
-double-v; doubled: 530,;530
-bill-n; bill: 8423,;8423
-smash-v; smashed: 660,smash: 125,;785
-erect-v; erected: 248,;248
-host-v; hosted: 1977,;1977
-stir-v; stir: 404,stirring: 128,;532
-stage-n; stage: 5501,;5501
-explain-v; explain: 1273,explained: 1627,;2900
-create-v; create: 4822,creating: 2098,created: 2747,;9667
-solve-v; solved: 1331,solve: 3005,;4336
-leadership-n; leadership: 5010,;5010
-serve-v; served: 1771,serving: 1692,serve: 3819,;7282
-weigh-v; weighed: 191,weighing: 334,;525
-want-v; wants: 3280,wanting: 409,wanted: 3584,want: 11224,;18497
-blow-v; blow: 854,blew: 219,blown: 174,;1247
-quit-v; quit: 667,;667
-relationship-n; relationships: 1411,relationship: 7949,;9360
-rate-v; rated: 235,;235
-breath-n; breath: 329,;329
-weaken-v; weakened: 364,;364
-man-v; manning: 84,;84
-freedom-n; freedom: 3284,freedoms: 476,;3760
-column-n; column: 390,;390
-denounce-v; denounced: 423,;423
-chapter-n; chapter: 1064,;1064
-invest-v; investing: 1035,invest: 3379,invested: 1613,;6027
-damage-n; damage: 2596,;2596
-arrest-v; arrested: 5221,;5221
-wake-v; wake: 961,;961
-deteriorate-v; deteriorating: 427,;427
-eliminate-v; eliminated: 534,;534
-research-n; research: 14564,;14564
-institution-n; institutions: 5154,institution: 1326,;6480
-research-v; research: 14564,;14564
-damage-v; damaged: 1150,damaging: 387,;1537
-overturn-v; overturned: 134,;134
-comfort-v; comforted: 48,;48
-celebrate-v; celebrating: 475,celebrate: 1295,;1770
-feature-v; featuring: 751,featured: 401,;1152
-initiative-n; initiatives: 1635,initiative: 2335,;3970
-fuel-v; fuel: 2852,;2852
-observe-v; observe: 1137,;1137
-specify-v; specify: 285,;285
-broadcast-v; broadcast: 3428,broadcasting: 1785,;5213
-broadcast-n; broadcast: 3428,;3428
-provide-v; provide: 11104,provided: 5023,provides: 3974,;20101
-degree-n; degree: 2607,;2607
-bar-n; bars: 379,;379
-brush-v; brush: 419,;419
-cease-v; ceases: 73,;73
-gap-n; gap: 1508,;1508
-fire-n; fire: 5743,;5743
-total-v; totaling: 452,;452
-require-v; require: 2150,requires: 2150,;4300
-threaten-v; threaten: 664,threatened: 1233,;1897
-tackle-v; tackle: 935,;935
-accordance-n; accordance: 4076,;4076
-panic-v; panic: 550,;550
-ban-v; banned: 1079,;1079
-increase-n; increase: 16049,;16049
-increase-v; increase: 16049,increasing: 5374,increased: 9124,;30547
-drag-v; drag: 270,dragging: 132,;402
-ban-n; ban: 2938,bans: 321,;3259
-fashion-n; fashion: 1085,;1085
-pond-n; pond: 261,;261
-explore-v; exploring: 634,explore: 1620,;2254
-produce-v; produced: 2609,;2609
-release-v; released: 6028,releasing: 288,;6316
-release-n; release: 5100,;5100
-safeguard-v; safeguard: 2446,safeguarded: 195,;2641
-sample-n; sample: 585,;585
-time-n; times: 9624,time: 41204,;50828
-transform-v; transform: 411,;411
-result-v; resulted: 1010,resulting: 1222,result: 6902,results: 9298,;18432
-heave-v; heaving: 17,heave: 19,;36
-reject-v; rejected: 1822,rejects: 376,;2198
-declaration-n; declaration: 3510,;3510
-seat-n; seat: 1076,seats: 2243,;3319
-rush-v; rushed: 1310,;1310
-designate-v; designated: 2210,;2210
-swim-v; swim: 376,swimming: 1734,;2110
-defense-n; defense: 12593,;12593
-result-n; results: 9298,;9298
-seek-v; sought: 1055,seek: 3291,seeking: 2702,;7048
-sustain-v; sustain: 457,;457
-demand-v; demanding: 1083,demand: 7641,;8724
-occupy-v; occupy: 316,occupied: 1400,;1716
-attempt-n; attempts: 684,;684
-secretary-n; secretary: 16975,;16975
-whistle-v; whistled: 6,;6
-occur-v; occur: 835,occurred: 2529,occurs: 313,;3677
-child-n; children: 16962,child: 5259,;22221
-pardon-v; pardoned: 33,pardon: 90,;123
-refuse-v; refuses: 357,refusing: 302,refused: 1691,;2350
-fund-v; funded: 1236,;1236
-forget-v; forget: 1465,forgot: 315,;1780
-fund-n; fund: 8850,;8850
-touch-v; touched: 427,;427
-flower-n; flowers: 1687,;1687
-answer-n; answer: 1774,answers: 534,;2308
-read-v; read: 3094,reading: 2347,;5441
-determine-v; determined: 1930,determine: 1175,;3105
-spot-v; spotted: 329,;329
-borrow-v; borrowed: 397,borrow: 476,;873
-answer-v; answer: 1774,answered: 545,answers: 534,;2853
-ponder-v; ponder: 111,pondering: 89,;200
-life-n; life: 15126,lives: 4077,;19203
-crack-v; cracked: 222,crack: 765,;987
-lessen-v; lessen: 132,;132
-protest-v; protest: 2089,protested: 280,;2369
-conjure-v; conjures: 8,;8
-respond-v; responding: 548,responded: 632,;1180
-crack-n; crack: 765,;765
-date-v; dating: 238,;238
-sing-v; sing: 970,;970
-hate-v; hated: 80,hate: 378,;458
-issue-v; issued: 11857,issuing: 994,issue: 20862,;33713
-clip-n; clips: 81,;81
-occupation-n; occupation: 1372,;1372
-dance-v; dance: 2409,dancing: 606,;3015
-issue-n; issue: 20862,issues: 17636,;38498
-argument-n; argument: 398,arguments: 279,;677
-need-n; need: 14657,;14657
-ease-v; eased: 444,;444
-proceed-v; proceeded: 238,;238
-response-n; response: 4555,;4555
-prepare-v; preparing: 1554,prepare: 1665,prepared: 2374,;5593
-need-v; need: 14657,needed: 3355,needs: 7395,needing: 134,;25541
-guide-n; guides: 311,guide: 1620,;1931
-marry-v; married: 1746,;1746
-smoke-v; smoked: 81,;81
-amount-n; amounts: 1052,amount: 4011,;5063
-procedure-n; procedure: 1057,;1057
-guide-v; guide: 1620,;1620
-worker-n; workers: 7893,worker: 974,;8867
-outline-n; outlines: 168,;168
-postpone-v; postponing: 80,postpone: 338,postponed: 712,;1130
-amount-v; amounts: 1052,;1052
-conspiracy-n; conspiracy: 397,;397
-suffering-n; suffering: 1496,;1496
-invite-v; invited: 3372,invite: 953,;4325
-sting-v; stings: 13,;13
-outline-v; outlining: 133,outline: 942,outlines: 168,;1243
-month-n; months: 22127,month: 12664,;34791
-snow-v; snowed: 32,;32
-disaster-n; disaster: 3056,;3056
-disagree-v; disagreed: 114,;114
-smoke-n; smoke: 699,;699
-pilot-n; pilot: 1484,;1484
-present-v; presenting: 345,presented: 2486,;2831
-cave-v; caving: 9,;9
-soak-v; soaking: 52,;52
-situation-n; situation: 15561,situations: 1257,;16818
-present-n; presents: 556,;556
-rebound-v; rebound: 474,;474
-map-n; map: 1183,;1183
-sleep-v; slept: 161,sleep: 1397,sleeping: 475,;2033
-dialogue-n; dialogue: 5156,;5156
-sleep-n; sleep: 1397,;1397
-divert-v; divert: 200,;200
-endow-v; endowing: 11,;11
-put-v; put: 8134,putting: 1312,puts: 531,;9977
-gift-n; gift: 750,;750
-difficulty-n; difficulties: 3389,;3389
-go-v; go: 13672,gone: 2371,went: 5932,going: 7973,goes: 1726,;31674
-freeze-v; freezing: 287,;287
-teach-v; teaching: 2667,teach: 1142,taught: 821,;4630
-continue-v; continuing: 2520,continues: 2343,continue: 16700,continued: 5539,;27102
-voice-n; voice: 2235,;2235
-nomination-n; nomination: 1102,;1102
-way-n; ways: 3990,way: 14059,;18049
-close-n; closing: 1745,;1745
-defeat-v; defeated: 906,defeating: 162,;1068
-tv-n; tv: 5636,;5636
-close-v; close: 7406,;7406
-border-n; border: 5493,;5493
-unveil-v; unveiled: 694,;694
-appreciate-v; appreciate: 954,;954
-associate-v; associated: 1318,;1318
-eater-n; eater: 44,;44
-wealth-n; wealth: 1773,;1773
-allow-v; allows: 1547,allow: 4197,allowed: 3652,;9396
-include-v; included: 3304,include: 7381,including: 27312,includes: 2772,;40769
-calendar-n; calendar: 514,;514
-environment-n; environment: 11109,;11109
-march-v; marching: 204,;204
-disappear-v; disappears: 70,disappear: 305,disappeared: 507,;882
-route-n; route: 2662,;2662
-partner-n; partner: 3165,;3165
-launch-v; launched: 4682,;4682
-sight-n; sight: 704,;704
-accuse-v; accused: 1702,;1702
-portray-v; portray: 65,;65
-strength-n; strength: 3233,;3233
-shut-v; shut: 634,shuts: 21,;655
-evaporate-v; evaporated: 32,;32
-begin-v; begins: 1016,began: 6409,beginning: 4770,begin: 2854,begun: 1508,;16557
-regard-v; regarding: 2867,regarded: 1260,;4127
-talk-n; talk: 4949,;4949
-complete-v; completing: 455,complete: 4546,;5001
-appointment-n; appointments: 520,appointment: 1677,;2197
-act-v; acted: 406,acting: 2162,act: 3757,;6325
-talk-v; talks: 27839,talking: 2040,talked: 1270,talk: 4949,;36098
-think-v; thought: 4898,thinking: 3176,think: 13422,thinks: 1029,;22525
-notify-v; notify: 278,;278
-thrust-n; thrust: 154,;154
-urge-v; urge: 1203,urged: 6525,;7728
-school-n; schools: 7174,school: 16165,;23339
-celebrity-n; celebrity: 178,;178
-one-n; ones: 1697,one: 70550,;72247
-pull-v; pull: 869,pulled: 581,;1450
-enter-v; entered: 2489,entering: 1553,enter: 3404,;7446
-landing-n; landing: 996,;996
-succeed-v; succeed: 951,succeeded: 468,succeeds: 125,;1544
-pleasure-n; pleasure: 750,;750
-plot-n; plot: 609,;609
-keep-v; keeping: 1884,keeps: 574,kept: 2338,keep: 6196,;10992
-track-n; track: 2089,tracks: 476,;2565
-consequence-n; consequences: 1176,;1176
-cool-v; cool: 755,;755
-transport-v; transported: 330,;330
-sort-n; sort: 912,sorts: 380,;1292
-line-n; line: 6320,lines: 1984,;8304
-clear-v; clears: 41,;41
-sort-v; sorted: 92,;92
-transport-n; transport: 6863,;6863
-progress-n; progress: 10308,;10308
-tell-v; telling: 787,tells: 523,tell: 3681,told: 15826,;20817
-govern-v; govern: 240,;240
-hearing-n; hearings: 345,hearing: 1650,;1995
-scald-v; scald: 23,;23
-play-v; play: 6805,plays: 953,playing: 2519,played: 2838,;13115
-fan-n; fans: 1228,;1228
-play-n; play: 6805,;6805
-confirm-v; confirmed: 4363,confirm: 773,;5136
-suspend-v; suspended: 2117,;2117
-risk-v; risk: 4933,;4933
-perform-v; perform: 1398,performs: 121,;1519
-reserve-n; reserve: 3983,;3983
-benefit-v; benefit: 5303,benefits: 3588,;8891
-strangle-v; strangle: 37,;37
-experiment-v; experimenting: 115,;115
-bring-v; brought: 4062,brings: 956,bringing: 1827,bring: 5746,;12591
-yesterday-n; yesterday: 4528,;4528
-phase-n; phase: 3141,;3141
-hack-v; hack: 60,;60
-shed-v; shed: 334,;334
-negotiate-v; negotiate: 832,;832
-open-v; open: 9594,opened: 5780,opens: 1564,opening: 8977,;25915
-guess-n; guess: 621,;621
-choose-v; chosen: 1287,choose: 1913,choosing: 561,chose: 778,;4539
-deal-n; deals: 1165,;1165
-deal-v; dealing: 1408,deal: 7101,dealt: 662,;9171
-construct-v; constructed: 493,;493
-guess-v; guess: 621,guessed: 93,;714
-fly-v; fly: 1215,flying: 1408,flown: 251,flew: 702,;3576
-monitor-n; monitoring: 2511,;2511
-place-v; placed: 1504,place: 9012,;10516
-hand-n; hand: 6332,hands: 2911,;9243
-place-n; place: 9012,places: 4374,;13386
-woman-n; woman: 4514,women: 16605,;21119
-breathe-v; breathe: 219,breathing: 324,;543
-investigation-n; investigation: 5487,investigations: 2339,;7826
-distort-v; distorting: 120,;120
-monitor-v; monitor: 1656,;1656
-turn-v; turned: 2478,turning: 1407,turns: 773,turn: 4020,;8678
-accelerate-v; accelerating: 555,;555
-technology-n; technologies: 3770,technology: 19993,;23763
-turn-n; turn: 4020,;4020
-jump-v; jump: 700,jumping: 247,;947
-check-n; checks: 663,check: 2021,;2684
-deprive-v; deprive: 78,;78
-rating-n; ratings: 647,;647
-depression-n; depression: 610,;610
-statement-n; statements: 3636,statement: 14305,;17941
-check-v; checked: 398,check: 2021,;2419
-hold-v; held: 21710,hold: 7614,holding: 3038,;32362
-minimize-v; minimize: 515,;515
-slash-v; slashed: 149,;149
-taste-v; taste: 790,;790
-slash-n; slash: 210,;210
-bomb-v; bomb: 2990,;2990
-protect-v; protecting: 1695,protect: 4338,protected: 1465,;7498
-penny-n; penny: 301,;301
-suffer-v; suffered: 1723,suffer: 1043,suffering: 1496,;4262
-avoid-v; avoid: 3871,avoided: 407,;4278
-fact-n; facts: 1397,fact: 6890,;8287
-attention-n; attention: 7225,;7225
-tendency-n; tendency: 306,;306
-invade-v; invaded: 287,;287
-portfolio-n; portfolio: 1428,;1428
-food-n; food: 11609,;11609
-team-n; teams: 3862,team: 10672,;14534
-enrich-v; enrich: 474,;474
-fade-v; faded: 134,;134
-article-n; articles: 1749,article: 4448,;6197
-shock-v; shock: 607,;607
-hour-n; hours: 7314,hour: 2572,;9886
-prediction-n; prediction: 232,;232
-car-n; car: 5801,;5801
-sympathy-n; sympathy: 791,;791
-shock-n; shock: 607,;607
-system-n; system: 23369,systems: 10037,;33406
-ask-v; ask: 4824,asking: 1390,asked: 7374,asks: 660,;14248
-succession-n; succession: 434,;434
-shoot-n; shooting: 1121,;1121
-absence-n; absence: 575,;575
-shoot-v; shoot: 427,shooting: 1121,shot: 1708,;3256
-slow-v; slowed: 575,;575
-incident-n; incident: 4715,incidents: 1452,;6167
-denigrate-v; denigrates: 7,;7
-exist-v; exist: 1273,exists: 728,existing: 5057,;7058
-schedule-v; scheduled: 5708,;5708
-store-n; stores: 1697,store: 1934,;3631
-caution-v; caution: 360,cautioning: 23,;383
-confront-v; confronting: 218,;218
-agent-n; agent: 776,;776
-outrage-v; outraged: 67,;67
-branch-n; branch: 2172,;2172
-package-v; package: 2319,;2319
-caution-n; caution: 360,;360
-sigh-v; sigh: 628,sighed: 56,;684
-swallow-v; swallow: 155,;155
-ambition-n; ambitions: 455,;455
-trend-n; trends: 1402,;1402
-act-n; acts: 1343,;1343
-predict-v; predict: 587,predicted: 1133,;1720
-run-n; run: 3498,;3498
-message-n; message: 3377,;3377
-complain-v; complaining: 185,complain: 317,;502
-association-n; association: 9690,;9690
-hide-v; hidden: 683,hid: 128,;811
-run-v; ran: 829,runs: 751,run: 3498,running: 1990,;7068
-carry-v; carry: 4348,carried: 3559,;7907
-equivalent-n; equivalent: 1162,;1162
-remain-v; remains: 2991,remain: 4350,remained: 2192,;9533
-village-n; village: 4374,;4374
-state-v; state: 28975,stated: 2655,;31630
-punish-v; punish: 462,punished: 607,;1069
-staff-n; staff: 7677,;7677
-indict-v; indicted: 150,;150
-science-n; science: 8883,;8883
-ground-n; ground: 3722,;3722
-accept-v; accepted: 2444,accept: 2966,;5410
-impact-v; impact: 5874,;5874
-sentence-n; sentence: 1212,;1212
-stab-v; stabbed: 123,;123
-quarter-n; quarter: 9763,;9763
-nurture-v; nurtured: 158,;158
-impact-n; impact: 5874,;5874
-movement-n; movement: 4101,movements: 1215,;5316
-meet-v; meet: 9825,meeting: 41844,met: 15041,;66710
-chance-n; chances: 683,chance: 2650,;3333
-shave-v; shave: 40,;40
-discover-v; discovered: 2848,;2848
-throw-v; throw: 432,threw: 311,;743
-publicize-v; publicized: 192,;192
-command-v; commands: 175,commanding: 168,;343
-welcome-v; welcome: 4502,welcoming: 789,;5291
-convention-n; convention: 2908,;2908
-command-n; command: 1924,;1924
-roar-v; roared: 31,roaring: 71,;102
-unlock-v; unlock: 54,;54
-port-n; port: 2884,;2884
-consolidate-v; consolidate: 1025,;1025
-hope-n; hopes: 6458,hope: 10904,;17362
-end-n; ends: 1143,end: 32429,;33572
-vice-n; vice: 11250,;11250
-block-v; block: 1467,blocked: 547,;2014
-series-n; series: 6084,;6084
-point-n; point: 6672,;6672
-penetrate-v; penetrate: 162,;162
-fighter-n; fighter: 1108,;1108
-point-v; pointed: 4104,point: 6672,;10776
-house-n; house: 9906,;9906
-hope-v; hopes: 6458,hoping: 1375,hope: 10904,hoped: 4141,;22878
-end-v; ends: 1143,end: 32429,;33572
-energy-n; energy: 10448,;10448
-population-n; populations: 309,population: 7477,;7786
-discuss-v; discussing: 1052,discussed: 4847,discuss: 6232,;12131
-faction-n; factions: 816,;816
-kill-v; kill: 1031,killed: 10992,kills: 420,;12443
-sit-v; sitting: 732,sat: 421,sit: 867,;2020
-truth-n; truth: 1693,;1693
-educate-v; educating: 236,educate: 431,educated: 692,;1359
-announce-v; announce: 1182,announcing: 534,announced: 14035,;15751
-exercise-n; exercise: 3891,;3891
-exercise-v; exercise: 3891,;3891
-owe-v; owe: 150,owed: 430,;580
-down-n; down: 11376,;11376
-weight-n; weights: 162,weight: 1338,;1500
-agreement-n; agreement: 18709,;18709
-feeling-n; feeling: 2262,feelings: 1799,;4061
-perspective-n; perspective: 2055,;2055
-stretch-n; stretch: 348,;348
-attract-v; attracted: 1497,attract: 1701,;3198
-consideration-n; consideration: 1814,;1814
-cut-v; cut: 4563,cutting: 1035,;5598
-prosecute-v; prosecuted: 308,;308
-organization-n; organization: 12467,;12467
-event-n; event: 5883,events: 4512,;10395
-court-n; court: 8489,courts: 1625,;10114
-repair-v; repairing: 151,repair: 991,;1142
-allege-v; alleges: 72,;72
-disappoint-v; disappoint: 54,;54
-shout-v; shouting: 266,;266
-batter-v; battered: 267,;267
-greet-v; greeted: 657,;657
-direction-n; direction: 2458,;2458
-draw-v; drawn: 1154,draw: 1630,drew: 653,;3437
-satisfy-v; satisfied: 2058,;2058
-bless-v; bless: 90,;90
-magazine-n; magazine: 2145,;2145
-punch-v; punched: 36,;36
-avert-v; avert: 223,;223
-collection-n; collection: 1914,;1914
-wait-v; waiting: 2040,waited: 313,wait: 2328,;4681
-sacrifice-n; sacrifice: 496,;496
-idea-n; idea: 2714,;2714
-sacrifice-v; sacrificed: 202,;202
-renovate-v; renovated: 157,;157
-respect-v; respect: 5275,;5275
-combine-v; combining: 623,;623
-mind-n; mind: 2657,;2657
-assassination-n; assassination: 702,;702
-foil-v; foiling: 33,;33
-ownership-n; ownership: 1207,;1207
-summarize-v; summarize: 119,;119
-wander-v; wander: 104,;104
-watch-v; watched: 864,watch: 2569,watching: 1674,;5107
-happen-v; happens: 715,happen: 1161,happening: 463,happened: 2015,;4354
-treatment-n; treatment: 5863,;5863
-justification-n; justification: 130,;130
-recording-n; recording: 715,;715
-explosion-n; explosion: 1826,;1826
-match-n; match: 4044,;4044
-handle-v; handles: 206,handling: 2068,handle: 2051,handled: 1060,;5385
-college-n; college: 4305,;4305
-delay-v; delay: 1042,;1042
-publish-v; published: 5044,;5044
-delay-n; delay: 1042,;1042
-reveal-v; reveal: 618,revealed: 2165,;2783
-contain-v; contained: 1083,contains: 1056,contain: 1088,;3227
-recovery-n; recovery: 2403,;2403
-future-n; future: 14223,;14223
-attend-v; attending: 2568,attended: 5056,attend: 5282,;12906
-couple-n; couples: 450,couple: 1691,;2141
-manipulate-v; manipulated: 111,;111
-consider-v; considered: 3417,considering: 1599,consider: 3792,considers: 674,;9482
-cause-v; caused: 4942,causing: 1687,cause: 6405,;13034
-reinstate-v; reinstated: 91,;91
-suit-v; suiting: 17,suits: 436,;453
-dissent-n; dissents: 6,;6
-knock-v; knock: 131,;131
-suit-n; suits: 436,;436
-obligation-n; obligation: 666,;666
-correct-v; corrected: 127,;127
-separation-n; separation: 739,;739
-cause-n; cause: 6405,causes: 1481,;7886
-stuff-n; stuff: 489,;489
-foundation-n; foundation: 5493,;5493
-see-v; seen: 5283,see: 12996,sees: 880,saw: 3507,seeing: 1458,;24124
-overstate-v; overstating: 14,;14
-have-v; has: 107204,had: 41549,having: 4482,have: 114118,'ve: 3416,;270769
-entrust-v; entrust: 76,entrusted: 382,;458
-say-v; saying: 10867,say: 13822,said: 212821,says: 23200,;260710
-location-n; locations: 1276,location: 1639,;2915
-suppress-v; suppressing: 121,;121
-harm-n; harm: 1128,;1128
-subject-n; subjects: 934,subject: 2953,;3887
-light-n; light: 4565,lights: 652,;5217
-emerge-v; emerge: 446,emerging: 1274,emerged: 726,emerges: 85,;2531
-thread-v; thread: 309,;309
-burn-v; burn: 342,;342
-assimilate-v; assimilate: 35,;35
-hear-v; heard: 2617,hear: 1464,hears: 139,hearing: 1650,;5870
-maintain-v; maintained: 2737,;2737
-forecast-v; forecast: 2193,;2193
-profit-n; profits: 2201,;2201
-page-n; pages: 587,;587
-partnership-n; partnership: 6762,;6762
-repel-v; repel: 28,repelling: 20,;48
-inform-v; inform: 3069,informed: 1343,;4412
-follow-v; following: 13393,follow: 2745,followed: 2763,follows: 1661,;20562
-bully-v; bullied: 131,;131
-government-n; governments: 6915,government: 78207,;85122
-signal-v; signal: 1336,;1336
-success-n; success: 6187,;6187
-import-n; import: 3243,;3243
-like-v; liked: 459,like: 23479,;23938
-clash-v; clash: 582,clashed: 253,;835
-official-n; officials: 15082,official: 14800,;29882
-estimate-v; estimated: 3192,;3192
-loss-n; loss: 3062,;3062
-letter-n; letters: 1388,;1388
-estimate-n; estimate: 1008,estimates: 1541,;2549
-majority-n; majority: 3194,majorities: 21,;3215
-lot-n; lots: 779,lot: 6495,;7274
-permit-v; permit: 1136,;1136
-anger-n; anger: 687,;687
-send-v; sends: 268,sending: 1212,sent: 5528,send: 4118,;11126
-become-v; becomes: 1221,becoming: 2201,became: 4495,become: 11172,;19089
-beginning-n; beginning: 4770,;4770
-violate-v; violating: 425,violate: 387,;812
-circulate-v; circulating: 101,;101
-vow-v; vowed: 954,;954
-remind-v; reminds: 396,reminded: 1158,remind: 642,;2196
-motivation-n; motivation: 270,;270
-content-n; content: 2921,;2921
-take-v; taken: 6164,taking: 5458,take: 18162,takes: 2398,took: 6760,;38942
-wonder-v; wondered: 177,wondering: 267,wonder: 1069,;1513
-type-n; type: 3683,;3683
-plague-v; plagued: 185,;185
-morning-n; morning: 9342,;9342
-favor-n; favor: 1067,;1067
-elect-v; electing: 248,;248
-bomber-n; bomber: 527,;527
-crash-v; crashed: 1440,;1440
-wave-n; wave: 1950,;1950
-fall-n; fall: 3084,;3084
-decrease-v; decreased: 1924,;1924
-dare-v; dares: 279,dare: 1206,dared: 246,;1731
-apply-v; applied: 1668,applying: 759,applies: 300,;2727
-capacity-n; capacity: 3838,;3838
-renew-v; renew: 445,;445
-lose-v; losing: 1003,loses: 218,lost: 3603,lose: 1508,;6332
-pain-n; pain: 1286,pains: 187,;1473
-behave-v; behaved: 85,;85
-existence-n; existence: 873,;873
-develop-v; developed: 8304,develop: 10752,developing: 14888,;33944
-responsibility-n; responsibilities: 1568,;1568
-detect-v; detect: 366,;366
-desire-n; desire: 1702,;1702
-site-n; site: 5635,;5635
-authority-n; authorities: 7387,authority: 7898,;15285
-organize-v; organized: 2814,organizing: 1169,;3983
-surface-v; surface: 1281,;1281
-course-n; course: 6046,;6046
-feel-v; feel: 5731,feeling: 2262,feels: 1425,felt: 3102,;12520
-oversight-n; oversight: 408,;408
-identification-n; identification: 631,;631
-evacuate-v; evacuate: 304,;304
-assault-n; assault: 470,;470
-collaborate-v; collaborate: 228,;228
-form-n; form: 5952,;5952
-audience-n; audience: 1906,;1906
-lurk-v; lurking: 32,;32
-offer-v; offered: 2570,offering: 1903,offer: 4653,;9126
-form-v; formed: 2057,form: 5952,;8009
-bus-n; bus: 4267,;4267
-thing-n; things: 5761,thing: 3794,;9555
-today-n; today: 56147,;56147
-agree-v; agreed: 11104,agrees: 458,agree: 2323,;13885
-equal-v; equals: 267,;267
-eat-v; ate: 376,eating: 1653,eat: 3126,;5155
-chase-v; chased: 89,;89
-heat-n; heat: 1182,heating: 520,;1702
-failure-n; failure: 2092,;2092
-breakdown-n; breakdown: 761,;761
-repeat-v; repeating: 161,repeat: 469,repeated: 1102,;1732
-minute-n; minutes: 2866,minute: 1323,;4189
-pay-v; paying: 1096,pay: 7019,paid: 2907,;11022
-analyst-n; analyst: 987,analysts: 3246,;4233
-arrival-n; arrival: 1390,;1390
-pattern-n; pattern: 762,;762
-security-n; security: 28816,;28816
-officer-n; officer: 3727,;3727
-night-n; night: 6630,;6630
-effort-n; effort: 4120,;4120
-shake-v; shook: 204,;204
-cruise-v; cruise: 359,;359
-expose-v; expose: 232,exposing: 131,exposed: 779,;1142
-emphasize-v; emphasized: 1556,emphasizing: 319,;1875
-extend-v; extend: 1833,;1833
-device-n; devices: 2207,;2207
-anticipate-v; anticipated: 698,;698
-conflict-n; conflicts: 2389,conflict: 4116,;6505
-back-n; backs: 377,;377
-tear-v; tore: 67,torn: 251,;318
-word-n; word: 1602,words: 3794,;5396
-conflict-v; conflicted: 35,;35
-back-v; backed: 897,;897
-report-n; report: 21447,reports: 7369,;28816
-right-n; right: 15710,;15710
-join-v; joined: 2299,joins: 278,joining: 1432,;4009
-miss-v; misses: 85,miss: 1321,missed: 472,missing: 2222,;4100
-wear-v; wearing: 1219,wear: 1110,worn: 263,wore: 275,;2867
-piece-n; piece: 1392,;1392
-piece-v; piece: 1392,;1392
-subdue-v; subdued: 141,;141
-conclusion-n; conclusion: 1377,;1377
-choice-n; choices: 698,choice: 2813,;3511
-division-n; divisions: 669,division: 2865,;3534
-oppose-v; oppose: 1290,opposed: 1847,;3137
-improve-v; improving: 3735,improved: 3742,improve: 8748,;16225
-moment-n; moments: 259,moment: 2536,;2795
-infrastructure-n; infrastructure: 6783,;6783
-round-n; round: 5387,;5387
-face-n; faces: 1355,face: 5724,;7079
-deny-v; deny: 456,denying: 216,denied: 1471,;2143
-race-n; races: 470,race: 3018,;3488
-face-v; facing: 2883,faced: 1813,face: 5724,faces: 1355,;11775
-fit-v; fits: 157,;157
-request-v; requested: 1146,request: 2405,;3551
-trouble-n; trouble: 1595,troubles: 518,;2113
-pass-v; passed: 4016,pass: 2057,;6073
-observation-n; observations: 342,;342
-speech-n; speeches: 632,speech: 6661,;7293
-disappointment-n; disappointment: 289,;289
-production-n; production: 10905,;10905
-dedicate-v; dedicated: 1222,;1222
-vote-n; vote: 4081,votes: 1928,;6009
-quality-n; qualities: 425,;425
-evolve-v; evolving: 251,;251
-nod-v; nodded: 38,;38
-reality-n; realities: 354,reality: 2014,;2368
-vote-v; vote: 4081,voting: 1273,voted: 1227,;6581
-importance-n; importance: 8254,;8254
-paper-n; paper: 4522,;4522
-ability-n; ability: 3448,;3448
-leader-n; leader: 9387,leaders: 15019,;24406
-news-n; news: 16008,;16008
-convene-v; convened: 631,;631
-instill-v; instill: 77,;77
-recall-v; recall: 636,;636
-probe-v; probe: 765,;765
-book-n; book: 4614,books: 3722,;8336
-immigration-n; immigration: 3792,;3792
-refer-v; refers: 406,referring: 943,refer: 946,;2295
-student-n; students: 14420,student: 3458,;17878
-prevail-v; prevailed: 81,prevail: 180,;261
-expand-v; expanding: 2505,expand: 5215,;7720
-pledge-v; pledged: 2142,;2142
-making-n; making: 6788,;6788
-confer-v; conferred: 282,;282
-policy-n; policy: 18635,;18635
-pose-v; posed: 526,;526
-root-v; rooting: 31,;31
-foot-n; feet: 1164,;1164
-climb-v; climbing: 490,climb: 441,;931
-imply-v; imply: 96,;96
-hurry-n; hurry: 542,;542
-weapon-n; weapons: 7924,weapon: 946,;8870
-role-n; role: 12539,;12539
-detail-n; details: 4561,detail: 795,;5356
-train-n; train: 3528,;3528
-dispute-n; dispute: 2119,;2119
-television-n; television: 5752,;5752
-dispute-v; dispute: 2119,;2119
-flood-n; flood: 1633,;1633
-train-v; training: 10309,train: 3528,;13837
-inspire-v; inspires: 59,;59
-floor-n; floor: 2997,;2997
-praise-v; praised: 1905,praise: 598,;2503
-tie-n; ties: 16462,;16462
-leak-v; leaked: 183,;183
-participate-v; participating: 1937,participated: 1536,participate: 3674,;7147
-leak-n; leak: 204,;204
-speculation-n; speculation: 642,;642
-status-n; status: 4298,;4298
-tube-n; tube: 323,;323
-flee-v; fled: 661,;661
-test-n; test: 5501,testing: 2017,;7518
-leave-v; leave: 4203,leaving: 2155,left: 9164,;15522
-settle-v; settle: 1533,settled: 1103,;2636
-propose-v; propose: 740,proposed: 5020,proposing: 297,;6057
-poise-v; poised: 185,;185
-convict-v; convicted: 1335,;1335
-test-v; tested: 1365,testing: 2017,;3382
-combination-n; combination: 906,;906
-find-v; finding: 1178,found: 8997,find: 6403,finds: 453,;17031
-ride-v; riding: 362,ride: 577,;939
-drop-v; drop: 2895,dropped: 2801,;5696
-thanks-n; thanks: 2750,;2750
-intervene-v; intervening: 98,intervene: 443,;541
-ride-n; ride: 577,;577
-clutch-v; clutching: 41,;41
-betray-v; betraying: 57,betray: 56,;113
-mean-v; meant: 843,meaning: 1326,means: 6537,mean: 2761,;11467
-target-n; target: 2810,;2810
-pause-v; pause: 152,;152
-personality-n; personality: 559,;559
-bite-v; bite: 195,;195
-onslaught-n; onslaught: 64,;64
-hamper-v; hampered: 168,;168
-district-n; districts: 1310,district: 8545,;9855
-defer-v; defer: 96,;96
-stay-v; staying: 634,stays: 182,stayed: 616,stay: 4302,;5734
-scan-v; scanned: 43,;43
-plead-v; pleaded: 429,pled: 4,;433
-tag-v; tagged: 43,;43
-return-n; returns: 1240,;1240
-drain-v; draining: 48,;48
-business-n; business: 22589,;22589
-scatter-v; scattered: 405,;405
-compromise-v; compromise: 817,;817
-front-n; front: 4369,;4369
-conduct-v; conducted: 4139,conduct: 3127,;7266
-get-v; gotten: 439,got: 4691,gets: 1125,getting: 2956,get: 11080,;20291
-guidance-n; guidance: 1494,;1494
-submarine-n; submarine: 596,;596
-bump-v; bumped: 77,;77
-learn-v; learned: 2112,learning: 3060,learn: 4272,;9444
-table-n; table: 3298,;3298
-fear-n; fear: 1956,;1956
-fear-v; fear: 1956,;1956
-sue-v; sue: 353,;353
-stake-n; stake: 1040,;1040
-accompany-v; accompanying: 608,;608
-public-n; public: 31804,;31804
-term-n; term: 5134,terms: 5290,;10424
-promise-v; promise: 976,promised: 1648,;2624
-chew-v; chew: 137,;137
-treat-v; treated: 1259,treat: 1406,;2665
-decline-v; declined: 2414,declining: 701,;3115
-facility-n; facilities: 5498,facility: 1243,;6741
-proof-n; proof: 666,;666
-stand-v; standing: 7186,stood: 1353,stand: 3440,;11979
-coordinate-v; coordinate: 950,;950
-something-n; something: 4491,;4491
-celebration-n; celebration: 1078,;1078
-difference-n; difference: 1720,differences: 3304,;5024
-pressure-n; pressures: 816,;816
-hit-v; hits: 501,hit: 4650,;5151
-position-n; position: 6339,;6339
-arise-v; arises: 159,arise: 397,;556
-surround-v; surround: 103,;103
-vacation-n; vacation: 888,;888
-shorten-v; shortened: 172,shorten: 161,;333
-matter-v; matter: 5594,mattered: 16,;5610
-project-v; projecting: 48,;48
-explanation-n; explanation: 725,;725
-capability-n; capability: 1591,;1591
-stop-v; stopped: 1282,stop: 4611,stops: 493,;6386
-curtail-v; curtail: 84,;84
-stop-n; stop: 4611,;4611
-land-v; landed: 544,lands: 1351,;1895
-side-n; side: 8064,sides: 16544,;24608
-hint-v; hinted: 151,;151
-matter-n; matters: 2548,matter: 5594,;8142
-project-n; project: 10126,;10126
-save-v; save: 1852,saved: 595,;2447
-rule-v; rule: 3037,ruled: 983,;4020
-rule-n; rules: 4604,rule: 3037,;7641
-rest-n; rest: 2901,;2901
-restate-v; restated: 68,;68
-push-v; push: 3453,pushed: 992,pushing: 1323,;5768
-travel-v; travelled: 215,;215
-utilize-v; utilize: 364,;364
-trap-v; trapped: 511,;511
-withstand-v; withstand: 256,;256
-information-n; information: 23901,;23901
-travel-n; travel: 4934,;4934
-road-n; road: 14802,;14802
-dismiss-v; dismissed: 530,;530
-surpass-v; surpass: 269,surpassed: 404,;673
-operator-n; operator: 760,;760
-peril-n; peril: 79,;79
-return-v; returns: 1240,return: 9195,returned: 3481,returning: 1759,;15675
-permission-n; permission: 961,;961
-intend-v; intend: 525,intended: 1141,;1666
-balance-n; balance: 3294,balances: 185,;3479
-tank-n; tank: 634,;634
-resource-n; resources: 9112,;9112
-stock-n; stock: 8673,;8673
-generation-n; generation: 4242,;4242
-condition-n; conditions: 7737,condition: 2782,;10519
-death-n; death: 6314,deaths: 1907,;8221
-set-v; set: 14214,;14214
-stun-v; stunned: 109,;109
-change-n; changes: 7137,change: 9138,;16275
-let-v; letting: 527,let: 8596,;9123
-fate-n; fate: 1121,;1121
-change-v; changing: 2288,changed: 3380,change: 9138,;14806
-exclude-v; excluding: 709,;709
-water-n; water: 13413,;13413
-tease-v; tease: 32,;32
-question-n; question: 7425,questions: 3530,;10955
-bear-v; born: 2309,;2309
-mess-v; mess: 378,messed: 32,;410
-sponsor-v; sponsored: 1909,sponsor: 515,;2424
-mess-n; mess: 378,;378
-snap-v; snapped: 80,snap: 139,;219
-question-v; question: 7425,questioned: 409,questioning: 325,;8159
-interview-v; interview: 5188,interviewed: 868,;6056
-bow-v; bow: 253,;253
-resistance-n; resistance: 2083,;2083
-shift-n; shift: 966,;966
-enable-v; enabled: 650,;650
-interview-n; interview: 5188,interviews: 759,;5947
-hop-v; hop: 163,;163
-focus-v; focusing: 938,focused: 1908,focus: 5099,;7945
-yell-v; yelling: 87,yelled: 71,;158
-conceal-v; concealed: 137,;137
-defend-v; defend: 943,;943
-birth-n; birth: 1921,;1921
-spin-v; spinning: 115,;115
-encourage-v; encourage: 3217,encouraging: 1757,encouraged: 1508,;6482
-straighten-v; straightened: 37,;37
-sell-v; sell: 3171,sells: 448,selling: 2897,;6516
-air-v; aired: 209,;209
-add-v; add: 2143,added: 16650,;18793
-air-n; air: 10765,;10765
-broaden-v; broaden: 467,;467
-start-v; started: 5801,start: 5796,starting: 3836,;15433
-imagine-v; imagined: 301,imagine: 861,;1162
-fortune-n; fortune: 1193,;1193
-rely-v; relies: 336,rely: 1297,relied: 333,;1966
-sound-n; sounds: 637,;637
-grab-v; grab: 274,;274
-sound-v; sound: 3089,sounds: 637,;3726
-version-n; version: 1864,;1864
-start-n; start: 5796,;5796
-law-n; law: 18472,laws: 4880,;23352
-reflect-v; reflect: 1765,reflected: 1007,reflects: 1155,;3927
-fight-v; fought: 608,fighting: 3459,fight: 4344,;8411
-reason-v; reason: 4721,reasoned: 31,;4752
-fight-n; fight: 4344,;4344
-recover-v; recover: 866,recovering: 509,;1375
-reason-n; reasons: 3875,reason: 4721,;8596
-transfer-v; transferred: 963,;963
-behaviour-n; behavior: 1326,;1326
-erupt-v; erupted: 376,;376
-await-v; awaited: 78,;78
-mistake-n; mistake: 848,;848
-investigate-v; investigating: 2012,investigate: 1021,investigated: 585,;3618
-compile-v; compiled: 732,;732
-pick-v; picked: 590,pick: 1030,;1620
-pick-n; pick: 1030,;1030
-overthrow-v; overthrown: 67,;67
-campaign-n; campaign: 4613,;4613
-embrace-v; embraced: 129,;129
-criticize-v; criticizing: 248,criticized: 1251,criticize: 416,;1915
-concern-n; concerns: 3116,concern: 6164,;9280
-trainer-n; trainers: 163,;163
-concern-v; concerned: 6139,concerning: 2740,;8879
-understand-v; understood: 777,understand: 5248,understanding: 8714,;14739
-replace-v; replacing: 757,replaced: 939,replace: 1483,;3179
-opinion-n; opinion: 2619,;2619
-note-v; note: 2299,noted: 11181,;13480
-know-v; known: 3585,knowing: 550,knew: 1283,know: 11615,knows: 1779,;18812
-love-n; love: 4840,;4840
-assert-v; assert: 72,;72
-love-v; loved: 613,love: 4840,loves: 391,loving: 454,;6298
-note-n; note: 2299,notes: 2996,;5295
-story-n; story: 3097,stories: 1639,;4736
-standard-n; standard: 4616,;4616
-remedy-v; remedy: 133,;133
-foresee-v; foreseen: 74,;74
-analyse-v; analyzed: 270,analyze: 453,;723
-budget-n; budget: 4900,;4900
-soar-v; soaring: 457,;457
-sprinkle-v; sprinkle: 58,;58
-order-n; order: 12090,;12090
-mislead-v; misled: 92,;92
-sense-v; sense: 2737,;2737
-ascend-v; ascend: 67,;67
-shore-n; shore: 416,;416
-order-v; ordered: 1795,;1795
-conform-v; conform: 450,;450
-eye-n; eye: 1397,;1397
-abuse-n; abuse: 1475,abuses: 272,;1747
-job-n; job: 5665,jobs: 3604,;9269
-habit-n; habits: 625,;625
-campaign-v; campaigned: 42,;42
-charge-v; charging: 295,charged: 2418,;2713
-state-n; states: 33276,state: 28975,;62251
-charge-n; charges: 2246,charge: 3493,;5739
-grow-v; grown: 1539,growing: 6012,grew: 2134,grow: 3335,;13020
-technique-n; techniques: 1538,;1538
-zone-n; zone: 3766,;3766
-survey-v; surveyed: 571,;571
-seem-v; seem: 1587,seems: 3298,seemed: 1147,;6032
-survey-n; survey: 7754,;7754
-fail-v; fail: 1025,failed: 2969,failing: 855,;4849
-depend-v; depends: 1189,depend: 855,depending: 668,;2712
-quote-v; quote: 189,quoted: 2480,;2669
-war-n; war: 15021,wars: 914,;15935
-purchase-v; purchase: 2991,;2991
-remember-v; remembered: 307,remembering: 128,remember: 1841,remembers: 334,;2610
-press-n; press: 13698,;13698
-drive-v; drove: 433,drive: 3903,;4336
-individual-n; individuals: 1941,individual: 3826,;5767
-rescue-v; rescue: 3286,;3286
-promote-v; promoted: 1680,promote: 12908,promoting: 6808,;21396
-training-n; training: 10309,;10309
-press-v; pressing: 722,;722
-office-n; offices: 5363,office: 13450,;18813
-game-n; game: 3881,games: 10410,;14291
-win-v; wins: 1264,win: 4066,won: 6104,winning: 1849,;13283
-development-n; developments: 3472,;3472
-surrender-v; surrender: 423,;423
-approach-v; approach: 3172,approached: 431,;3603
-win-n; win: 4066,;4066
-undergo-v; undergo: 403,;403
-soil-n; soil: 1344,;1344
-approach-n; approaches: 597,approach: 3172,;3769
-pray-v; pray: 274,;274
-review-v; reviewing: 593,;593
-retreat-v; retreated: 123,;123
-cross-v; crossed: 398,cross: 2169,;2567
-action-n; action: 6701,actions: 3913,;10614
-barrier-n; barriers: 1036,barrier: 444,;1480
-rise-v; rise: 5517,;5517
-resume-v; resume: 2364,;2364
-disorder-n; disorder: 376,disorders: 319,;695
-hand-v; handed: 1032,;1032
-scare-v; scaring: 41,;41
-unit-n; units: 2950,unit: 4981,;7931
-score-n; score: 824,;824
-solicit-v; solicit: 220,;220
-call-v; call: 7438,called: 11366,calls: 4109,calling: 2294,;25207
-dig-v; dig: 265,digging: 209,dug: 207,;681
-segment-n; segment: 529,;529
-pound-n; pounds: 517,;517
-notice-v; notices: 487,notice: 2069,noticed: 722,;3278
-call-n; call: 7438,calls: 4109,;11547
-convince-v; convince: 327,convinced: 710,;1037
-unfold-v; unfolded: 71,;71
-plan-v; planning: 7719,planned: 2828,;10547
-visit-n; visit: 41769,;41769
-producer-n; producers: 1007,producer: 1224,;2231
-plan-n; plans: 6859,plan: 12628,;19487
-visit-v; visited: 5206,visit: 41769,visits: 6165,visiting: 7652,;60792
-count-v; count: 1232,counted: 310,;1542
-authorization-n; authorization: 409,;409
-accusation-n; accusations: 353,;353
-worry-v; worry: 1665,;1665
-react-v; react: 273,;273
-head-v; head: 7232,heading: 748,headed: 1843,;9823
-threat-n; threats: 1200,threat: 4001,;5201
-collect-v; collected: 1119,collecting: 680,collect: 1000,;2799
-ignore-v; ignored: 483,ignoring: 250,;733
-injure-v; injured: 4500,injure: 42,;4542
-head-n; head: 7232,heads: 2783,;10015
-deliver-v; deliver: 1472,;1472
-exceed-v; exceed: 884,;884
-advance-v; advancing: 829,;829
-advance-n; advance: 2883,;2883
-screen-n; screen: 1170,;1170
-element-n; element: 661,;661
-boundary-n; boundaries: 424,;424
-lie-v; lies: 860,lying: 415,lied: 65,;1340
-wound-n; wound: 351,wounds: 322,;673
-trade-n; trade: 41445,;41445
-outside-n; outside: 6117,;6117
-document-n; documents: 3091,;3091
-inquiry-n; inquiry: 578,;578
-mission-n; mission: 4191,;4191
-warn-v; warned: 3238,warning: 2509,;5747
-encounter-v; encounter: 372,encountered: 469,;841
-reach-v; reached: 7229,reach: 4317,;11546
-phone-n; phone: 4266,;4266
-impress-v; impressed: 1372,;1372
-confiscate-v; confiscate: 95,;95
-administration-n; administration: 9445,;9445
-secure-v; secure: 1824,;1824
-deploy-v; deployed: 1288,deploy: 771,;2059
-level-n; level: 9291,;9291
-member-n; member: 10230,members: 19370,;29600
-wish-v; wish: 2894,;2894
-level-v; level: 9291,;9291
-dim-v; dimmed: 28,;28
-wish-n; wishes: 1651,;1651
-memory-n; memory: 1407,;1407
-abortion-n; abortion: 303,abortions: 77,;380
-challenge-n; challenges: 3408,challenge: 2166,;5574
-spare-v; spared: 197,spare: 718,;915
-people-n; people: 91958,;91958
-challenge-v; challenge: 2166,challenged: 350,;2516
-grade-n; grade: 2407,;2407
-general-n; general: 17209,;17209
-swing-v; swing: 269,;269
-group-n; group: 22693,groups: 7094,;29787
-blame-v; blame: 726,blamed: 666,blaming: 126,;1518
-lure-v; lure: 143,lured: 93,;236
-concentrate-v; concentrating: 268,;268
-characterize-v; characterized: 334,;334
-judgment-n; judgment: 703,;703
-swing-n; swings: 100,swing: 269,;369
-come-v; come: 9697,comes: 2654,came: 6796,coming: 5085,;24232
-cover-n; cover: 2811,;2811
-torture-n; torture: 481,;481
-cover-v; covered: 1525,cover: 2811,covers: 1324,covering: 1338,;6998
-torture-v; torture: 481,;481
-restrain-v; restrain: 155,;155
-gather-v; gathered: 1142,gather: 581,;1723
-adopt-v; adopting: 622,adopt: 2023,adopted: 4273,;6918
-drug-n; drugs: 3269,drug: 5110,;8379
-indictment-n; indictment: 183,;183
-direct-v; directed: 951,directing: 224,direct: 4814,;5989
-glorify-v; glorify: 45,;45
-region-n; region: 17987,;17987
-ruin-v; ruined: 149,;149
-blink-v; blink: 58,;58
-priority-n; priority: 2914,;2914
-interfere-v; interfere: 898,;898
-wipe-v; wiping: 110,wipe: 272,;382
-conquer-v; conquer: 178,;178
-decision-n; decision: 8544,decisions: 2084,;10628
-half-n; half: 8577,;8577
-renounce-v; renounce: 253,;253
-assure-v; assure: 362,;362
-admit-v; admit: 535,admitted: 1564,;2099
-try-v; try: 3018,trying: 2662,tried: 1553,;7233
-cede-v; ceding: 25,;25
-company-n; company: 27339,companies: 19549,;46888
-approve-v; approve: 807,approved: 5907,;6714
-power-n; powers: 2153,power: 12692,;14845
-walk-v; walking: 845,walked: 569,walk: 1224,;2638
-finish-v; finished: 1934,finish: 995,;2929
-revamp-v; revamp: 81,;81
-gun-n; gun: 638,guns: 577,;1215
-contribute-v; contribute: 3370,contributed: 1414,;4784
-station-n; station: 8206,;8206
-purpose-n; purposes: 1189,;1189
-enhance-v; enhance: 7409,enhancing: 2435,;9844
-cooperate-v; cooperated: 543,cooperate: 3068,;3611
-land-n; land: 9422,;9422
-home-n; home: 14373,homes: 2342,;16715
-service-n; service: 16143,;16143
-abandon-v; abandoned: 738,;738
-introduce-v; introduced: 2518,introduce: 1573,;4091
-drink-v; drink: 1591,;1591
-reaction-n; reaction: 1282,;1282
-film-n; films: 2356,film: 5974,;8330
-execute-v; executing: 107,execute: 234,;341
-country-n; country: 30388,countries: 75471,;105859
-cope-v; cope: 803,;803
-process-n; process: 12382,;12382
-consult-v; consulted: 434,;434
-tax-n; tax: 5231,;5231
-speculate-v; speculated: 111,speculate: 121,;232
-crow-v; crow: 137,;137
-signal-n; signals: 675,signal: 1336,;2011
-congratulate-v; congratulated: 739,;739
-break-v; break: 2099,broke: 1629,;3728
-debate-v; debated: 173,;173
-tip-n; tips: 250,;250
-ring-n; ring: 617,;617
-sense-n; sense: 2737,;2737
-debate-n; debates: 283,debate: 2011,;2294
-tip-v; tipped: 66,;66
-transpire-v; transpired: 16,;16
-break-n; break: 2099,;2099
-exchange-v; exchange: 19519,;19519
-edge-n; edge: 882,;882
-person-n; person: 7536,persons: 4194,;11730
-name-n; name: 5314,names: 2358,;7672
-ambassador-n; ambassador: 7219,;7219
-pursue-v; pursue: 1322,pursued: 526,;1848
-core-n; core: 2930,;2930
-name-v; named: 2144,name: 5314,;7458
-preclude-v; preclude: 35,;35
-strategy-n; strategy: 4802,;4802
-arrive-v; arriving: 708,arrive: 1347,arrived: 11046,;13101
-figure-v; figured: 144,figure: 2845,;2989
-fulfill-v; fulfill: 850,;850
-expire-v; expires: 262,;262
-refuge-n; refuge: 481,;481
-heart-n; heart: 3730,;3730
-title-v; titled: 433,;433
-claim-v; claimed: 1831,claim: 1114,claiming: 445,;3390
-park-v; parked: 753,;753
-park-n; park: 5523,parks: 1305,;6828
-analysis-n; analysis: 2569,;2569
-relief-n; relief: 3318,;3318
-inherit-v; inherit: 144,;144
-believe-v; believed: 3431,believe: 7249,believes: 3463,;14143
-building-n; building: 12589,buildings: 3703,;16292
-do-v; did: 15342,do: 32067,doing: 3528,does: 11987,done: 3995,;66919
-sum-n; sum: 958,;958
-achieve-v; achieving: 1145,achieve: 4187,achieved: 3126,;8458
-sum-v; sum: 958,;958
-mention-v; mentioned: 2202,mention: 1032,;3234
-supply-v; supply: 5538,;5538
-qualify-v; qualify: 620,;620
-withdraw-v; withdrawn: 455,withdraw: 1684,;2139
-formulate-v; formulated: 641,;641
-discussion-n; discussions: 3175,discussion: 3071,;6246
-deserve-v; deserves: 275,;275
-commit-v; committing: 297,;297
-realize-v; realized: 1393,realize: 2301,realizing: 689,;4383
-hall-n; hall: 3897,;3897
-base-n; base: 3901,;3901
-collapse-v; collapsing: 98,;98
-express-v; expresses: 489,express: 2917,expressed: 13565,expressing: 1218,;18189
-box-n; box: 1189,;1189
-admire-v; admire: 280,admired: 228,;508
-reply-v; replied: 466,;466
-bother-v; bothering: 41,;41
-define-v; define: 379,;379
-room-n; room: 3118,;3118
-nominate-v; nominated: 691,;691
-tower-n; tower: 1455,;1455
-speak-v; speaks: 306,spoke: 2314,speaking: 4797,speak: 2152,;9569
-factor-n; factors: 3454,;3454
-step-n; steps: 2865,;2865
-economy-n; economy: 22972,;22972
-image-n; images: 1171,image: 2917,;4088
-enemy-n; enemy: 1110,enemies: 535,;1645
-trigger-v; trigger: 382,triggered: 591,;973
-marriage-n; marriage: 2024,;2024
-man-n; men: 8943,man: 9196,;18139
-resolve-v; resolved: 1557,resolve: 2932,resolving: 1167,;5656
-concede-v; concede: 89,;89
-certify-v; certified: 922,;922
-specialist-n; specialists: 701,;701
-basis-n; bases: 1325,basis: 6676,;8001
-cent-n; cents: 2270,cent: 2940,;5210
-compare-v; compare: 625,compared: 5667,compares: 183,;6475
-disturbance-n; disturbances: 139,;139
-slip-v; slipped: 279,;279
-decompose-v; decomposing: 12,;12
-comparison-n; comparison: 1463,;1463
-admission-n; admission: 1468,;1468
-collar-n; collar: 133,;133
-measure-n; measures: 11612,measure: 1936,;13548
-reduction-n; reduction: 2408,;2408
-meeting-n; meetings: 4254,meeting: 41844,;46098
-phrase-n; phrase: 351,;351
-appoint-v; appoint: 403,appointed: 2638,;3041
-invoke-v; invoke: 43,;43
-dodge-v; dodged: 30,;30
-experience-n; experience: 7775,;7775
-search-n; search: 3044,;3044
-experience-v; experiencing: 426,experienced: 1756,experience: 7775,;9957
-search-v; search: 3044,searched: 342,;3386
-source-n; sources: 4399,source: 4669,;9068
-dry-v; dry: 822,;822
-crawl-v; crawled: 34,;34
-trust-n; trust: 4212,;4212
-picture-n; pictures: 1944,picture: 2257,;4201
-endure-v; endures: 21,enduring: 190,endure: 245,;456
-speed-v; speeding: 516,;516
-patch-v; patched: 19,;19
-identify-v; identify: 981,identified: 1097,;2078
-harm-v; harm: 1128,;1128
-proposal-n; proposal: 4716,proposals: 3493,;8209
-cheat-v; cheat: 154,cheating: 182,;336
-prohibit-v; prohibit: 284,;284
+number-n; number: 1195,numbers: 293,;1488
+listen-v; listens: 22,listening: 70,listened: 59,listen: 181,;332
+struggle-n; struggle: 165,;165
+formation-n; formation: 66,;66
+struggle-v; struggling: 275,struggle: 165,struggled: 58,struggles: 37,;535
+list-n; list: 1397,;1397
+counsel-n; counseling: 32,counsel: 45,;77
+indication-n; indication: 47,;47
+unity-n; unity: 147,;147
+wield-v; wield: 8,wielding: 5,;13
+underestimate-v; underestimate: 8,;8
+use-n; use: 1330,;1330
+deceive-v; deceiving: 10,;10
+class-n; classes: 90,class: 556,;646
+prove-v; proves: 20,proven: 32,prove: 119,;171
+thank-v; thanking: 6,thank: 556,;562
+writing-n; writing: 167,;167
+use-v; using: 551,use: 1330,used: 935,uses: 128,;2944
+definition-n; definition: 58,;58
+promotion-n; promotion: 163,;163
+penalty-n; penalty: 85,;85
+impose-v; imposed: 88,;88
+rid-v; rid: 58,;58
+split-v; split: 81,;81
+ticket-n; ticket: 119,;119
+seize-v; seized: 99,seize: 60,;159
+warning-n; warning: 164,;164
+last-v; last: 4280,lasted: 48,;4328
+live-v; living: 409,live: 611,lived: 147,lives: 309,;1476
+help-n; help: 1602,;1602
+scream-v; screaming: 18,;18
+owner-n; owners: 104,;104
+affect-v; affecting: 50,affect: 206,affected: 304,affects: 40,;600
+notion-n; notion: 57,;57
+unite-v; unite: 48,;48
+help-v; helping: 219,helped: 376,helps: 119,help: 1602,;2316
+duty-n; duty: 115,;115
+award-n; awards: 207,;207
+ring-n; ring: 153,;153
+arrange-v; arranging: 18,arranged: 60,arrange: 48,;126
+hurt-v; hurt: 277,;277
+facilitate-v; facilitate: 56,;56
+reassure-v; reassure: 29,;29
+hire-v; hiring: 72,hired: 94,;166
+donate-v; donated: 62,;62
+rush-n; rush: 99,;99
+killing-n; killing: 169,;169
+wash-v; wash: 46,washed: 30,;76
+persist-v; persisted: 18,;18
+die-v; die: 183,dying: 56,died: 347,;586
+evidence-n; evidence: 281,;281
+step-v; step: 463,steps: 319,;782
+session-n; session: 614,;614
+solution-n; solution: 265,;265
+problem-n; problem: 1034,problems: 1027,;2061
+town-n; town: 348,towns: 92,;440
+haunt-v; haunting: 10,;10
+recognize-v; recognize: 128,recognizing: 28,recognized: 82,recognizes: 36,;274
+acknowledge-v; acknowledges: 32,acknowledged: 89,acknowledge: 68,;189
+effect-n; effect: 436,effects: 197,;633
+identification-n; identification: 45,;45
+describe-v; describe: 59,;59
+effect-v; effect: 436,;436
+risk-n; risk: 687,;687
+escape-v; escaped: 41,escape: 70,;111
+injury-n; injuries: 82,;82
+door-n; door: 251,doors: 46,;297
+medicine-n; medicine: 266,;266
+recommend-v; recommend: 65,;65
+risk-v; risk: 687,;687
+strike-v; struck: 106,strikes: 87,;193
+twist-v; twisted: 23,;23
+sign-n; signing: 182,signs: 328,sign: 592,;1102
+overcome-v; overcome: 54,;54
+sign-v; signed: 771,sign: 592,;1363
+past-n; past: 1482,;1482
+indulge-v; indulging: 4,;4
+center-n; center: 1036,centers: 144,;1180
+toss-v; toss: 8,;8
+receive-v; receive: 204,received: 509,receiving: 112,;825
+belong-v; belonged: 19,belong: 56,;75
+show-n; show: 1019,;1019
+make-v; making: 720,make: 1712,made: 1897,makes: 350,;4679
+suggest-v; suggested: 231,suggest: 134,suggesting: 88,;453
+lead-v; leads: 82,led: 614,lead: 413,;1109
+show-v; shown: 165,shows: 352,showing: 161,showed: 340,show: 1019,;2037
+arise-v; arise: 34,;34
+afford-v; afford: 140,;140
+oil-n; oil: 1931,;1931
+connection-n; connection: 106,;106
+hang-v; hang: 105,;105
+reputation-n; reputation: 134,;134
+spend-v; spending: 826,spend: 316,spent: 377,;1519
+work-n; work: 1958,works: 304,;2262
+decade-n; decades: 408,decade: 507,;915
+laugh-v; laughing: 30,laughed: 20,;50
+work-v; worked: 364,work: 1958,working: 646,works: 304,;3272
+be-v; be: 10687,'s: 25034,being: 889,is: 24891,am: 789,been: 3963,'re: 876,are: 11562,were: 5502,'m: 692,was: 13940,;98825
+retire-v; retiring: 25,retire: 56,;81
+top-n; top: 1014,;1014
+attack-v; attack: 363,attacking: 43,attacked: 105,;511
+account-v; accounting: 291,account: 344,accounts: 208,;843
+good-n; good: 2160,;2160
+regret-n; regret: 70,;70
+director-n; director: 1166,;1166
+accomplish-v; accomplished: 29,;29
+regret-v; regret: 70,;70
+rub-v; rub: 15,;15
+rally-v; rallied: 47,;47
+task-n; task: 217,;217
+file-v; file: 399,filed: 129,;528
+history-n; history: 772,;772
+motive-n; motive: 23,;23
+city-n; city: 1483,cities: 490,;1973
+predator-n; predators: 6,;6
+cost-v; cost: 631,costing: 20,;651
+option-n; option: 132,options: 236,;368
+hole-n; hole: 68,;68
+comment-n; comment: 603,comments: 256,;859
+cost-n; cost: 631,;631
+critic-n; critic: 29,;29
+trip-n; trip: 388,;388
+click-v; click: 34,;34
+insist-v; insisted: 87,insist: 40,;127
+cite-v; cite: 25,;25
+network-n; network: 556,networks: 127,;683
+indicate-v; indicate: 52,indicated: 107,indicating: 42,;201
+argue-v; arguing: 57,argue: 106,;163
+boil-v; boil: 10,;10
+detain-v; detained: 80,;80
+tour-n; tour: 419,;419
+mobilize-v; mobilize: 17,mobilized: 22,;39
+compel-v; compel: 7,;7
+expression-n; expression: 114,;114
+communicate-v; communicate: 60,;60
+tour-v; tour: 419,touring: 16,;435
+marketing-n; marketing: 336,;336
+justify-v; justify: 44,;44
+appear-v; appeared: 252,appears: 202,appear: 246,;700
+record-n; record: 927,records: 184,;1111
+thought-n; thoughts: 56,;56
+prevent-v; prevented: 34,prevent: 269,;303
+control-n; control: 806,;806
+control-v; control: 806,controlling: 60,;866
+obtain-v; obtained: 72,;72
+force-n; force: 754,forces: 670,;1424
+anxiety-n; anxiety: 46,;46
+money-n; money: 2386,;2386
+force-v; forced: 287,force: 754,forces: 670,;1711
+nation-n; nation: 548,;548
+persuade-v; persuade: 49,;49
+single-v; single: 293,;293
+crime-n; crime: 214,;214
+raise-v; raised: 349,raise: 563,raising: 247,;1159
+enjoy-v; enjoy: 168,enjoyed: 76,;244
+tune-v; tuning: 45,;45
+give-v; giving: 244,gave: 468,given: 521,gives: 169,give: 1010,;2412
+bury-v; bury: 19,buried: 45,;64
+contact-v; contact: 244,contacted: 63,;307
+contact-n; contact: 244,;244
+separate-v; separate: 207,separates: 14,;221
+expect-v; expected: 1202,expecting: 67,expect: 416,;1685
+involve-v; involved: 400,involves: 84,;484
+day-n; day: 2752,days: 1306,;4058
+condemn-v; condemned: 81,condemning: 22,;103
+activate-v; activated: 19,;19
+pipeline-n; pipeline: 137,;137
+copy-v; copied: 20,;20
+curse-v; cursing: 19,;19
+lock-v; locking: 11,;11
+relay-v; relayed: 12,;12
+toll-n; toll: 118,;118
+favour-v; favors: 45,;45
+claim-n; claim: 90,;90
+capture-v; captured: 47,;47
+part-n; part: 1183,parts: 348,;1531
+resign-v; resigned: 88,resign: 68,;156
+range-v; ranging: 73,;73
+beat-v; beat: 166,beating: 84,;250
+star-n; star: 351,;351
+victim-n; victims: 180,;180
+beat-n; beat: 166,;166
+remove-v; removed: 89,remove: 94,;183
+mourn-v; mourned: 4,mourning: 24,;28
+body-n; body: 336,;336
+cry-v; cry: 78,crying: 56,cried: 70,;204
+share-v; shared: 91,sharing: 93,share: 805,;989
+cry-n; cry: 78,;78
+double-v; doubled: 104,;104
+bill-n; bill: 696,;696
+smash-v; smashed: 34,smash: 20,;54
+erect-v; erected: 14,;14
+host-v; hosting: 90,hosted: 136,;226
+stir-v; stir: 47,stirring: 9,;56
+stage-n; stage: 386,;386
+explain-v; explain: 176,explained: 91,;267
+create-v; create: 330,creating: 155,created: 230,;715
+solve-v; solved: 75,solving: 62,solve: 174,;311
+leadership-n; leadership: 297,;297
+serve-v; served: 137,serving: 76,serve: 133,;346
+weigh-v; weighed: 35,weighing: 66,;101
+want-v; wants: 471,wanting: 44,wanted: 709,want: 1745,;2969
+blow-v; blew: 21,blown: 20,;41
+quit-v; quit: 84,;84
+relationship-n; relationships: 102,relationship: 542,;644
+rate-v; rated: 48,;48
+breath-n; breath: 40,;40
+weaken-v; weakened: 73,;73
+man-v; manning: 13,;13
+freedom-n; freedom: 227,freedoms: 13,;240
+column-n; column: 96,;96
+denounce-v; denounced: 43,;43
+invest-v; investing: 187,invest: 358,invested: 248,;793
+damage-n; damage: 247,;247
+arrest-v; arrested: 139,;139
+wake-v; wake: 116,;116
+deteriorate-v; deteriorating: 66,;66
+eliminate-v; eliminated: 43,;43
+research-n; research: 1130,;1130
+institution-n; institutions: 661,institution: 159,;820
+research-v; research: 1130,;1130
+damage-v; damaged: 132,damaging: 36,;168
+arrest-n; arrest: 69,;69
+overturn-v; overturned: 10,;10
+comfort-v; comforted: 6,;6
+celebrate-v; celebrating: 35,celebrate: 88,;123
+feature-v; featuring: 42,featured: 27,;69
+initiative-n; initiatives: 59,initiative: 123,;182
+fuel-v; fuel: 339,;339
+observe-v; observe: 43,;43
+specify-v; specifying: 9,specify: 38,;47
+broadcast-v; broadcast: 193,broadcasting: 101,;294
+broadcast-n; broadcast: 193,;193
+provide-v; provide: 598,provided: 243,provides: 114,;955
+degree-n; degree: 237,;237
+bar-n; bars: 56,;56
+brush-v; brush: 41,;41
+cease-v; ceases: 4,;4
+gap-n; gap: 150,;150
+fire-n; fire: 363,;363
+total-v; totaling: 44,total: 953,;997
+require-v; require: 211,requires: 169,;380
+threaten-v; threaten: 41,threatened: 91,;132
+tackle-v; tackle: 56,;56
+accordance-n; accordance: 95,;95
+panic-v; panic: 114,;114
+ban-v; banned: 107,;107
+increase-n; increase: 1099,;1099
+increase-v; increase: 1099,increasing: 373,increased: 504,;1976
+drag-v; drag: 68,dragging: 35,;103
+ban-n; ban: 230,bans: 33,;263
+fashion-n; fashion: 166,;166
+pond-n; pond: 36,;36
+explore-v; exploring: 36,explore: 81,;117
+produce-v; produced: 160,;160
+release-v; released: 423,releasing: 38,;461
+safeguard-v; safeguard: 82,safeguarded: 12,;94
+sample-n; sample: 26,;26
+undertake-v; undertake: 18,;18
+time-n; times: 1037,time: 5875,;6912
+transform-v; transform: 33,;33
+result-v; resulted: 56,resulting: 74,result: 551,results: 547,;1228
+heave-v; heaving: 13,heave: 4,;17
+reject-v; rejected: 122,rejects: 46,;168
+declaration-n; declaration: 160,;160
+seat-n; seat: 120,seats: 155,;275
+rush-v; rushed: 104,;104
+swim-v; swim: 27,swimming: 112,;139
+defense-n; defense: 912,;912
+result-n; results: 547,;547
+seek-v; sought: 143,seek: 243,seeking: 211,;597
+sustain-v; sustain: 46,;46
+demand-v; demanding: 100,demand: 1048,;1148
+occupy-v; occupy: 15,occupied: 51,;66
+attempt-n; attempts: 66,;66
+secretary-n; secretary: 1317,;1317
+whistle-v; whistled: 4,;4
+occur-v; occur: 96,occurred: 225,occurs: 53,;374
+child-n; children: 1062,child: 514,;1576
+pardon-v; pardoned: 9,pardon: 14,;23
+refuse-v; refuses: 22,refusing: 20,refused: 117,;159
+fund-v; funded: 148,;148
+forget-v; forget: 135,forgot: 38,;173
+fund-n; fund: 1172,;1172
+touch-v; touched: 63,;63
+answer-n; answer: 206,answers: 63,;269
+read-v; read: 336,reading: 127,;463
+determine-v; determined: 139,determine: 119,;258
+spot-v; spotted: 60,;60
+borrow-v; borrowed: 118,borrow: 138,;256
+answer-v; answer: 206,answered: 61,answers: 63,;330
+ponder-v; ponder: 17,pondering: 15,;32
+life-n; life: 1344,lives: 309,;1653
+crack-v; cracked: 19,crack: 66,;85
+shoulder-v; shoulder: 57,;57
+lessen-v; lessen: 21,;21
+protest-v; protest: 143,protested: 26,;169
+conjure-v; conjures: 4,;4
+respond-v; responding: 49,responded: 89,;138
+crack-n; crack: 66,;66
+date-v; dating: 24,;24
+sing-v; sing: 113,;113
+hate-v; hated: 23,hate: 54,;77
+issue-v; issued: 508,issuing: 66,;574
+clip-n; clips: 21,;21
+occupation-n; occupation: 58,;58
+dance-v; dance: 151,dancing: 41,;192
+issue-n; issue: 1653,issues: 1019,;2672
+argument-n; argument: 103,arguments: 38,;141
+need-n; need: 1666,;1666
+ease-v; eased: 52,;52
+proceed-v; proceeded: 15,;15
+response-n; response: 463,;463
+prepare-v; preparing: 148,prepare: 111,prepared: 228,;487
+need-v; need: 1666,needed: 401,needs: 622,needing: 20,;2709
+guide-n; guides: 29,guide: 114,;143
+marry-v; married: 194,;194
+smoke-v; smoked: 17,;17
+amount-n; amounts: 113,amount: 363,;476
+procedure-n; procedure: 76,;76
+guide-v; guide: 114,;114
+worker-n; workers: 846,worker: 169,;1015
+postpone-v; postponing: 14,postpone: 36,postponed: 55,;105
+amount-v; amounts: 113,;113
+conspiracy-n; conspiracy: 22,;22
+suffering-n; suffering: 127,;127
+invite-v; invited: 239,invite: 128,;367
+sting-v; stings: 3,;3
+outline-v; outlining: 11,outline: 34,outlines: 22,;67
+month-n; months: 1758,month: 1637,;3395
+snow-v; snowed: 8,;8
+disaster-n; disaster: 282,;282
+disagree-v; disagreed: 21,;21
+pilot-n; pilot: 119,;119
+present-v; presented: 95,;95
+cave-v; caving: 4,;4
+soak-v; soaking: 6,;6
+situation-n; situation: 1228,situations: 95,;1323
+present-n; presents: 44,;44
+rebound-v; rebound: 140,;140
+map-n; map: 100,;100
+sleep-v; slept: 27,sleep: 132,sleeping: 58,;217
+dialogue-n; dialogue: 205,;205
+assess-v; assessing: 20,;20
+divert-v; divert: 32,;32
+endow-v; endowing: 4,;4
+put-v; put: 991,putting: 167,puts: 75,;1233
+gift-n; gift: 85,;85
+difficulty-n; difficulties: 156,;156
+go-v; go: 1601,gone: 340,went: 1008,going: 1345,goes: 195,;4489
+freeze-v; freezing: 29,;29
+teach-v; teaching: 126,teach: 94,taught: 45,;265
+continue-v; continuing: 159,continues: 254,continue: 1144,continued: 473,;2030
+voice-n; voice: 167,;167
+nomination-n; nomination: 76,;76
+way-n; ways: 359,way: 1499,;1858
+close-n; closing: 183,;183
+defeat-v; defeated: 55,defeating: 11,;66
+tv-n; tv: 1105,;1105
+close-v; close: 776,;776
+border-n; border: 326,;326
+unveil-v; unveiled: 103,;103
+appreciate-v; appreciate: 58,;58
+associate-v; associated: 166,;166
+eater-n; eater: 21,;21
+wealth-n; wealth: 285,;285
+allow-v; allows: 116,allow: 351,allowed: 280,;747
+redemption-n; redemption: 25,;25
+include-v; included: 206,include: 435,including: 2206,includes: 223,;3070
+calendar-n; calendar: 57,;57
+environment-n; environment: 521,;521
+march-v; marching: 13,;13
+disappear-v; disappears: 6,disappear: 37,disappeared: 55,;98
+route-n; route: 335,;335
+partner-n; partner: 274,;274
+launch-v; launched: 277,launch: 289,;566
+sight-n; sight: 77,;77
+prefer-v; preferred: 150,;150
+accuse-v; accused: 110,;110
+portray-v; portray: 15,;15
+understand-v; understood: 69,understand: 483,understanding: 344,;896
+replace-v; replacing: 36,replaced: 68,replace: 124,;228
+shut-v; shut: 102,;102
+evaporate-v; evaporated: 13,;13
+begin-v; begins: 101,began: 681,beginning: 494,begin: 250,begun: 150,;1676
+regard-v; regarding: 225,regarded: 53,;278
+talk-n; talk: 1029,;1029
+complete-v; completing: 25,complete: 252,;277
+appointment-n; appointments: 30,appointment: 72,;102
+act-v; acting: 188,acted: 57,act: 363,;608
+talk-v; talking: 403,talked: 376,talk: 1029,;1808
+think-v; thought: 957,thinking: 406,think: 3720,thinks: 194,;5277
+notify-v; notify: 16,;16
+urge-v; urge: 54,urged: 285,;339
+teaching-n; teaching: 126,;126
+school-n; schools: 339,school: 1551,;1890
+celebrity-n; celebrity: 43,;43
+one-n; ones: 181,one: 7864,;8045
+pull-v; pull: 139,pulled: 112,;251
+enter-v; entered: 224,entering: 105,enter: 174,;503
+embed-v; imbedded: 1,;1
+landing-n; landing: 65,;65
+succeed-v; succeed: 89,succeeded: 48,succeeds: 22,;159
+pleasure-n; pleasure: 48,;48
+plot-n; plot: 50,;50
+keep-v; keeping: 206,keeps: 66,kept: 228,keep: 789,;1289
+track-n; track: 228,tracks: 66,;294
+consequence-n; consequences: 100,;100
+cool-v; cool: 90,;90
+transport-v; transported: 15,;15
+sort-n; sort: 209,sorts: 38,;247
+line-n; line: 676,lines: 219,;895
+clear-v; clears: 8,;8
+sort-v; sorted: 10,;10
+transport-n; transport: 216,;216
+progress-n; progress: 522,;522
+tell-v; telling: 126,tells: 52,tell: 697,told: 1305,;2180
+govern-v; govern: 31,;31
+stick-v; stick: 137,;137
+hearing-n; hearings: 48,hearing: 202,;250
+scald-v; scald: 6,;6
+play-v; play: 605,plays: 59,playing: 244,played: 288,;1196
+fan-n; fans: 114,;114
+play-n; play: 605,;605
+confirm-v; confirmed: 240,confirm: 55,;295
+suspend-v; suspended: 103,;103
+survive-v; survive: 130,survived: 37,;167
+perform-v; perform: 122,performs: 12,;134
+reserve-n; reserve: 1008,;1008
+benefit-v; benefit: 337,benefits: 275,;612
+strangle-v; strangle: 11,;11
+address-v; addressing: 69,address: 254,;323
+bring-v; brought: 370,brings: 76,bringing: 143,bring: 491,;1080
+yesterday-n; yesterday: 315,;315
+phase-n; phase: 179,;179
+hack-v; hack: 35,;35
+shed-v; shed: 71,;71
+negotiate-v; negotiate: 71,;71
+open-v; open: 847,opened: 543,opens: 216,opening: 606,;2212
+guess-n; guess: 125,;125
+choose-v; chosen: 89,choose: 173,choosing: 46,chose: 103,;411
+deal-n; deals: 362,;362
+deal-v; dealing: 107,deal: 1476,dealt: 55,;1638
+construct-v; constructed: 32,;32
+trouble-n; trouble: 342,troubles: 138,;480
+guess-v; guess: 125,guessed: 12,;137
+fly-v; fly: 119,flying: 140,flown: 33,flew: 78,;370
+monitor-n; monitoring: 141,;141
+place-v; placed: 81,;81
+hand-n; hand: 520,hands: 261,;781
+place-n; place: 682,places: 338,;1020
+woman-n; woman: 324,women: 974,;1298
+breathe-v; breathe: 21,breathing: 43,;64
+investigation-n; investigation: 399,investigations: 100,;499
+distort-v; distorting: 14,;14
+monitor-v; monitor: 154,;154
+turn-v; turned: 295,turning: 128,turns: 81,turn: 441,;945
+accelerate-v; accelerating: 49,;49
+technology-n; technologies: 192,technology: 1104,;1296
+turn-n; turn: 441,;441
+jump-v; jump: 131,jumped: 148,jumping: 39,;318
+check-n; checks: 70,check: 185,;255
+deprive-v; deprive: 9,deprived: 10,;19
+cure-v; cure: 56,;56
+rating-n; ratings: 203,;203
+depression-n; depression: 192,;192
+statement-n; statements: 114,statement: 993,;1107
+check-v; checked: 46,check: 185,;231
+hold-v; held: 1388,hold: 706,holding: 400,;2494
+minimize-v; minimize: 49,;49
+slash-v; slashed: 64,;64
+taste-v; taste: 62,;62
+sleep-n; sleep: 132,;132
+slash-n; slash: 50,;50
+bomb-v; bomb: 134,;134
+protect-v; protecting: 92,protect: 324,protected: 80,;496
+penny-n; penny: 42,;42
+suffer-v; suffering: 127,suffer: 115,suffers: 21,;263
+avoid-v; avoid: 299,avoided: 51,;350
+fact-n; facts: 114,fact: 1059,;1173
+attention-n; attention: 641,;641
+tendency-n; tendency: 30,;30
+invade-v; invaded: 15,;15
+portfolio-n; portfolio: 364,;364
+food-n; food: 907,;907
+team-n; teams: 245,team: 1000,;1245
+fade-v; faded: 23,;23
+article-n; articles: 82,article: 243,;325
+shock-v; shock: 93,shocked: 67,;160
+hour-n; hours: 465,hour: 267,;732
+prediction-n; prediction: 50,;50
+car-n; car: 765,;765
+sympathy-n; sympathy: 58,;58
+shock-n; shock: 93,;93
+system-n; system: 1822,systems: 375,;2197
+ask-v; ask: 578,asking: 177,asked: 875,;1630
+succession-n; succession: 54,;54
+shoot-n; shooting: 160,;160
+absence-n; absence: 34,;34
+shoot-v; shoot: 96,shooting: 160,;256
+slow-v; slowed: 141,;141
+fill-v; filling: 22,;22
+incident-n; incident: 471,incidents: 97,;568
+denigrate-v; denigrates: 3,;3
+exist-v; exist: 104,exists: 54,existing: 228,;386
+schedule-v; scheduled: 359,;359
+store-n; stores: 299,store: 256,;555
+caution-v; caution: 56,cautioning: 3,;59
+confront-v; confronting: 23,;23
+agent-n; agent: 113,;113
+outrage-v; outraged: 9,;9
+branch-n; branch: 173,;173
+package-v; package: 514,;514
+caution-n; caution: 56,;56
+sigh-v; sigh: 30,sighed: 5,;35
+swallow-v; swallow: 31,;31
+ambition-n; ambitions: 53,;53
+trend-n; trends: 83,;83
+act-n; acts: 66,;66
+predict-v; predict: 98,predicted: 165,;263
+run-n; run: 549,;549
+message-n; message: 346,;346
+complain-v; complaining: 28,complain: 53,;81
+slope-n; slope: 23,;23
+association-n; association: 897,;897
+hide-v; hidden: 74,hid: 20,;94
+run-v; ran: 177,runs: 120,run: 549,running: 279,;1125
+carry-v; carry: 261,carried: 186,;447
+equivalent-n; equivalent: 125,;125
+remain-v; remains: 359,remain: 435,remained: 151,;945
+village-n; village: 393,;393
+state-v; state: 2546,stated: 104,;2650
+punish-v; punish: 40,punished: 47,;87
+staff-n; staff: 555,;555
+indict-v; indicted: 25,;25
+science-n; science: 471,;471
+ground-n; ground: 254,;254
+accept-v; accepted: 182,accept: 230,;412
+impact-v; impact: 558,;558
+sentence-n; sentence: 182,;182
+stab-v; stabbed: 15,;15
+quarter-n; quarter: 1064,;1064
+nurture-v; nurtured: 5,;5
+impact-n; impact: 558,;558
+movement-n; movement: 289,movements: 49,;338
+meet-v; meet: 697,meeting: 2816,met: 1875,;5388
+chance-n; chances: 85,chance: 285,;370
+shave-v; shave: 12,;12
+discover-v; discovered: 195,;195
+throw-v; throw: 78,threw: 59,;137
+publicize-v; publicized: 32,;32
+command-v; commands: 16,commanding: 18,;34
+welcome-v; welcome: 572,welcoming: 76,;648
+convention-n; convention: 163,;163
+command-n; command: 160,;160
+roar-v; roared: 13,roaring: 14,;27
+unlock-v; unlock: 8,;8
+department-n; department: 847,;847
+port-n; port: 228,;228
+consolidate-v; consolidate: 58,;58
+hope-n; hopes: 544,hope: 828,;1372
+end-n; end: 1718,;1718
+vice-n; vice: 1974,;1974
+block-v; block: 148,blocked: 53,;201
+series-n; series: 716,;716
+point-n; point: 777,;777
+penetrate-v; penetrate: 16,;16
+fighter-n; fighter: 108,;108
+point-v; pointed: 149,point: 777,;926
+house-n; house: 1439,;1439
+hope-v; hopes: 544,hoping: 201,hope: 828,hoped: 279,;1852
+end-v; ended: 406,ends: 168,end: 1718,ending: 159,;2451
+energy-n; energy: 1136,;1136
+population-n; populations: 22,population: 422,;444
+discuss-v; discussing: 94,discussed: 287,discuss: 431,;812
+faction-n; factions: 46,;46
+kill-v; kill: 117,killed: 535,;652
+sit-v; sitting: 112,sat: 81,sit: 120,;313
+truth-n; truth: 188,;188
+educate-v; educating: 7,educate: 33,educated: 112,;152
+announce-v; announce: 117,announcing: 66,announced: 1038,;1221
+exercise-n; exercise: 231,;231
+exercise-v; exercise: 231,;231
+owe-v; owe: 34,owed: 56,;90
+down-n; down: 1894,;1894
+weight-n; weights: 17,weight: 140,;157
+agreement-n; agreement: 1210,;1210
+feeling-n; feeling: 374,feelings: 153,;527
+mark-v; marks: 179,;179
+perspective-n; perspective: 298,;298
+stretch-n; stretch: 37,;37
+attract-v; attracted: 108,attract: 127,;235
+consideration-n; consideration: 102,;102
+cut-v; cut: 899,cutting: 211,;1110
+prosecute-v; prosecuted: 20,;20
+organization-n; organization: 953,;953
+event-n; event: 371,events: 505,;876
+court-n; court: 792,courts: 86,;878
+repair-v; repairing: 21,repair: 82,;103
+allege-v; alleges: 10,;10
+disappoint-v; disappoint: 17,;17
+shout-v; shouting: 28,;28
+batter-v; battered: 116,;116
+greet-v; greeted: 57,;57
+direction-n; direction: 224,;224
+draw-v; drawn: 112,draw: 158,drew: 98,;368
+satisfy-v; satisfied: 129,;129
+bless-v; bless: 14,;14
+magazine-n; magazine: 155,;155
+punch-v; punched: 6,;6
+avert-v; avert: 30,;30
+collection-n; collection: 103,;103
+wait-v; waiting: 227,waited: 71,wait: 234,;532
+sacrifice-n; sacrifice: 48,;48
+idea-n; idea: 371,;371
+sacrifice-v; sacrificed: 20,;20
+renovate-v; renovated: 10,;10
+respect-v; respect: 216,;216
+combine-v; combining: 34,;34
+mind-n; mind: 293,;293
+assassination-n; assassination: 35,;35
+foil-v; foiling: 8,;8
+ownership-n; ownership: 95,;95
+summarize-v; summarize: 9,;9
+wander-v; wander: 11,;11
+watch-n; watch: 410,;410
+watch-v; watched: 190,watch: 410,watching: 336,;936
+happen-v; happens: 141,happen: 276,happening: 97,happened: 450,;964
+treatment-n; treatment: 270,;270
+justification-n; justification: 7,;7
+explosion-n; explosion: 119,;119
+match-n; match: 289,;289
+handle-v; handles: 18,handling: 117,handle: 180,handled: 51,;366
+economy-n; economy: 2902,;2902
+college-n; college: 585,;585
+delay-v; delay: 108,;108
+adhere-v; adheres: 28,;28
+publish-v; published: 266,;266
+delay-n; delay: 108,;108
+reveal-v; reveal: 45,revealed: 111,;156
+contain-v; contained: 67,contains: 40,contain: 81,;188
+recovery-n; recovery: 290,;290
+future-n; future: 1075,;1075
+attend-v; attending: 223,attended: 349,attend: 301,;873
+couple-n; couples: 50,couple: 258,;308
+path-n; path: 168,;168
+manipulate-v; manipulated: 12,;12
+consider-v; considered: 334,considering: 219,consider: 321,considers: 64,;938
+cause-v; caused: 372,causing: 116,cause: 357,;845
+reinstate-v; reinstated: 24,;24
+suit-v; suiting: 4,suits: 56,;60
+dissent-n; dissents: 5,;5
+knock-v; knock: 23,;23
+suit-n; suits: 56,;56
+obligation-n; obligation: 42,;42
+correct-v; corrected: 22,;22
+separation-n; separation: 39,;39
+cause-n; cause: 357,causes: 92,;449
+stuff-n; stuff: 95,;95
+foundation-n; foundation: 354,;354
+see-v; seen: 697,see: 2192,sees: 138,saw: 676,seeing: 183,;3886
+overstate-v; overstating: 4,;4
+have-v; has: 9786,had: 4975,having: 364,have: 11038,'ve: 682,;26845
+entrust-v; entrust: 9,entrusted: 22,;31
+say-v; saying: 1230,say: 3979,said: 16961,says: 4525,;26695
+location-n; locations: 54,location: 91,;145
+suppress-v; suppressing: 12,;12
+harm-n; harm: 95,;95
+subject-n; subjects: 40,subject: 153,;193
+light-n; light: 396,lights: 50,;446
+emerge-v; emerge: 67,emerged: 105,emerges: 21,;193
+thread-v; thread: 33,;33
+burn-v; burn: 61,;61
+assimilate-v; assimilate: 2,;2
+hear-v; heard: 404,hear: 265,hears: 4,hearing: 202,;875
+maintain-v; maintained: 96,;96
+forecast-v; forecast: 281,;281
+profit-n; profits: 383,;383
+page-n; pages: 68,;68
+partnership-n; partnership: 231,;231
+repel-v; repel: 4,repelling: 6,;10
+inform-v; inform: 29,informed: 84,;113
+follow-v; following: 595,follow: 274,followed: 241,follows: 63,;1173
+bully-v; bullied: 22,;22
+government-n; governments: 666,government: 6427,;7093
+signal-v; signal: 173,;173
+success-n; success: 391,;391
+hunt-v; hunted: 4,;4
+like-v; liked: 97,like: 4156,;4253
+clash-v; clash: 35,clashed: 40,;75
+official-n; officials: 1937,official: 1339,;3276
+forbid-v; forbade: 4,;4
+estimate-v; estimated: 222,;222
+loss-n; loss: 437,;437
+letter-n; letters: 146,;146
+estimate-n; estimate: 177,estimates: 252,;429
+majority-n; majority: 277,majorities: 11,;288
+lot-n; lots: 123,lot: 1215,;1338
+permit-v; permit: 58,;58
+anger-n; anger: 104,;104
+send-v; sends: 46,sending: 140,sent: 495,send: 295,;976
+become-v; become: 875,becoming: 204,became: 421,;1500
+beginning-n; beginning: 494,;494
+violate-v; violating: 14,violate: 39,;53
+circulate-v; circulating: 17,;17
+vow-v; vowed: 48,;48
+remind-v; reminds: 42,reminded: 35,remind: 33,;110
+motivation-n; motivation: 17,;17
+content-n; content: 224,;224
+take-v; taken: 473,taking: 516,take: 1821,takes: 222,took: 828,;3860
+wonder-v; wondered: 16,wondering: 61,wonder: 116,;193
+type-n; type: 474,;474
+plague-v; plagued: 25,;25
+morning-n; morning: 786,;786
+favor-n; favor: 144,;144
+elect-v; electing: 18,;18
+bomber-n; bomber: 20,;20
+crash-v; crashed: 99,;99
+wave-n; wave: 227,;227
+fall-n; fall: 627,;627
+decrease-v; decreased: 58,;58
+dare-v; dares: 17,dare: 139,dared: 45,;201
+apply-v; apply: 138,applying: 40,applies: 23,;201
+capacity-n; capacity: 250,;250
+renew-v; renew: 22,;22
+lose-v; losing: 134,loses: 37,lost: 621,lose: 215,;1007
+pain-n; pain: 196,pains: 32,;228
+behave-v; behaved: 12,;12
+existence-n; existence: 80,;80
+develop-v; developed: 410,develop: 532,developing: 803,;1745
+responsibility-n; responsibilities: 59,;59
+detect-v; detect: 19,;19
+desire-n; desire: 146,;146
+site-n; site: 430,;430
+authority-n; authorities: 777,authority: 357,;1134
+organize-v; organized: 149,organizing: 97,;246
+surface-v; surface: 114,;114
+course-n; course: 1004,;1004
+feel-v; feel: 1155,feeling: 374,feels: 104,felt: 779,;2412
+oversight-n; oversight: 109,;109
+nothing-n; nothing: 515,;515
+evacuate-v; evacuate: 27,;27
+assault-n; assault: 49,;49
+collaborate-v; collaborate: 12,;12
+form-n; form: 306,;306
+audience-n; audience: 194,;194
+lurk-v; lurking: 7,;7
+offer-v; offered: 232,offer: 469,;701
+form-v; formed: 131,form: 306,;437
+bus-n; bus: 261,;261
+thing-n; things: 1093,thing: 982,;2075
+today-n; today: 4809,;4809
+agree-v; agreed: 612,agrees: 41,agree: 296,;949
+equal-v; equals: 19,;19
+eat-v; ate: 56,eating: 113,eat: 197,;366
+chase-v; chased: 19,;19
+heat-n; heat: 144,heating: 60,;204
+breakdown-n; breakdown: 37,;37
+repeat-v; repeating: 24,repeated: 69,;93
+minute-n; minutes: 247,minute: 151,;398
+pay-v; paying: 193,pay: 897,paid: 392,;1482
+analyst-n; analyst: 394,analysts: 940,;1334
+arrival-n; arrival: 86,;86
+pattern-n; pattern: 96,;96
+security-n; security: 1448,;1448
+officer-n; officer: 326,;326
+night-n; night: 737,;737
+effort-n; effort: 441,;441
+shake-v; shook: 28,;28
+cruise-v; cruise: 30,;30
+expose-v; expose: 46,exposing: 24,exposed: 122,;192
+emphasize-v; emphasized: 93,emphasizing: 16,;109
+extend-v; extend: 149,;149
+device-n; devices: 127,;127
+anticipate-v; anticipated: 69,;69
+conflict-n; conflicts: 167,conflict: 238,;405
+back-n; backs: 28,;28
+tear-v; tore: 8,torn: 28,;36
+word-n; word: 252,words: 541,;793
+conflict-v; conflicted: 4,;4
+back-v; backed: 196,;196
+report-n; report: 1585,reports: 614,;2199
+right-n; right: 4622,;4622
+join-v; join: 251,joined: 180,joins: 33,joining: 121,;585
+miss-v; misses: 14,miss: 159,missed: 51,missing: 173,;397
+wear-v; wearing: 159,wear: 133,worn: 32,wore: 55,;379
+piece-n; piece: 227,;227
+piece-v; piece: 227,;227
+subdue-v; subdued: 16,;16
+conclusion-n; conclusion: 99,;99
+choice-n; choices: 70,choice: 246,;316
+division-n; divisions: 103,division: 298,;401
+oppose-v; oppose: 79,opposed: 135,;214
+improve-v; improving: 161,improved: 163,improve: 399,;723
+moment-n; moments: 56,moment: 369,;425
+infrastructure-n; infrastructure: 509,;509
+round-n; round: 351,;351
+face-n; faces: 190,face: 613,;803
+deny-v; deny: 46,denying: 19,denied: 117,;182
+race-n; races: 79,race: 208,;287
+face-v; facing: 278,faced: 191,face: 613,faces: 190,;1272
+fit-v; fits: 23,fit: 76,;99
+request-v; requested: 86,request: 223,requesting: 33,;342
+examine-v; examined: 28,;28
+pass-v; passed: 376,pass: 206,;582
+observation-n; observations: 18,;18
+speech-n; speeches: 71,speech: 459,;530
+disappointment-n; disappointment: 35,;35
+production-n; production: 853,;853
+dedicate-v; dedicated: 44,;44
+vote-n; vote: 362,votes: 196,;558
+quality-n; qualities: 27,;27
+evolve-v; evolving: 10,;10
+nod-v; nodded: 7,;7
+reality-n; realities: 20,reality: 238,;258
+vote-v; vote: 362,voting: 115,voted: 135,;612
+importance-n; importance: 326,;326
+paper-n; paper: 372,;372
+ability-n; ability: 362,;362
+leader-n; leader: 609,leaders: 1011,;1620
+news-n; news: 1863,;1863
+convene-v; convened: 40,;40
+instill-v; instill: 15,;15
+recall-v; recall: 88,;88
+probe-v; probe: 46,;46
+book-n; book: 622,books: 310,;932
+immigration-n; immigration: 87,;87
+refer-v; refers: 36,referring: 74,refer: 32,;142
+student-n; students: 656,student: 320,;976
+prevail-v; prevail: 19,;19
+expand-v; expanding: 204,expand: 331,;535
+pledge-v; pledged: 115,;115
+making-n; making: 720,;720
+confer-v; conferred: 33,;33
+policy-n; policy: 1507,;1507
+pose-v; posed: 37,;37
+root-v; rooting: 9,;9
+foot-n; feet: 101,;101
+climb-v; climbing: 51,climb: 38,;89
+imply-v; imply: 28,;28
+hurry-n; hurry: 61,;61
+weapon-n; weapons: 431,weapon: 77,;508
+role-n; role: 836,;836
+detail-n; details: 372,detail: 77,;449
+train-n; train: 278,;278
+dispute-n; dispute: 157,;157
+television-n; television: 484,;484
+dispute-v; dispute: 157,;157
+flood-n; flood: 150,;150
+train-v; training: 419,train: 278,;697
+inspire-v; inspires: 3,;3
+praise-v; praised: 149,praise: 48,;197
+tie-n; ties: 1012,;1012
+leak-v; leaked: 25,;25
+participate-v; participating: 116,participated: 131,participate: 275,;522
+leak-n; leak: 24,;24
+speculation-n; speculation: 82,;82
+status-n; status: 294,;294
+tube-n; tube: 88,;88
+flee-v; fled: 57,;57
+test-n; test: 536,testing: 191,;727
+leave-v; leave: 416,leaving: 215,left: 1010,;1641
+settle-v; settle: 75,settled: 109,;184
+propose-v; propose: 57,proposed: 349,proposing: 33,;439
+convict-v; convicted: 45,;45
+test-v; tested: 118,;118
+combination-n; combination: 86,;86
+find-v; finding: 146,found: 832,find: 866,;1844
+ride-v; riding: 45,ride: 77,;122
+drop-v; drop: 487,dropped: 376,;863
+thanks-n; thanks: 307,;307
+intervene-v; intervening: 20,intervene: 48,;68
+ride-n; ride: 77,;77
+clutch-v; clutching: 11,;11
+betray-v; betraying: 9,betray: 10,;19
+mean-v; meant: 136,meaning: 162,means: 755,mean: 685,;1738
+target-n; target: 359,;359
+pause-v; pause: 27,;27
+personality-n; personality: 85,;85
+bite-v; bite: 27,;27
+onslaught-n; onslaught: 10,;10
+hamper-v; hampered: 16,;16
+district-n; districts: 101,district: 787,;888
+defer-v; defer: 14,;14
+stay-v; staying: 84,stays: 27,stayed: 84,stay: 453,;648
+scan-v; scanned: 6,;6
+loosen-v; loosen: 18,;18
+plead-v; pleaded: 19,pled: 2,;21
+tag-v; tagged: 7,;7
+return-n; returns: 247,;247
+drain-v; draining: 10,;10
+business-n; business: 2345,;2345
+scatter-v; scattered: 22,;22
+compromise-v; compromise: 86,;86
+front-n; front: 390,;390
+conduct-v; conducted: 192,conduct: 185,;377
+get-v; gotten: 73,got: 864,gets: 141,getting: 456,get: 1687,;3221
+guidance-n; guidance: 48,;48
+submarine-n; submarine: 86,;86
+bump-v; bumped: 16,;16
+learn-v; learned: 269,learning: 181,learn: 334,;784
+table-n; table: 237,;237
+fear-n; fear: 306,;306
+fear-v; fear: 306,;306
+sue-v; sue: 48,;48
+stake-n; stake: 455,;455
+accompany-v; accompanying: 51,;51
+public-n; public: 1629,;1629
+term-n; term: 523,terms: 529,;1052
+promise-v; promise: 152,promised: 183,;335
+chew-v; chew: 6,;6
+treat-v; treated: 109,treat: 123,;232
+decline-v; declined: 525,declining: 127,;652
+facility-n; facilities: 192,facility: 114,;306
+proof-n; proof: 49,;49
+stand-v; standing: 714,stand: 265,;979
+coordinate-v; coordinate: 73,;73
+something-n; something: 972,;972
+celebration-n; celebration: 65,;65
+difference-n; difference: 236,differences: 175,;411
+pressure-n; pressures: 107,;107
+hit-v; hits: 115,hit: 736,;851
+position-n; position: 573,;573
+sense-v; sense: 357,;357
+surround-v; surround: 13,;13
+vacation-n; vacation: 62,;62
+shorten-v; shortened: 14,shorten: 4,;18
+matter-v; matter: 699,mattered: 6,;705
+project-v; projecting: 19,projects: 523,;542
+explanation-n; explanation: 99,;99
+capability-n; capability: 81,;81
+stop-v; stopped: 139,stop: 437,stops: 47,;623
+curtail-v; curtail: 27,;27
+stop-n; stop: 437,;437
+land-v; landed: 41,lands: 23,;64
+side-n; side: 602,sides: 734,;1336
+hint-v; hinted: 26,;26
+matter-n; matters: 164,matter: 699,;863
+project-n; project: 639,;639
+save-v; save: 245,saved: 75,;320
+rule-v; rule: 287,ruled: 81,;368
+rule-n; rules: 1341,rule: 287,;1628
+rest-n; rest: 350,;350
+push-v; push: 314,pushed: 188,pushing: 209,;711
+travel-v; travelled: 5,;5
+utilize-v; utilize: 21,;21
+trap-v; trapped: 34,;34
+withstand-v; withstand: 25,;25
+information-n; information: 1202,;1202
+travel-n; travel: 315,;315
+road-n; road: 536,;536
+dismiss-v; dismissed: 42,;42
+surpass-v; surpass: 28,surpassed: 45,;73
+operator-n; operator: 78,;78
+peril-n; peril: 20,;20
+return-v; returns: 247,return: 641,returned: 270,returning: 107,;1265
+permission-n; permission: 72,;72
+intend-v; intends: 57,intend: 42,intended: 79,;178
+tank-n; tank: 106,;106
+resource-n; resources: 450,;450
+stock-n; stock: 1897,;1897
+generation-n; generation: 271,;271
+condition-n; conditions: 434,condition: 183,;617
+death-n; death: 529,deaths: 207,;736
+set-v; set: 1046,;1046
+stun-v; stunned: 22,;22
+change-n; changes: 549,change: 1005,;1554
+let-v; letting: 75,let: 1767,;1842
+fate-n; fate: 139,;139
+change-v; changing: 266,changed: 419,change: 1005,;1690
+exclude-v; excluding: 53,;53
+water-n; water: 799,;799
+tease-v; tease: 6,;6
+question-n; question: 723,questions: 437,;1160
+bear-v; born: 179,;179
+mess-v; mess: 96,messed: 5,;101
+sponsor-v; sponsored: 163,sponsor: 68,;231
+mess-n; mess: 96,;96
+snap-v; snapped: 21,snap: 25,;46
+question-v; question: 723,questioned: 57,questioning: 43,;823
+interview-v; interview: 658,interviewed: 129,;787
+bow-v; bow: 40,;40
+resistance-n; resistance: 146,;146
+shift-n; shift: 206,;206
+enable-v; enabled: 31,;31
+interview-n; interview: 658,interviews: 107,;765
+hop-v; hop: 13,;13
+focus-v; focusing: 99,focus: 655,;754
+yell-v; yelling: 16,yelled: 25,;41
+conceal-v; concealed: 15,;15
+defend-v; defend: 80,;80
+birth-n; birth: 139,;139
+spin-v; spinning: 24,;24
+encourage-v; encourage: 163,encouraging: 106,encouraged: 115,;384
+straighten-v; straightened: 13,;13
+sell-v; sell: 686,sells: 81,selling: 499,;1266
+air-v; aired: 20,;20
+add-v; add: 220,added: 855,;1075
+air-n; air: 998,;998
+broaden-v; broaden: 35,;35
+start-v; started: 801,start: 694,starting: 433,;1928
+imagine-v; imagined: 50,imagine: 158,;208
+fortune-n; fortune: 98,;98
+rely-v; relies: 38,rely: 136,relied: 45,;219
+sound-n; sounds: 114,;114
+grab-v; grab: 44,;44
+sound-v; sound: 270,sounds: 114,;384
+version-n; version: 172,;172
+start-n; start: 694,;694
+law-n; law: 1288,laws: 243,;1531
+reflect-v; reflect: 159,reflected: 79,reflects: 163,;401
+fight-v; fought: 61,fighting: 224,fight: 295,;580
+reason-v; reasoned: 4,;4
+fight-n; fight: 295,;295
+recover-v; recover: 125,recovering: 38,;163
+reason-n; reasons: 279,reason: 605,;884
+transfer-v; transferred: 81,;81
+behaviour-n; behavior: 196,;196
+erupt-v; erupted: 35,;35
+await-v; awaited: 9,;9
+mistake-n; mistake: 120,;120
+investigate-v; investigating: 83,investigate: 98,investigated: 41,;222
+compile-v; compiled: 30,;30
+pick-v; picked: 101,pick: 178,;279
+pick-n; pick: 178,;178
+overthrow-v; overthrown: 10,;10
+campaign-n; campaign: 571,;571
+embrace-v; embraced: 26,;26
+criticize-v; criticizing: 62,criticized: 172,;234
+concern-n; concerns: 350,concern: 526,;876
+trainer-n; trainers: 7,;7
+concern-v; concerning: 142,concerned: 477,;619
+catch-v; catching: 25,;25
+strength-n; strength: 223,;223
+opinion-n; opinion: 292,;292
+note-v; note: 267,noted: 459,;726
+know-v; known: 375,knowing: 65,knew: 315,know: 2636,knows: 209,;3600
+love-n; love: 634,;634
+assert-v; assert: 8,;8
+love-v; loved: 78,love: 634,loves: 42,loving: 27,;781
+note-n; note: 267,notes: 176,;443
+story-n; story: 361,stories: 134,;495
+standard-n; standard: 473,;473
+remedy-v; remedy: 18,;18
+foresee-v; foreseen: 11,;11
+analyse-v; analyzed: 39,analyze: 58,;97
+budget-n; budget: 490,;490
+soar-v; soaring: 111,;111
+order-n; order: 586,;586
+mislead-v; misled: 9,;9
+ascend-v; ascend: 5,;5
+shore-n; shore: 109,;109
+order-v; ordered: 109,;109
+conform-v; conform: 23,;23
+eye-n; eye: 141,;141
+abuse-n; abuse: 61,abuses: 34,;95
+job-n; job: 834,jobs: 747,;1581
+habit-n; habits: 45,;45
+campaign-v; campaigned: 13,;13
+charge-v; charging: 48,charged: 124,;172
+state-n; states: 1566,state: 2546,;4112
+charge-n; charges: 177,charge: 304,;481
+grow-v; growing: 636,grew: 243,grow: 326,;1205
+technique-n; techniques: 52,;52
+zone-n; zone: 370,;370
+survey-v; surveyed: 85,;85
+seem-v; seem: 301,seems: 548,seemed: 337,;1186
+survey-n; survey: 462,;462
+fail-v; fail: 154,failed: 301,;455
+depend-v; depends: 118,depending: 74,;192
+quote-v; quote: 44,quoted: 124,;168
+war-n; war: 1082,wars: 119,;1201
+purchase-v; purchase: 317,;317
+remember-v; remembered: 31,remembering: 8,remember: 445,remembers: 24,;508
+press-n; press: 831,;831
+drive-v; drove: 82,drive: 288,;370
+individual-n; individuals: 163,individual: 231,;394
+rescue-v; rescue: 500,;500
+promote-v; promoted: 99,promote: 527,promoting: 230,;856
+training-n; training: 419,;419
+press-v; pressing: 78,;78
+office-n; offices: 143,office: 1171,;1314
+game-n; game: 385,games: 1412,;1797
+win-v; wins: 63,win: 382,won: 510,winning: 166,;1121
+development-n; developments: 135,;135
+surrender-v; surrender: 26,;26
+approach-v; approach: 299,approached: 40,;339
+win-n; win: 382,;382
+undergo-v; undergo: 25,;25
+soil-n; soil: 77,;77
+approach-n; approaches: 52,approach: 299,;351
+pray-v; pray: 20,;20
+review-v; reviewing: 35,;35
+retreat-v; retreated: 11,;11
+cross-v; crossed: 25,cross: 226,;251
+action-n; action: 531,actions: 290,;821
+barrier-n; barriers: 67,barrier: 43,;110
+rise-v; rise: 585,;585
+resume-v; resume: 126,;126
+disorder-n; disorder: 36,disorders: 11,;47
+hand-v; handed: 75,;75
+scare-v; scaring: 9,;9
+unit-n; units: 239,unit: 552,;791
+score-n; score: 88,;88
+solicit-v; solicit: 15,;15
+call-v; call: 797,called: 1295,calls: 571,calling: 231,;2894
+dig-v; dig: 42,digging: 35,dug: 24,;101
+segment-n; segment: 83,;83
+pound-n; pounds: 73,;73
+notice-v; notices: 23,notice: 174,noticed: 153,;350
+call-n; call: 797,calls: 571,;1368
+convince-v; convince: 50,convinced: 63,;113
+unfold-v; unfolded: 8,;8
+plan-v; planning: 380,planned: 316,;696
+visit-n; visit: 3068,;3068
+producer-n; producers: 164,producer: 113,;277
+plan-n; plans: 892,plan: 1579,;2471
+visit-v; visited: 360,visit: 3068,visits: 667,visiting: 656,;4751
+count-v; count: 103,counting: 35,counted: 61,;199
+authorization-n; authorization: 27,;27
+accusation-n; accusations: 24,;24
+worry-v; worry: 271,;271
+react-v; react: 37,;37
+head-v; heads: 203,heading: 77,headed: 256,;536
+threat-n; threat: 228,;228
+collect-v; collected: 57,collecting: 54,collect: 85,;196
+ignore-v; ignored: 36,ignoring: 19,;55
+injure-v; injured: 244,injure: 11,;255
+head-n; head: 766,heads: 203,;969
+deliver-v; deliver: 75,;75
+exceed-v; exceed: 66,;66
+advance-v; advancing: 38,;38
+screen-n; screen: 229,;229
+element-n; element: 74,;74
+boundary-n; boundaries: 19,;19
+lie-v; lies: 49,lying: 35,lied: 14,;98
+wound-n; wound: 53,wounds: 21,;74
+trade-n; trade: 3029,;3029
+outside-n; outside: 647,;647
+document-n; documents: 202,;202
+inquiry-n; inquiry: 23,;23
+mission-n; mission: 185,;185
+warn-v; warned: 223,warning: 164,;387
+encounter-v; encounter: 35,encountered: 54,;89
+reach-v; reached: 511,reach: 307,;818
+phone-n; phone: 539,;539
+impress-v; impressed: 81,;81
+encounter-n; encounters: 10,;10
+confiscate-v; confiscate: 7,;7
+administration-n; administration: 1160,;1160
+secure-v; secure: 122,;122
+deploy-v; deployed: 41,deploy: 33,;74
+level-n; level: 777,;777
+member-n; member: 622,members: 872,;1494
+wish-v; wish: 179,;179
+level-v; level: 777,;777
+dim-v; dimmed: 9,;9
+wish-n; wishes: 117,;117
+memory-n; memory: 189,;189
+abortion-n; abortion: 16,abortions: 4,;20
+challenge-n; challenges: 196,challenge: 243,;439
+spare-v; spared: 18,spare: 47,;65
+people-n; people: 8968,;8968
+challenge-v; challenge: 243,challenged: 36,;279
+grade-n; grade: 94,;94
+general-n; general: 1975,;1975
+swing-v; swing: 49,;49
+group-n; group: 3444,groups: 419,;3863
+blame-v; blame: 146,blamed: 72,blaming: 21,;239
+lure-v; lure: 34,lured: 18,;52
+concentrate-v; concentrating: 25,;25
+characterize-v; characterized: 17,;17
+judgment-n; judgment: 113,;113
+swing-n; swings: 37,swing: 49,;86
+come-v; come: 1151,comes: 405,came: 886,coming: 607,;3049
+cover-n; cover: 221,;221
+torture-n; torture: 102,;102
+cover-v; covered: 94,cover: 221,covers: 57,covering: 86,;458
+torture-v; torture: 102,;102
+restrain-v; restrain: 15,;15
+gather-v; gathered: 100,gather: 57,;157
+adopt-v; adopting: 33,adopt: 107,adopted: 216,;356
+drug-n; drugs: 204,drug: 305,;509
+indictment-n; indictment: 30,;30
+direct-v; directed: 59,directing: 27,direct: 349,;435
+glorify-v; glorify: 3,;3
+region-n; region: 1083,;1083
+ruin-v; ruined: 20,;20
+blink-v; blink: 12,;12
+priority-n; priority: 168,;168
+mandate-n; mandate: 59,;59
+interfere-v; interfere: 54,;54
+wipe-v; wiping: 14,wipe: 37,;51
+conquer-v; conquer: 14,;14
+decision-n; decision: 653,decisions: 220,;873
+half-n; half: 1013,;1013
+renounce-v; renounce: 11,;11
+assure-v; assure: 26,;26
+admit-v; admit: 49,admitted: 115,;164
+try-v; try: 367,trying: 483,tried: 260,;1110
+cede-v; ceding: 5,;5
+company-n; company: 3566,companies: 3072,;6638
+approve-v; approve: 91,approved: 372,;463
+power-n; powers: 138,power: 1229,;1367
+walk-v; walking: 114,walked: 114,walk: 154,;382
+finish-v; finished: 214,finish: 138,;352
+revamp-v; revamp: 21,;21
+gun-n; gun: 144,guns: 61,;205
+contribute-v; contribute: 146,contributed: 98,;244
+station-n; station: 2299,;2299
+purpose-n; purposes: 59,;59
+enhance-v; enhance: 202,enhancing: 61,;263
+cooperate-v; cooperated: 27,;27
+land-n; land: 433,;433
+home-n; home: 1644,homes: 217,;1861
+service-n; services: 690,service: 758,;1448
+abandon-v; abandoned: 80,;80
+introduce-v; introduced: 146,introduce: 116,;262
+drink-v; drink: 150,;150
+reaction-n; reaction: 265,;265
+film-n; films: 195,film: 938,;1133
+execute-v; executing: 11,execute: 30,;41
+country-n; country: 2107,countries: 4150,;6257
+cope-v; cope: 68,;68
+process-n; process: 750,;750
+consult-v; consulted: 24,;24
+tax-n; tax: 697,;697
+speculate-v; speculated: 13,speculate: 22,;35
+signal-n; signals: 85,signal: 173,;258
+break-v; break: 288,breaking: 70,broke: 164,;522
+debate-v; debated: 32,;32
+tip-n; tips: 47,;47
+contribution-n; contribution: 104,;104
+sense-n; sense: 357,;357
+debate-n; debates: 44,debate: 244,;288
+tip-v; tipped: 11,;11
+transpire-v; transpired: 6,;6
+break-n; break: 288,;288
+exchange-v; exchange: 4220,;4220
+edge-n; edge: 111,;111
+person-n; person: 1161,persons: 89,;1250
+name-n; name: 568,names: 170,;738
+ambassador-n; ambassador: 632,;632
+pursue-v; pursue: 78,pursued: 28,;106
+core-n; core: 214,;214
+name-v; named: 245,name: 568,;813
+preclude-v; preclude: 6,;6
+strategy-n; strategy: 457,;457
+arrive-v; arrive: 83,arrived: 1027,;1110
+figure-v; figured: 35,figure: 312,;347
+fulfill-v; fulfill: 50,;50
+expire-v; expires: 20,;20
+refuge-n; refuge: 17,;17
+heart-n; heart: 376,;376
+title-v; titled: 36,;36
+claim-v; claimed: 110,claim: 90,claiming: 29,;229
+chapter-n; chapter: 69,;69
+park-n; park: 659,parks: 51,;710
+analysis-n; analysis: 299,;299
+relief-n; relief: 305,;305
+inherit-v; inherit: 17,;17
+believe-v; believed: 279,believe: 1053,believes: 244,;1576
+building-n; building: 720,buildings: 160,;880
+do-v; did: 3194,do: 4796,doing: 571,does: 1527,done: 514,;10602
+sum-n; sum: 95,;95
+achieve-v; achieving: 48,achieve: 187,achieved: 140,;375
+sum-v; sum: 95,;95
+mention-v; mentioned: 544,mention: 99,;643
+supply-v; supply: 385,;385
+qualify-v; qualify: 72,;72
+withdraw-v; withdrawn: 43,withdraw: 108,;151
+formulate-v; formulated: 26,;26
+discussion-n; discussions: 206,discussion: 247,;453
+deserve-v; deserves: 28,;28
+commit-v; committing: 33,;33
+realize-v; realized: 132,realize: 154,realizing: 29,;315
+hall-n; hall: 315,;315
+base-n; base: 335,;335
+collapse-v; collapsing: 30,;30
+express-v; expresses: 40,express: 315,expressed: 834,expressing: 118,;1307
+box-n; box: 193,;193
+admire-v; admire: 28,admired: 24,;52
+reply-v; replied: 26,;26
+bother-v; bothering: 11,;11
+define-v; define: 41,;41
+room-n; room: 396,rooms: 65,;461
+nominate-v; nominated: 38,;38
+tower-n; tower: 169,;169
+speak-v; speaks: 30,spoke: 198,speaking: 457,speak: 244,;929
+factor-n; factors: 186,;186
+step-n; steps: 319,;319
+experiment-v; experimenting: 17,;17
+image-n; images: 99,image: 263,;362
+enemy-n; enemy: 108,enemies: 39,;147
+trigger-v; trigger: 48,triggered: 75,;123
+marriage-n; marriage: 198,;198
+man-n; men: 470,man: 584,;1054
+resolve-v; resolved: 101,resolve: 202,resolving: 74,;377
+concede-v; concede: 25,;25
+certify-v; certified: 29,;29
+specialist-n; specialists: 43,;43
+basis-n; bases: 63,basis: 252,;315
+cent-n; cents: 209,;209
+compare-v; compare: 63,compared: 537,compares: 32,;632
+disturbance-n; disturbances: 15,;15
+slip-v; slipped: 47,;47
+decompose-v; decomposing: 2,;2
+comparison-n; comparison: 127,;127
+admission-n; admission: 66,;66
+collar-n; collar: 29,;29
+measure-n; measures: 683,;683
+reduction-n; reduction: 150,;150
+meeting-n; meetings: 267,meeting: 2816,;3083
+phrase-n; phrase: 53,;53
+appoint-v; appoint: 24,appointed: 201,;225
+invoke-v; invoke: 12,;12
+dodge-v; dodged: 8,;8
+experience-n; experience: 468,;468
+search-n; search: 393,;393
+experience-v; experiencing: 36,experienced: 188,experience: 468,;692
+search-v; search: 393,searched: 32,;425
+source-n; sources: 262,source: 259,;521
+dry-v; dry: 85,;85
+crawl-v; crawled: 4,;4
+trust-n; trust: 319,;319
+articulate-v; articulate: 13,;13
+picture-n; pictures: 221,picture: 275,;496
+endure-v; endures: 2,enduring: 18,endure: 17,;37
+speed-v; speeding: 29,;29
+patch-v; patched: 8,;8
+identify-v; identify: 77,identified: 65,;142
+harm-v; harm: 95,;95
+proposal-n; proposal: 279,proposals: 146,;425
+cheat-v; cheat: 26,cheating: 29,;55
+prohibit-v; prohibit: 13,;13
 wet-v; wetted: 6,;6
-view-v; viewed: 646,view: 6433,;7079
-bet-n; bet: 271,;271
-eviscerate-v; eviscerated: 5,;5
-reduce-v; reduced: 2251,;2251
-case-n; case: 9524,cases: 8288,;17812
-president-n; presidents: 2387,president: 60090,;62477
-pursuit-n; pursuit: 674,;674
-view-n; views: 7862,view: 6433,;14295
-bet-v; betting: 580,bet: 271,;851
-pool-n; pool: 933,;933
-interpret-v; interpret: 269,;269
-web-n; web: 4428,;4428
-out-v; outing: 76,;76
-stall-v; stalled: 584,;584
-mass-n; mass: 2740,;2740
-compete-v; competes: 37,;37
-area-n; areas: 14045,area: 12166,;26211
-age-n; age: 5859,;5859
-disrupt-v; disrupt: 246,;246
-connect-v; connected: 1188,connecting: 354,connects: 127,connect: 545,;2214
-guarantee-v; guarantees: 859,guaranteed: 768,guarantee: 2690,;4317
-waste-v; wasted: 206,waste: 2213,;2419
-declare-v; declaring: 279,declare: 631,;910
-fire-v; firing: 421,;421
-advocate-n; advocate: 462,advocates: 426,;888
-study-n; study: 9717,studies: 3265,;12982
-representative-n; representatives: 5553,;5553
-advocate-v; advocating: 272,advocate: 462,advocated: 507,;1241
-study-v; study: 9717,studied: 1397,;11114
-report-v; report: 21447,reported: 12319,reporting: 2140,reports: 7369,;43275
-dominate-v; dominate: 266,;266
-represent-v; represented: 865,represent: 1221,represents: 1475,;3561
-write-v; write: 2088,written: 3642,writes: 365,wrote: 2154,writing: 2333,;10582
-suggestion-n; suggestions: 1687,suggestion: 602,;2289
-intention-n; intentions: 416,;416
-sex-n; sex: 1405,;1405
-burden-n; burden: 1356,;1356
-engage-v; engage: 1037,engaged: 1408,;2445
-convert-v; convert: 227,converted: 311,;538
-authorize-v; authorize: 175,authorizing: 131,;306
-stress-v; stress: 1171,stressing: 674,;1845
-complaint-n; complaints: 1830,;1830
-testify-v; testified: 101,testify: 146,;247
-lesson-n; lesson: 555,;555
-resolution-n; resolutions: 1905,resolution: 7216,;9121
-traffic-n; traffic: 10378,;10378
-emergency-n; emergency: 4180,;4180
-earn-v; earn: 884,earning: 433,earned: 958,;2275
-loom-v; looms: 39,;39
-pin-v; pinned: 65,pin: 453,;518
-look-n; look: 9705,;9705
-look-v; looked: 1393,looking: 5316,look: 9705,looks: 1940,;18354
-originate-v; originated: 349,originate: 57,;406
-projection-n; projections: 303,;303
-spread-v; spreading: 848,spread: 3193,;4041
-slap-v; slapped: 114,;114
-withdrawal-n; withdrawals: 145,;145
-balance-v; balance: 3294,;3294
-navigate-v; navigate: 56,;56
-strengthen-v; strengthen: 8290,;8290
-underscore-v; underscore: 104,;104
-teacher-n; teacher: 4288,;4288
-uphold-v; uphold: 709,;709
-implement-v; implement: 4290,implemented: 3088,;7378
-society-n; society: 10290,;10290
-trial-n; trial: 2793,trials: 684,;3477
-compose-v; composed: 908,;908
-build-v; building: 12589,build: 5670,built: 3523,;21782
-minister-n; minister: 44918,;44918
-health-n; health: 16530,;16530
-shame-n; shame: 332,;332
-surprise-n; surprises: 117,;117
-family-n; families: 4558,family: 11873,;16431
-link-v; links: 2112,;2112
-narrow-v; narrowed: 199,;199
-operate-v; operated: 590,operate: 1661,operating: 3675,;5926
-isolate-v; isolate: 196,isolated: 604,isolating: 62,;862
-craft-v; craft: 389,;389
-election-n; election: 9879,;9879
-fall-v; fell: 5194,fallen: 1154,fall: 3084,;9432
-divide-v; divide: 468,dividing: 208,;676
-determination-n; determination: 1455,;1455
-apologize-v; apologized: 207,apologize: 308,;515
-disclose-v; disclose: 422,disclosed: 778,;1200
-value-n; values: 2539,value: 8726,;11265
-chief-n; chief: 14370,;14370
-value-v; valuing: 62,;62
-enchant-v; enchanting: 60,;60
-care-v; cares: 205,care: 6691,;6896
-possibility-n; possibilities: 496,possibility: 1912,;2408
-establish-v; established: 7725,establish: 4581,;12306
-select-v; selecting: 496,selected: 2169,;2665
-care-n; care: 6691,;6691
-manage-v; managing: 1675,manage: 1377,managed: 1188,;4240
-rage-n; rage: 215,;215
-traverse-v; traversing: 31,;31
-move-n; move: 5473,;5473
-move-v; moving: 2091,move: 5473,moved: 2250,;9814
-thrive-v; thrive: 118,;118
-program-n; program: 9450,programs: 3564,;13014
-rage-v; rage: 215,;215
-lay-v; laid: 1360,lay: 863,;2223
-specialize-v; specializing: 260,;260
-support-v; support: 21243,supported: 2798,supports: 2768,;26809
-telephone-n; telephone: 3191,;3191
-base-v; based: 9027,;9027
-reinforce-v; reinforced: 411,;411
-community-n; communities: 1378,community: 13527,;14905
-computer-n; computer: 5390,;5390
-support-n; support: 21243,;21243
-forgive-v; forgive: 138,;138
-price-n; price: 11967,;11967
-frustration-n; frustration: 300,;300
-buy-v; buy: 5847,buying: 2163,bought: 2106,;10116
-judge-n; judge: 1470,judges: 922,;2392
-transition-n; transition: 1953,;1953
-deprivation-n; deprivation: 59,;59
-examination-n; examination: 2096,;2096
-address-v; address: 5025,;5025
-judge-v; judging: 639,;639
-unravel-v; unraveling: 32,;32
-spring-n; spring: 3049,;3049
-decide-v; decided: 6759,decides: 391,decide: 1762,;8912
-gain-v; gained: 1291,gaining: 430,gain: 1828,;3549
-danger-n; danger: 1318,;1318
-rip-v; ripping: 25,;25
-gain-n; gain: 1828,;1828
-spring-v; sprung: 101,;101
-perception-n; perception: 210,;210
-battle-n; battle: 2462,battles: 317,;2779
-reform-n; reforms: 4035,;4035
-reform-v; reform: 12171,;12171
-battle-v; battling: 136,;136
-newspaper-n; newspaper: 3279,;3279
-advantage-n; advantages: 1738,;1738
-cast-v; cast: 929,;929
-interrupt-v; interrupt: 72,;72
-replacement-n; replacement: 587,;587
-ensure-v; ensuring: 1068,ensure: 6351,ensured: 306,;7725
-combat-v; combat: 2177,;2177
-destroy-v; destroyed: 1425,destroy: 829,destroying: 378,;2632
-province-n; provinces: 2769,;2769
+view-v; viewed: 81,view: 507,;588
+bet-n; bet: 110,;110
+eviscerate-v; eviscerated: 2,;2
+reduce-v; reduced: 160,;160
+case-n; case: 1007,cases: 546,;1553
+president-n; presidents: 161,president: 5086,;5247
+pursuit-n; pursuit: 50,;50
+view-n; views: 353,view: 507,;860
+bet-v; betting: 54,bet: 110,;164
+pool-n; pool: 96,;96
+interpret-v; interpret: 35,;35
+web-n; web: 602,;602
+out-v; outing: 8,;8
+stall-v; stalled: 42,;42
+mass-n; mass: 159,;159
+compete-v; competes: 8,competing: 95,;103
+area-n; areas: 738,area: 737,;1475
+age-n; age: 345,;345
+disrupt-v; disrupt: 27,;27
+connect-v; connected: 106,connecting: 26,connects: 6,connect: 71,;209
+guarantee-v; guarantees: 105,guaranteed: 63,guarantee: 255,;423
+waste-v; wasted: 11,waste: 109,;120
+declare-v; declaring: 26,declare: 52,;78
+fire-v; firing: 41,;41
+advocate-n; advocate: 56,advocates: 51,;107
+study-n; study: 521,studies: 210,;731
+representative-n; representatives: 343,;343
+advocate-v; advocating: 20,advocate: 56,advocated: 36,;112
+study-v; study: 521,studied: 130,;651
+report-v; report: 1585,reported: 888,reporting: 294,reports: 614,;3381
+dominate-v; dominate: 53,;53
+represent-v; represented: 63,represent: 118,represents: 97,;278
+write-v; write: 274,written: 207,writes: 41,wrote: 398,writing: 167,;1087
+suggestion-n; suggestions: 94,suggestion: 61,;155
+intention-n; intentions: 35,;35
+sex-n; sex: 110,;110
+burden-n; burden: 135,;135
+engage-v; engage: 106,engaged: 87,;193
+convert-v; convert: 32,converted: 34,;66
+authorize-v; authorize: 15,authorizing: 10,;25
+stress-v; stress: 112,stressing: 38,;150
+complaint-n; complaints: 86,;86
+testify-v; testified: 15,testify: 11,;26
+lesson-n; lesson: 87,;87
+resolution-n; resolutions: 71,resolution: 337,;408
+traffic-n; traffic: 365,;365
+emergency-n; emergency: 395,;395
+earn-v; earn: 108,earning: 59,earned: 112,;279
+loom-v; looms: 9,;9
+pin-v; pin: 48,;48
+look-n; look: 1570,;1570
+look-v; looked: 282,looking: 604,look: 1570,looks: 313,;2769
+originate-v; originated: 35,originate: 11,;46
+projection-n; projections: 42,;42
+spread-v; spreading: 92,spread: 225,;317
+slap-v; slapped: 29,;29
+balance-n; balance: 464,balances: 30,;494
+balance-v; balance: 464,;464
+navigate-v; navigate: 20,;20
+strengthen-v; strengthen: 385,;385
+underscore-v; underscore: 28,;28
+teacher-n; teacher: 491,;491
+uphold-v; uphold: 29,;29
+implement-v; implement: 122,implemented: 89,;211
+society-n; society: 539,;539
+trial-n; trial: 188,trials: 42,;230
+compose-v; composed: 70,;70
+build-v; building: 720,build: 366,built: 286,;1372
+minister-n; minister: 3706,;3706
+health-n; health: 863,;863
+shame-n; shame: 25,;25
+surprise-n; surprises: 21,;21
+wire-n; wires: 17,;17
+family-n; families: 307,family: 1281,;1588
+narrow-v; narrowed: 17,;17
+operate-v; operated: 26,operate: 91,;117
+isolate-v; isolate: 11,isolated: 59,isolating: 9,;79
+craft-v; craft: 25,;25
+election-n; election: 1005,;1005
+fall-v; fell: 813,fallen: 270,fall: 627,;1710
+divide-v; divide: 51,dividing: 26,;77
+determination-n; determination: 65,;65
+apologize-v; apologized: 44,apologize: 44,;88
+disclose-v; disclose: 92,disclosed: 129,;221
+value-n; values: 218,value: 881,;1099
+chief-n; chief: 1564,;1564
+value-v; valuing: 23,;23
+enchant-v; enchanting: 7,;7
+care-v; cares: 23,care: 564,;587
+possibility-n; possibilities: 52,possibility: 252,;304
+establish-v; established: 338,establish: 251,;589
+select-v; selecting: 25,selected: 180,;205
+care-n; care: 564,;564
+manage-v; managing: 225,manage: 138,managed: 112,;475
+rage-n; rage: 35,;35
+traverse-v; traversing: 6,;6
+move-n; move: 746,;746
+move-v; moved: 261,move: 746,moving: 227,;1234
+thrive-v; thrive: 12,;12
+program-n; program: 1380,programs: 455,;1835
+rage-v; rage: 35,;35
+lay-v; laid: 111,lay: 85,;196
+specialize-v; specializing: 29,;29
+support-v; support: 1210,supported: 150,supports: 161,;1521
+telephone-n; telephone: 160,;160
+base-v; based: 688,;688
+reinforce-v; reinforced: 24,;24
+community-n; communities: 58,community: 440,;498
+computer-n; computer: 484,;484
+support-n; support: 1210,;1210
+forgive-v; forgive: 17,;17
+price-n; price: 1646,;1646
+frustration-n; frustration: 38,;38
+buy-v; buy: 1096,buying: 568,bought: 393,;2057
+judge-n; judge: 194,judges: 78,;272
+deprivation-n; deprivation: 5,;5
+examination-n; examination: 167,;167
+judge-v; judging: 82,;82
+unravel-v; unraveling: 13,;13
+spring-n; spring: 267,;267
+decide-v; decided: 559,decides: 41,decide: 1009,;1609
+gain-v; gained: 139,gaining: 62,gain: 203,;404
+danger-n; danger: 113,;113
+rip-v; ripping: 4,;4
+gain-n; gain: 203,;203
+spring-v; sprung: 6,;6
+perception-n; perception: 32,;32
+battle-n; battle: 542,battles: 26,;568
+reform-n; reforms: 209,;209
+reform-v; reform: 634,;634
+combat-v; combat: 138,;138
+battle-v; battling: 25,;25
+newspaper-n; newspaper: 285,;285
+advantage-n; advantages: 73,;73
+cast-v; cast: 98,;98
+interrupt-v; interrupt: 16,;16
+replacement-n; replacement: 35,;35
+ensure-v; ensuring: 43,ensure: 252,ensured: 13,;308
+wind-v; wind: 202,;202
+destroy-v; destroyed: 126,destroy: 68,destroying: 34,;228
+province-n; provinces: 209,;209
