@@ -6,6 +6,7 @@
 import os, sys, re, itertools, gensim, numpy, math, scipy, sklearn
 from scipy import stats
 from matplotlib import pyplot
+from numpy import linalg
 from sys import stdout
 from sklearn import svm
 from sklearn.metrics import precision_recall_fscore_support
@@ -107,6 +108,8 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
             sim = vecmodel.similarity(pair[0][0],pair[1][0])
             items_tot += 1
             lem = pair[0][2]
+            w1 = pair[0][0]
+            w2 = pair[1][0]
             if pair[0][1] == pair[1][1]: 
                 label = 'syn'
                 syn_sim_list_ALL.append(sim)
@@ -125,6 +128,7 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
                 else: 
                     poly_sim_list.append(sim)
                     poly_tot += 1
+                    
             if not entropies.has_key(lem): 
                 LT_total = 0
                 LT_entropy = 0
@@ -146,9 +150,19 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
 #                 print 'ENTROPY: ' + lem
 #                 print entropies[lem][0]
 #                 print entropies[lem][1]
-                        
+             
+            dimensions = []
+            norm_A = numpy.linalg.norm(vecmodel[w1])
+            norm_B = numpy.linalg.norm(vecmodel[w2])
+            for i in range(len(vecmodel[w1])):
+                a = vecmodel[w1][i]
+                b = vecmodel[w2][i]
+                dim = (a*b)/(norm_A*norm_B)
+                dimensions.append(dim)
+                                
                     
             featureset = [sim,inflectot[lem],transnums[lem],entropies[lem][0],entropies[lem][1]]
+            featureset += dimensions
             
             ##create input for SVM. currently set to set aside every tenth item for test set (next step try dividing by word/lemma type)      
             if items_tot % 10 == 0:
