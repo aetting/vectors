@@ -19,9 +19,10 @@ class SenseObj(object):
         
 def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     
-    [X_train,y_train,X_test,y_test] = getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel)
+    [X_train,y_train,X_test,y_test,lemma_div,training_length] = getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel)
     
-    clf = svm.SVC(kernel='rbf')
+    ker = 'rbf'
+    clf = svm.SVC(kernel=ker) 
     print 'training SVM'
     clf.fit(X_train, y_train)
     
@@ -40,12 +41,17 @@ def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     syn_fmeasure = evals[2][1]
     syn_true_tot = evals[3][1]
     
+    print '\n'
+    print 'Kernel: ' + ker
+    print 'Features: ' + str(len(X_train[0]))
+    print 'Lemma div: ' + str(lemma_div)
+    print 'Training set length: ' + str(training_length)
     print evals
           
     
 def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     
-    [senseDict,counts,inflectot,lem_translations,lem_translations_onto] = combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir)
+    [senseDict,counts,inflectot,lem_translations,lem_translations_onto,training_length] = combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir)
     print 'loading model'
     vecmodel = gensim.models.Word2Vec.load(os.path.abspath(w2vmodel))
     pairs = []
@@ -99,9 +105,10 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     s_i = 0
     test_tot = 0
     lemma_set_assignments = {}
+    lemma_div = 5
     for lem,ct in sortedpairs:
         s_i += 1
-        if s_i % 5 == 0 and test_tot < (float(total)/10):
+        if s_i % lemma_div == 0 and test_tot < (float(total)/10):
             lemma_set_assignments[lem] = 'test'
             test_tot += ct
         else: lemma_set_assignments[lem] = 'train'
@@ -192,9 +199,16 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
                 b = vecmodel[w2][i]
                 dim = (a*b)/(norm_A*norm_B)
                 dimensions.append(dim)
+                
+            transnum_all = len(lem_translations[lem])
                                 
-                    
-            featureset = [sim,inflectot[lem],transnums[lem],entropies[lem][0],entropies[lem][1]]
+            ##inflectot is a sum, for a given lemma, over the counts of each of its inflections -- counts based on full alignment training bitext, and inflection list based on inflections of lemma found in Ontonotes bitext (only place we have lemma annotation)
+            ##transnums is based on number of word types that this lemma is aligned to in Ontonotes, post filtering
+            ##transnum_all should be the number of word types that this lemma is aligned to in the entire alignment training bitext, post filtering
+            ##entropies[lem][0] is the entropy over all alignments found in full alignment training bitext, for inflections of lemma (after PMI filtering). this is based on "translations" dictionary collected while going through training bitext.
+            ##entropies[lem][1] is the entropy over all alignments found in Ontonotes bitext for lemma (lemma annotation in Ontonotes means don't have to go via inflection dictionary for this entropy. but it's probably noisier, being a smaller sample size.)   
+            
+            featureset = [sim,inflectot[lem],transnums[lem],transnum_all,entropies[lem][0],entropies[lem][1]]
             featureset += dimensions
             
             ##create input for SVM. every tenth item, or divide by lemmas      
@@ -229,11 +243,11 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     print 'Full dataset t-test: '
     print 't: ' + str(round(t,3)) + ' p: ' + str(round(p,6)) 
     
-#     pyplot.hist(poly_sim_list_ALL,bins = 200,alpha=.5,label = 'poly')
-#     pyplot.hist(syn_sim_list_ALL,bins = 200,alpha=.5,label = 'syn')
-#     pyplot.legend(loc='upper right')
-#     pyplot.savefig('fullOntoDist.png')
-#     pyplot.clf()
+    pyplot.hist(poly_sim_list_ALL,bins = 200,alpha=.5,label = 'poly')
+    pyplot.hist(syn_sim_list_ALL,bins = 200,alpha=.5,label = 'syn')
+    pyplot.legend(loc='upper right')
+    pyplot.savefig('fullOntoDist.png')
+    pyplot.clf()
             
     syn_correct = 0
     poly_correct = 0
@@ -294,9 +308,10 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     print 'Vectors: '
     print 'Poly: precision = ' + str(v_p_precision) + ' recall = ' + str(v_p_recall)
     print 'Syn: precision = ' + str(v_s_precision) + ' recall = ' + str(v_s_recall) 
-    print 'Total accuracy: ' + str(vec_accuracy)  
+    print 'Total accuracy: ' + str(vec_accuracy) 
+    print '\n' 
     
-    return [X_train,Y_train,X_test,Y_test]         
+    return [X_train,Y_train,X_test,Y_test,lemma_div,training_length]         
 
 
 
@@ -320,7 +335,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
     zhAligndoc.close()
     
     #run cleanAlignments function and get alignments and numbers for the entire alignment corpus
-    [translations,counts,num_alignments] = cleanAlignments(aligndir)
+    [translations,counts,num_alignments,training_length] = cleanAlignments(aligndir)
     
     enLemmaCounts = {}
 
@@ -560,7 +575,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
     print 'all lines: ' + str(align_i)
     print 'words added: ' + str(words_added)
     
-    return [words,counts,inflectot,lem_translations,lem_translations_onto]
+    return [words,counts,inflectot,lem_translations,lem_translations_onto,training_length]
     
 def cleanAlignments(aligndir):
 
@@ -578,6 +593,7 @@ def cleanAlignments(aligndir):
     translations = {}
     counts = {}
     num_alignments = 0
+    training_length = len(alignLines)
     for i in range(len(alignLines)):
         if i % 5000 == 0:
             stdout.write('.')
@@ -605,7 +621,7 @@ def cleanAlignments(aligndir):
             translations[enWord][zhWord] += 1
     print ''
 
-    return [translations,counts,num_alignments]
+    return [translations,counts,num_alignments,training_length]
     
 if __name__ == "__main__":
     classify(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6])
