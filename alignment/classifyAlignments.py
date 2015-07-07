@@ -71,10 +71,10 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
 #                 print tokList[i]
                 if not alignwsenses.has_key(tokList[i][0]): alignwsenses[tokList[i][0]] = 0
                 alignwsenses[tokList[i][0]] += 1
-            max = 0
+            mx = 0
             for s,n in alignwsenses.items():
-                if n > max: 
-                    max = n
+                if n > mx: 
+                    mx = n
                     sense = s
 #             print sense 
             pivotlist.append([alignw,sense,w])
@@ -201,6 +201,11 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
                 dimensions.append(dim)
                 
             transnum_all = len(lem_translations[lem])
+            w1freq = counts[w1]
+            w2freq = counts[w2]
+            zh_lowfreq = min([w1freq,w2freq])
+            zh_highfreq = max([2,4])
+            zhratio = zh_lowfreq/float(zh_highfreq)
                                 
             ##inflectot is a sum, for a given lemma, over the counts of each of its inflections -- counts based on full alignment training bitext, and inflection list based on inflections of lemma found in Ontonotes bitext (only place we have lemma annotation)
             ##transnums is based on number of word types that this lemma is aligned to in Ontonotes, post filtering
@@ -208,7 +213,7 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
             ##entropies[lem][0] is the entropy over all alignments found in full alignment training bitext, for inflections of lemma (after PMI filtering). this is based on "translations" dictionary collected while going through training bitext.
             ##entropies[lem][1] is the entropy over all alignments found in Ontonotes bitext for lemma (lemma annotation in Ontonotes means don't have to go via inflection dictionary for this entropy. but it's probably noisier, being a smaller sample size.)   
             
-            featureset = [sim,inflectot[lem],transnums[lem],transnum_all,entropies[lem][0],entropies[lem][1]]
+            featureset = [sim,inflectot[lem],transnums[lem],transnum_all,entropies[lem][0],entropies[lem][1],w1freq,w2freq,zh_lowfreq,zh_highfreq,zhratio]
             featureset += dimensions
             
             ##create input for SVM. every tenth item, or divide by lemmas      
