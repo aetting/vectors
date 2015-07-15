@@ -1,3 +1,38 @@
+FEATURE CORRELATIONS
+Feature 0
+Corr w/ decision func: (0.47390123471590723, 1.0758701340306635e-31)
+
+Feature 1
+Corr w/ decision func: (-0.47927696953411536, 1.7762530947422159e-32)
+
+Feature 2
+Corr w/ decision func: (-0.38147258541132545, 3.2271932417146288e-20)
+
+Feature 3
+Corr w/ decision func: (-0.27226306941509965, 1.1479522317413922e-10)
+
+Feature 4
+Corr w/ decision func: (-0.22157543450048564, 1.8733930314689189e-07)
+
+Feature 5
+Corr w/ decision func: (-0.31545685845452787, 5.4769349637277938e-14)
+
+Feature 6
+Corr w/ decision func: (0.092996536544736261, 0.030407838629973209)
+
+Feature 7
+Corr w/ decision func: (-0.049778794368311723, 0.2472982762279248)
+
+Feature 8
+Corr w/ decision func: (0.010583442305431045, 0.80581381232267835)
+
+Feature 9
+Corr w/ decision func: (0.03909385995777117, 0.36367431304786302)
+
+Feature 10
+Corr w/ decision func: (-0.028528417974167091, 0.50747877618295467)
+
+
 DECISION FUNCTION
 -1.45271557082: poly,meet-v,拜会,符合,-0.13806238246,poly
 -1.30129481275: poly,meet-v,遇到,拜会,0.158675958956,poly
@@ -541,6 +576,7 @@ DECISION FUNCTION
 1.65192455623: syn,realize-v,认识,体会,0.684452192925,syn
 1.6743353816: syn,walk-v,走路,走,0.661679162995,syn
 1.77707484814: syn,stop-v,停,停下,0.638256532767,poly
+
 
 SUPPORT VECTORS
 number-n,不少,数字,-0.0281834423869,poly

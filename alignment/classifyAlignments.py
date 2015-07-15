@@ -10,6 +10,7 @@ from numpy import linalg
 from sys import stdout
 from sklearn import svm
 from sklearn.metrics import precision_recall_fscore_support
+from scipy.stats.stats import pearsonr
 
 
 class SenseObj(object):
@@ -36,12 +37,20 @@ def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     decf_sorted = numpy.argsort(decf)
     
     with open('model_analysis.txt','w') as modelAnalyze:
-        modelAnalyze.write('DECISION FUNCTION\n')
+        modelAnalyze.write('FEATURE CORRELATIONS\n')
+        for ftr in range(len(X_test[0])):
+            modelAnalyze.write('Feature ' + str(ftr))
+            one_feature = []
+            for item in range(len(X_test)):
+                one_feature.append(X_test[item][ftr])
+            r = pearsonr(decf,one_feature)
+            modelAnalyze.write('\nCorr w/ decision func: ' + str(r) + '\n\n')
+        modelAnalyze.write('\nDECISION FUNCTION\n')
         for i in decf_sorted:
             modelAnalyze.write(str(decf[i]) + ': ')
             modelAnalyze.write(predictions[i] + ',')
             modelAnalyze.write(','.join(X_test_items[i]) + '\n')
-        modelAnalyze.write('\nSUPPORT VECTORS\n')
+        modelAnalyze.write('\n\nSUPPORT VECTORS\n')
         for s in supp:
             modelAnalyze.write(','.join(X_train_items[s]) + '\n')
         modelAnalyze.write('Training:' + str(len(X_train)) + '\n')
