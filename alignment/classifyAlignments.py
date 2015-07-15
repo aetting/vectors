@@ -31,12 +31,21 @@ def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     predictions = clf.predict(X_test)
     evals = precision_recall_fscore_support(y_test,predictions)
     supp = clf.support_
+    decf = clf.decision_function(X_test)
     
-    print 'SUPPORT VECTORS'
-    for s in supp:
-        print ','.join(X_train_items[s])
-    print 'Training:' + str(len(X_train))
-    print 'Support vectors:' + str(len(supp))
+    decf_sorted = numpy.argsort(decf)
+    
+    with open('model_analysis.txt','w') as modelAnalyze:
+        modelAnalyze.write('DECISION FUNCTION\n')
+        for i in decf_sorted:
+            modelAnalyze.write(str(decf[i]) + ': ')
+            modelAnalyze.write(predictions[i] + ',')
+            modelAnalyze.write(','.join(X_test_items[i]) + '\n')
+        modelAnalyze.write('\nSUPPORT VECTORS\n')
+        for s in supp:
+            modelAnalyze.write(','.join(X_train_items[s]) + '\n')
+        modelAnalyze.write('Training:' + str(len(X_train)) + '\n')
+        modelAnalyze.write('Support vectors:' + str(len(supp))+ '\n')
     
     poly_prec = evals[0][0]
     poly_rec = evals[1][0]
@@ -224,20 +233,22 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
             ##entropies[lem][0] is the entropy over all alignments found in full alignment training bitext, for inflections of lemma (after PMI filtering). this is based on "translations" dictionary collected while going through training bitext.
             ##entropies[lem][1] is the entropy over all alignments found in Ontonotes bitext for lemma (lemma annotation in Ontonotes means don't have to go via inflection dictionary for this entropy. but it's probably noisier, being a smaller sample size.)   
             
+            
             featureset = [sim,inflect_tot,transn,transnum_all,entropies[lem][0],entropies[lem][1],w1freq,w2freq,zh_lowfreq,zh_highfreq,zhratio]
 #             featureset = [inflect_tot,transn,transnum_all,entropies[lem][0],entropies[lem][1]]
 #             featureset += dimensions
             
+            itemset = [lem,w1,w2,str(sim),str(label)]
             ##create input for SVM. every tenth item, or divide by lemmas      
 #             if items_tot % 10 == 0:
             if lemma_set_assignments[lem] == 'test':
                 X_test.append(featureset)
                 Y_test.append(label)
-                X_test_items.append([lem,w1,w2])
+                X_test_items.append(itemset)
             else:
                 X_train.append(featureset)
                 Y_train.append(label)
-                X_train_items.append([lem,w1,w2])
+                X_train_items.append(itemset)
     
     synOut.close()
     polyOut.close()
@@ -260,11 +271,11 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     print 'Full dataset t-test: '
     print 't: ' + str(round(t,3)) + ' p: ' + str(round(p,6)) 
     
-    pyplot.hist(poly_sim_list_ALL,bins = 200,alpha=.5,label = 'poly')
-    pyplot.hist(syn_sim_list_ALL,bins = 200,alpha=.5,label = 'syn')
-    pyplot.legend(loc='upper right')
-    pyplot.savefig('fullOntoDist.png')
-    pyplot.clf()
+#     pyplot.hist(poly_sim_list_ALL,bins = 200,alpha=.5,label = 'poly')
+#     pyplot.hist(syn_sim_list_ALL,bins = 200,alpha=.5,label = 'syn')
+#     pyplot.legend(loc='upper right')
+#     pyplot.savefig('fullOntoDist.png')
+#     pyplot.clf()
             
     syn_correct = 0
     poly_correct = 0
