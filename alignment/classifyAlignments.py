@@ -19,7 +19,7 @@ class SenseObj(object):
         
 def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     
-    [X_train,y_train,X_test,y_test,lemma_div,training_length] = getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel)
+    [X_train,y_train,X_test,y_test,X_train_items, X_test_items,lemma_div,training_length] = getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel)
     
     ker = 'rbf'
     clf = svm.SVC(kernel=ker) 
@@ -30,6 +30,13 @@ def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     print 'testing'
     predictions = clf.predict(X_test)
     evals = precision_recall_fscore_support(y_test,predictions)
+    supp = clf.support_
+    
+    print 'SUPPORT VECTORS'
+    for s in supp:
+        print ','.join(X_train_items[s])
+    print 'Training:' + str(len(X_train))
+    print 'Support vectors:' + str(len(supp))
     
     poly_prec = evals[0][0]
     poly_rec = evals[1][0]
@@ -131,6 +138,8 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     
     X_train = []
     X_test = []
+    X_train_items = []
+    X_test_items = []
     Y_train = []
     Y_test = []
     
@@ -200,32 +209,35 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
                 dim = (a*b)/(norm_A*norm_B)
                 dimensions.append(dim)
                 
-            transnum_all = len(lem_translations[lem])
-            w1freq = counts[w1]
-            w2freq = counts[w2]
+            inflect_tot = math.log(inflectot[lem],2)
+            transn = math.log(transnums[lem],2)
+            transnum_all = math.log(len(lem_translations[lem]),2)
+            w1freq = math.log(counts[w1],2)
+            w2freq = math.log(counts[w2],2)
             zh_lowfreq = min([w1freq,w2freq])
-            zh_highfreq = max([2,4])
-            zhratio = zh_lowfreq/float(zh_highfreq)
+            zh_highfreq = max([w1freq,w2freq])
+            zhratio = zh_lowfreq - float(zh_highfreq)
                                 
-            ##inflectot is a sum, for a given lemma, over the counts of each of its inflections -- counts based on full alignment training bitext, and inflection list based on inflections of lemma found in Ontonotes bitext (only place we have lemma annotation)
-            ##transnums is based on number of word types that this lemma is aligned to in Ontonotes, post filtering
+            ##inflect_tot is a sum, for a given lemma, over the counts of each of its inflections -- counts based on full alignment training bitext, and inflection list based on inflections of lemma found in Ontonotes bitext (only place we have lemma annotation)
+            ##transn is based on number of word types that this lemma is aligned to in Ontonotes, post filtering
             ##transnum_all should be the number of word types that this lemma is aligned to in the entire alignment training bitext, post filtering
             ##entropies[lem][0] is the entropy over all alignments found in full alignment training bitext, for inflections of lemma (after PMI filtering). this is based on "translations" dictionary collected while going through training bitext.
             ##entropies[lem][1] is the entropy over all alignments found in Ontonotes bitext for lemma (lemma annotation in Ontonotes means don't have to go via inflection dictionary for this entropy. but it's probably noisier, being a smaller sample size.)   
             
-            featureset = [sim,inflectot[lem],transnums[lem],transnum_all,entropies[lem][0],entropies[lem][1],w1freq,w2freq,zh_lowfreq,zh_highfreq,zhratio]
-            featureset += dimensions
+            featureset = [sim,inflect_tot,transn,transnum_all,entropies[lem][0],entropies[lem][1],w1freq,w2freq,zh_lowfreq,zh_highfreq,zhratio]
+#             featureset = [inflect_tot,transn,transnum_all,entropies[lem][0],entropies[lem][1]]
+#             featureset += dimensions
             
             ##create input for SVM. every tenth item, or divide by lemmas      
 #             if items_tot % 10 == 0:
             if lemma_set_assignments[lem] == 'test':
                 X_test.append(featureset)
-#                 X_test.append([sim])
                 Y_test.append(label)
+                X_test_items.append([lem,w1,w2])
             else:
                 X_train.append(featureset)
-#                 X_train.append([sim])
                 Y_train.append(label)
+                X_train_items.append([lem,w1,w2])
     
     synOut.close()
     polyOut.close()
@@ -316,7 +328,7 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     print 'Total accuracy: ' + str(vec_accuracy) 
     print '\n' 
     
-    return [X_train,Y_train,X_test,Y_test,lemma_div,training_length]         
+    return [X_train,Y_train,X_test,Y_test,X_train_items, X_test_items,lemma_div,training_length]         
 
 
 
