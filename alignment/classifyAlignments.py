@@ -36,6 +36,7 @@ def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     
     decf_sorted = numpy.argsort(decf)
     
+    one_feature_vectors = []
     with open('model_analysis.txt','w') as modelAnalyze:
         modelAnalyze.write('FEATURE CORRELATIONS\n')
         for ftr in range(len(X_test[0])):
@@ -45,6 +46,12 @@ def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
                 one_feature.append(X_test[item][ftr])
             r = pearsonr(decf,one_feature)
             modelAnalyze.write('\nCorr w/ decision func: ' + str(r) + '\n\n')
+            one_feature_vectors.append(one_feature)
+#         modelAnalyze.write('\n0-1 corr: ' + str(pearsonr(one_feature_vectors[0],one_feature_vectors[1]))+ '\n')
+#         modelAnalyze.write('\n0-2 corr: ' + str(pearsonr(one_feature_vectors[0],one_feature_vectors[2]))+ '\n')
+#         modelAnalyze.write('\n0-3 corr: ' + str(pearsonr(one_feature_vectors[0],one_feature_vectors[3]))+ '\n')
+#         modelAnalyze.write('\n0-4 corr: ' + str(pearsonr(one_feature_vectors[0],one_feature_vectors[4]))+ '\n')
+#         modelAnalyze.write('\n0-5 corr: ' + str(pearsonr(one_feature_vectors[0],one_feature_vectors[5]))+ '\n\n')
         modelAnalyze.write('\nDECISION FUNCTION\n')
         for i in decf_sorted:
             modelAnalyze.write(str(decf[i]) + ': ')
