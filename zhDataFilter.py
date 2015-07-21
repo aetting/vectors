@@ -4,7 +4,7 @@
 import re, os, sys
 
 with open(os.path.abspath(sys.argv[1])) as f:
-    with open('processed.txt','w') as out:
+    with open(os.path.abspath(sys.argv[2]),'w') as out:
         r = f.read()
         r = re.sub('</.*>','\xe3\x80\x82',r)
         r = re.sub('<.*>','',r)
