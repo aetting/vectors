@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 
-### python classifyAlignments.py 'newparl' 'zh' 'en' '/Users/allysonettinger/Desktop/alignments/300k_align' 'newmap2' '/Users/allysonettinger/Desktop/zhModels/zhModel3'
+### python bclassifyAlignments.py 'newparl' 'zh' 'en' '/Users/allysonettinger/Desktop/alignments/300k_align' 'newmap2' '/Users/allysonettinger/Desktop/zhModels/zhModel3' 'en'
 
 import os, sys, re, itertools, gensim, numpy, math, scipy, sklearn, operator
 from scipy import stats
@@ -18,9 +18,9 @@ class SenseObj(object):
         self.lemma = lemma
         self.sense = sense
         
-def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
+def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang):
     
-    [X_train,y_train,X_test,y_test,X_train_items, X_test_items,lemma_div,training_length] = getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel)
+    [X_train,y_train,X_test,y_test,X_train_items, X_test_items,lemma_div,training_length] = getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang)
     
     ker = 'rbf'
     clf = svm.SVC(kernel=ker) 
@@ -81,9 +81,9 @@ def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     print evals
           
     
-def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
+def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang):
     
-    [senseDict,counts,inflectot,lem_translations,lem_translations_onto,training_length] = combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir)
+    [senseDict,counts,inflectot,lem_translations,lem_translations_onto,training_length] = combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang)
     print 'loading model'
     vecmodel = gensim.models.Word2Vec.load(os.path.abspath(w2vmodel))
     pairs = []
@@ -98,10 +98,9 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
         pivotlist = []
         print w
         for alignw,tokList in alignwdict.items():
-#             print '--' + alignw
             alignwsenses = {}
             senseratios = {}
-            print alignw
+            print '--' + alignw
             print len(tokList)
             for i in range(len(tokList)):
                 if not alignwsenses.has_key(tokList[i][0]): alignwsenses[tokList[i][0]] = 0
@@ -112,16 +111,13 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
                 if n > mx: 
                     mx = n
                     sense = s
-#             print sense 
             pivotlist.append([alignw,sense,w])
         pivotpairs = []
         pairIterator = itertools.combinations(pivotlist,2)
-#         print list
         testi += 1
         for pair in pairIterator:
             pivotpairs.append(pair)
             pairs_added += 1
-#             print ' '.join([pair[0][0],pair[0][1],pair[1][0],pair[1][1]])
         pairs += pivotpairs    
     
     lemma_dist = {}
@@ -291,11 +287,11 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
     print 'Full dataset t-test: '
     print 't: ' + str(round(t,3)) + ' p: ' + str(round(p,6)) 
     
-#     pyplot.hist(poly_sim_list_ALL,bins = 200,alpha=.5,label = 'poly')
-#     pyplot.hist(syn_sim_list_ALL,bins = 200,alpha=.5,label = 'syn')
-#     pyplot.legend(loc='upper right')
-#     pyplot.savefig('fullOntoDist.png')
-#     pyplot.clf()
+    pyplot.hist(poly_sim_list_ALL,bins = 200,alpha=.5,label = 'poly')
+    pyplot.hist(syn_sim_list_ALL,bins = 200,alpha=.5,label = 'syn')
+    pyplot.legend(loc='upper right')
+    pyplot.savefig('fullOntoDist.png')
+    pyplot.clf()
             
     syn_correct = 0
     poly_correct = 0
@@ -363,7 +359,7 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel):
 
 
 
-def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
+def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang):
 # def combineLayers():
     print 'combining corpus layers'
     parldir = os.path.abspath(parldir)
@@ -372,9 +368,16 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
     mapdir = os.path.abspath(mapdir)
 #     mapfixdir = os.path.abspath(mapfixdir)
 
+    if pivotlang == 'en':
+        pivotcode = 'tok.train'
+        paircode = 'tok.ne.train'
+    else:
+        pivotcode = 'tok.ne.train'
+        paircode = 'tok.train'
+        
     alignDoc = open(os.path.join(os.path.abspath(aligndir),'training.align'))
-    enAligndoc = open(os.path.join(os.path.abspath(aligndir),'training.tok.train.declass'))
-    zhAligndoc = open(os.path.join(os.path.abspath(aligndir),'training.tok.ne.train.declass'))
+    enAligndoc = open(os.path.join(os.path.abspath(aligndir),'training.'+pivotcode+'.declass'))
+    zhAligndoc = open(os.path.join(os.path.abspath(aligndir),'training.'+paircode+'.declass'))
     alignLines = alignDoc.read().split('\n')
     enAlignLines = enAligndoc.read().split('\n') 
     zhAlignLines = zhAligndoc.read().split('\n') 
@@ -383,7 +386,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
     zhAligndoc.close()
     
     #run cleanAlignments function and get alignments and numbers for the entire alignment corpus
-    [translations,counts,num_alignments,training_length] = cleanAlignments(aligndir)
+    [translations,counts,num_alignments,training_length] = cleanAlignments(aligndir,pivotlang)
     
     enLemmaCounts = {}
 
@@ -405,7 +408,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
         parl_i = 0
         
         ##get parallel file IDs for this pair, and IDs of corresponding annotation files 
-        m = re.match('([0-9]+_)(.+)\.tok\.ne.+',f)
+        m = re.match('([0-9]+_)(.+)\.tok\.ne+',f)
         if not m: continue
 #         print f
         num=m.group(1)
@@ -416,18 +419,28 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
         t = re.match('.+/([^/]+)',trl)
         enID = t.group(1)
         trf.close()
+
+        if pivotlang == 'en':
+            pivotID = enID
+            pairID = zhID
+            pivotdir = en_annotdir
+        else:
+            pivotID = zhID
+            pairID = enID
+            pivotdir = zh_annotdir
         
         ##create lists of sentences in two parallel files
-        enParlFile = open(os.path.join(parldir,parlID+'.tok.train.declass'))
-        zhParlFile = open(os.path.join(parldir,parlID+'.tok.ne.train.declass'))
+        enParlFile = open(os.path.join(parldir,parlID+'.'+pivotcode+'.declass'))
+        zhParlFile = open(os.path.join(parldir,parlID+'.'+paircode+'.declass'))
         enLineList = enParlFile.read().split('\n')
         enLines = [e for e in enLineList if len(e) > 0]
         zhLineList = zhParlFile.read().split('\n')
         zhLines = [e for e in zhLineList if len(e) > 0]
         if len(enLines) != len(zhLines): print parlID + ': zh and en don\'t have same number of lines'
+
         
         ##create dict mapping sentence and word index in parallel file to (not yet corrected) positions in sense annotation (from parse trees)
-        enMapFile = open(os.path.join(mapdir,'mapping_'+num+zhID+'.tok.train.declass'))
+        enMapFile = open(os.path.join(mapdir,'mapping_'+num+zhID+'.'+pivotcode+'.declass'))
         enMapLines = [e for e in enMapFile.read().split('\n') if len(e) > 0]
         enMaps = {}
         for m in enMapLines:
@@ -435,7 +448,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
         enMapFile.close()
         
         ##create dict mapping sentence/word indices to sense annotations (entries only for positions that have English annotation)
-        enSenseFile = open(os.path.join(en_annotdir,enID+'.sense'))
+        enSenseFile = open(os.path.join(pivotdir,pivotID+'.sense'))
         enSenseLines = [e for e in enSenseFile.read().split('\n') if len(e) > 0]
         enSenseAnnotatedPos = {}
         
@@ -464,12 +477,14 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
         for i in range(len(enLines)):
             enLine = enLines[i]
             zhLine = zhLines[i]
+
             
             ##create dict mapping English sentence/word index in parallel file to Chinese sentence/word index
             for a in alignLines[align_i].split():
                 enPos = str(parl_i) + '_' + a.split('-')[1]
                 zhPos = str(parl_i) + '_' + a.split('-')[0]
-                parlAligns[enPos] = zhPos
+                if pivotlang == 'en': parlAligns[enPos] = zhPos
+                else: parlAligns[zhPos] = enPos
 
 #             enLineWords = [e for e in enLine.split() if not re.match('\(.*',e)]
 #             zhLineWords = [e for e in zhLine.split() if not re.match('\(.*',e)]
@@ -625,7 +640,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir):
     
     return [words,counts,inflectot,lem_translations,lem_translations_onto,training_length]
     
-def cleanAlignments(aligndir):
+def cleanAlignments(aligndir, pivotlang):
 
     print 'getting alignment counts'
     alignDoc = open(os.path.join(os.path.abspath(aligndir),'training.align'))
@@ -638,6 +653,7 @@ def cleanAlignments(aligndir):
     enAligndoc.close()
     zhAligndoc.close()
     
+            
     translations = {}
     counts = {}
     num_alignments = 0
@@ -649,6 +665,7 @@ def cleanAlignments(aligndir):
         alignLine = alignLines[i].split()
         zhLine = zhAlignLines[i].split()
         enLine = enAlignLines[i].split()
+
         for j in range(len(alignLine)):
             zhPos = int(alignLine[j].split('-')[0])
             enPos = int(alignLine[j].split('-')[1])
@@ -664,15 +681,23 @@ def cleanAlignments(aligndir):
             if not counts.has_key(zhWord): counts[zhWord] = 0
             counts[enWord] += 1
             counts[zhWord] += 1
-            if not translations.has_key(enWord): translations[enWord] = {}
-            if not translations[enWord].has_key(zhWord): translations[enWord][zhWord] = 0
-            translations[enWord][zhWord] += 1
+            
+            if pivotlang == 'en': 
+                pivotWord = enWord
+                pairWord = zhWord
+            else:
+                pivotWord = zhWord
+                pairWord = enWord
+                
+            if not translations.has_key(pivotWord): translations[pivotWord] = {}
+            if not translations[pivotWord].has_key(pairWord): translations[pivotWord][pairWord] = 0
+            translations[pivotWord][pairWord] += 1
     print ''
 
     return [translations,counts,num_alignments,training_length]
     
 if __name__ == "__main__":
-    classify(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6])
+    classify(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6],sys.argv[7])
 
 # if __name__ == "__main__":
 #     cleanAlignments('/Users/allysonettinger/Desktop/300k_align')
