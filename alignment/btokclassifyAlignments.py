@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 
-### python bclassifyAlignments.py 'newparl' 'zh' 'en' '/Users/allysonettinger/Desktop/alignments/300k_align' 'newmap2' '/Users/allysonettinger/Desktop/zhModels/zhModel3' 'en'
+### python btokclassifyAlignments.py 'newparl' 'zh' 'en' '/Users/allysonettinger/Desktop/alignments/300k_align' 'newmap2' '/Users/allysonettinger/Desktop/zhModels/zhModel3' 'en'
 
 import os, sys, re, itertools, gensim, numpy, math, scipy, sklearn, operator
 from scipy import stats
@@ -104,19 +104,14 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang)
             print len(tokList)
             for i in range(len(tokList)):
                 if not alignwsenses.has_key(tokList[i][0]): alignwsenses[tokList[i][0]] = 0
-                alignwsenses[tokList[i][0]] += 1
-            mx = 0
-            for s,n in alignwsenses.items():
-                if (float(n)/len(tokList)) < 1.0: print str(s) + ': ' + str(float(n)/len(tokList))
-                if n > mx: 
-                    mx = n
-                    sense = s
-            pivotlist.append([alignw,sense,w])
+                sense = tokList[i][0]
+                pivotlist.append([alignw,sense,w])
         pivotpairs = []
         pairIterator = itertools.combinations(pivotlist,2)
         testi += 1
         for pair in pairIterator:
             pivotpairs.append(pair)
+            print pair
             pairs_added += 1
         pairs += pivotpairs    
     
@@ -137,7 +132,7 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang)
     s_i = 0
     test_tot = 0
     lemma_set_assignments = {}
-    lemma_div = 5
+    lemma_div = 4
     for lem,ct in sortedpairs:
         s_i += 1
         if s_i % lemma_div == 0 and test_tot < (float(total)/10):
@@ -703,10 +698,7 @@ def cleanAlignments(aligndir, pivotlang):
     
 if __name__ == "__main__":
     classify(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6],sys.argv[7])
-
-# if __name__ == "__main__":
-#     cleanAlignments('/Users/allysonettinger/Desktop/300k_align')
     
 # if __name__ == "__main__":
-#     combineLayers(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6])
-#     combineLayers('parl','zh','en','berkeleyOutput','mappings','enmapfix')
+#     getPairs(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6],sys.argv[7])
+
