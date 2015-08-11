@@ -92,22 +92,22 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang)
     testi = 0
     pairs_added = 0
     print 'getting double alignment pairs'
+    tokeninfo = open('token-level_info.txt','w')
     for w,alignwdict in senseDict.items():
         if len(alignwdict) < 2: continue
         transnums[w] = len(alignwdict)
         pivotlist = []
-        print w
+        tokeninfo.write(w + '\n')
         for alignw,tokList in alignwdict.items():
             alignwsenses = {}
             senseratios = {}
-            print '--' + alignw
-            print len(tokList)
+            tokeninfo.write('--' + alignw + ': ' + str(len(tokList)) + '\n')
             for i in range(len(tokList)):
                 if not alignwsenses.has_key(tokList[i][0]): alignwsenses[tokList[i][0]] = 0
                 alignwsenses[tokList[i][0]] += 1
             mx = 0
             for s,n in alignwsenses.items():
-                if (float(n)/len(tokList)) < 1.0: print str(s) + ': ' + str(float(n)/len(tokList))
+                if (float(n)/len(tokList)) < 1.0: tokeninfo.write(str(s) + ': ' + str(float(n)/len(tokList)) + '\n')
                 if n > mx: 
                     mx = n
                     sense = s
@@ -119,6 +119,7 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang)
             pivotpairs.append(pair)
             pairs_added += 1
         pairs += pivotpairs    
+    tokeninfo.close()
     
     lemma_dist = {}
     total = 0
