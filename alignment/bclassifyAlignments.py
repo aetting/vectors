@@ -111,10 +111,12 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,
         pivotlist = []
         tokeninfo.write(w + '\n')
         lemsenses = {}
+        print w
         for alignw,tokList in alignwdict.items():
             alignwsenses = {}
             senseratios = {}
             tokeninfo.write('--' + alignw + ': ' + str(len(tokList)) + '\n')
+            print alignw
             for i in range(len(tokList)):
                 if typelvl:
                     if not alignwsenses.has_key(tokList[i][0]): alignwsenses[tokList[i][0]] = 0
@@ -124,6 +126,8 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,
                     pivotlist.append([alignw,sense,w])
                 if not lemsenses.has_key(tokList[i][0]): lemsenses[tokList[i][0]] = {}
                 if not lemsenses[tokList[i][0]].has_key(alignw): lemsenses[tokList[i][0]][alignw] = 1
+                print tokList[i][0]
+                print tokList[i][2]
             if typelvl:
                 mx = 0
                 for s,n in alignwsenses.items():
@@ -677,7 +681,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang):
                     
                     if not words.has_key(lem): words[lem] = {}
                     if not words[lem].has_key(alignWord): words[lem][alignWord] = []
-                    words[lem][alignWord].append([sense, enParlPos])
+                    words[lem][alignWord].append([sense, enParlPos, enLineWords])
                     words_added += 1
                     if not wordfreqs.has_key(lem): wordfreqs[lem] = {}
                     if not wordfreqs[lem].has_key(alignWord): wordfreqs[lem][alignWord] = cZ
