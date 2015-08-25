@@ -18,9 +18,9 @@ class SenseObj(object):
         self.lemma = lemma
         self.sense = sense
         
-def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang):
+def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,type=False):
     
-    [X_train,y_train,X_test,y_test,X_train_items, X_test_items,lemma_div,training_length] = getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang)
+    [X_train,y_train,X_test,y_test,X_train_items, X_test_items,lemma_div,training_length] = getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,type=False)
     
     ker = 'rbf'
     clf = svm.SVC(kernel=ker) 
@@ -81,7 +81,7 @@ def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang)
     print evals
           
     
-def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang):
+def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,type=False):
     
     [senseDict,counts,inflectot,lem_translations,lem_translations_onto,training_length] = combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang)
     print 'loading model'
@@ -92,11 +92,12 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang)
     testi = 0
     pairs_added = 0
     print 'getting double alignment pairs'
+    tokeninfo = open('token-level_info.txt','w')
     for w,alignwdict in senseDict.items():
         if len(alignwdict) < 2: continue
         transnums[w] = len(alignwdict)
         pivotlist = []
-        print w
+        tokeninfo.write(w + '\n')
         for alignw,tokList in alignwdict.items():
             alignwsenses = {}
             senseratios = {}
@@ -113,7 +114,8 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang)
             pivotpairs.append(pair)
             print pair
             pairs_added += 1
-        pairs += pivotpairs    
+        pairs += pivotpairs 
+    tokeninfo.close()  
     
     lemma_dist = {}
     total = 0
