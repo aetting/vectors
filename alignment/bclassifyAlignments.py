@@ -8,35 +8,52 @@ from scipy import stats
 from matplotlib import pyplot
 from numpy import linalg
 from sys import stdout
-from sklearn import svm
+from sklearn import svm, preprocessing
+from sklearn.preprocessing import Imputer
 from sklearn.metrics import precision_recall_fscore_support
 from scipy.stats.stats import pearsonr
+from collections import *
+from util import *
 
-
-class SenseObj(object):
-    def __init__(self,lemma,sense):
-        self.lemma = lemma
-        self.sense = sense
         
-def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,typelvl):
+def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPivot,pivotlang,typelvl):
     
     typelvl = int(typelvl)
     if typelvl: print 'TYPE = TRUE'
     else: print 'TYPE = FALSE'
-    [X_train,y_train,X_test,y_test,X_train_items, X_test_items,lemma_div,training_length] = getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,typelvl)
+    
+
+    [X_train,y_train,X_test,y_test,X_train_items, X_test_items,lemma_div,training_length] = getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPivot,pivotlang,typelvl)
     
     ker = 'rbf'
     clf = svm.SVC(kernel=ker) 
+    
+    imp = Imputer(missing_values='NaN', strategy='mean', axis=0)
+    imp.fit(X_train)
+    X_train_I = imp.transform(X_train)
+    X_test_I = imp.transform(X_test)
+    
+    s = preprocessing.StandardScaler().fit(X_train_I)
+    X_train_IS = s.transform(X_train_I)
+    X_test_IS = s.transform(X_test_I)
+    
+    print 'BEFORE PREPROCESSING\n\n\n'
+    print X_train
+    print '\n\n\n\n\n AFTER PREPROCESSING'
+    print X_train_IS
+    
     print 'training SVM'
-    clf.fit(X_train, y_train)
+    clf.fit(X_train_IS, y_train)
+#     clf.fit(X_train, y_train)
 
     
     ##make predictions and get evaluation metrics
     print 'testing'
-    predictions = clf.predict(X_test)
+    predictions = clf.predict(X_test_IS)
+#     predictions = clf.predict(X_test)
     evals = precision_recall_fscore_support(y_test,predictions)
     supp = clf.support_
-    decf = clf.decision_function(X_test)
+    decf = clf.decision_function(X_test_IS)
     
     decf_sorted = numpy.argsort(decf)
     
@@ -92,32 +109,52 @@ def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,
     print evals
           
     
-def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,typelvl):
+def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPivot,pivotlang,typelvl):
     
     [senseDict,counts,inflectot,lem_translations,lem_translations_onto,training_length] = combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang)
     print 'loading model'
     vecmodel = gensim.models.Word2Vec.load(os.path.abspath(w2vmodel))
+    vecmodelPivot = gensim.models.Word2Vec.load(os.path.abspath(w2vmodelPivot))
     pairs = []
     transnums = {}
     entropies = {}
     testi = 0
     pairs_added = 0
+    stoplist = readStoplist('stoplist')
     print 'getting double alignment pairs'
     tokeninfo = open('token-level_info.txt','w')
     sensesets = open('sense-sets.txt','w')
+    enWordToContextDict = {}
+    zhWordToContextDict = {}
     for w,alignwdict in senseDict.items():
         if len(alignwdict) < 2: continue
-        transnums[w] = len(alignwdict)
+        encontextWordsDict = {}
+        zhcontextWordsDict = {}
+        transnums[w] = float(len(alignwdict))
         pivotlist = []
         tokeninfo.write(w + '\n')
         lemsenses = {}
-        print w
+#         print w
         for alignw,tokList in alignwdict.items():
+            zhcontextCount = Counter()
+            encontextCount = Counter()
             alignwsenses = {}
             senseratios = {}
             tokeninfo.write('--' + alignw + ': ' + str(len(tokList)) + '\n')
-            print alignw
+#             print alignw
             for i in range(len(tokList)):
+                enWordPos = int(tokList[i][1].split('_')[1])
+                zhWordPos = int(tokList[i][4].split('_')[1])
+                enSentence = tokList[i][2]
+                zhSentence = tokList[i][3]
+                enTokContextCount = Counter([enSentence[p] for p in range(len(enSentence)) if enSentence[p] not in stoplist and p != enWordPos])
+                zhTokContextCount = Counter([zhSentence[p] for p in range(len(zhSentence)) if p != zhWordPos])
+                zhcontextCount += zhTokContextCount
+                encontextCount += enTokContextCount
+#                 print tokList[i][1]
+#                 print tokList[i][2]
+#                 print tokList[i][4]
+#                 print tokList[i][3]
                 if typelvl:
                     if not alignwsenses.has_key(tokList[i][0]): alignwsenses[tokList[i][0]] = 0
                     alignwsenses[tokList[i][0]] += 1
@@ -126,8 +163,6 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,
                     pivotlist.append([alignw,sense,w])
                 if not lemsenses.has_key(tokList[i][0]): lemsenses[tokList[i][0]] = {}
                 if not lemsenses[tokList[i][0]].has_key(alignw): lemsenses[tokList[i][0]][alignw] = 1
-                print tokList[i][0]
-                print tokList[i][2]
             if typelvl:
                 mx = 0
                 for s,n in alignwsenses.items():
@@ -136,6 +171,12 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,
                         mx = n
                         sense = s
                 pivotlist.append([alignw,sense,w])
+#             print encontextCount
+            enCntxtAvgVec = getAvgVec(encontextCount,5,vecmodelPivot)
+            encontextWordsDict[alignw] = enCntxtAvgVec
+            zhcontextWordsDict[alignw] = zhcontextCount
+        enWordToContextDict[w] = encontextWordsDict
+        zhWordToContextDict[w] = zhcontextWordsDict
         sensesets.write(w + '\n')
         for s,alignwdict in lemsenses.items():
             sensesets.write(s + '\n')
@@ -152,6 +193,8 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,
     tokeninfo.close()
     sensesets.close()
     
+#     print enWordToContextDict['plan-v']['计划']
+#     print zhWordToContextDict['plan-v']['计划']
     
     lemma_dist = {}
     vocabmissing = {}
@@ -281,8 +324,8 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,
         try: vecmodel.similarity(pair[0][0],pair[1][0])
         except: 
 #             sim = neutralMean
-            sim = meanSim
-#             sim = 'missing'
+#             sim = meanSim
+            sim = 'NaN'
         else: 
             sim = vecmodel.similarity(pair[0][0],pair[1][0])
 #         if sim == 'missing': continue
@@ -324,27 +367,30 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,
         zh_lowf = min([w1f,w2f])
         zh_highf = max([w1f,w2f])
         
-        inflect_tot = centerScale(math.log(1+inflectot[lem],2),inflect_tot_list)
-        transn = centerScale(math.log(1+transnums[lem],2),transn_list)
-        transnum_all = centerScale(math.log(1+len(lem_translations[lem]),2),transnum_all_list)
-        w1freq = centerScale(math.log(1+counts[w1],2),w1freq_list)
-        w2freq = centerScale(math.log(1+counts[w2],2),w2freq_list)
-        zh_lowfreq = centerScale(min([w1f,w2f]),zh_lowfreq_list)
-        zh_highfreq = centerScale(max([w1f,w2f]),zh_highfreq_list)
-        zhratio = centerScale(zh_lowf - float(zh_highf),zhratio_list)
-        ent_lt = centerScale(entropies[lem][0],lt_ent_list)
-        ent_lto = centerScale(entropies[lem][1],lto_ent_list)
+#         inflect_tot = centerScale(math.log(1+inflectot[lem],2),inflect_tot_list)
+#         transn = centerScale(math.log(1+transnums[lem],2),transn_list)
+#         transnum_all = centerScale(math.log(1+len(lem_translations[lem]),2),transnum_all_list)
+#         w1freq = centerScale(math.log(1+counts[w1],2),w1freq_list)
+#         w2freq = centerScale(math.log(1+counts[w2],2),w2freq_list)
+#         zh_lowfreq = centerScale(min([w1f,w2f]),zh_lowfreq_list)
+#         zh_highfreq = centerScale(max([w1f,w2f]),zh_highfreq_list)
+#         zhratio = centerScale(zh_lowf - float(zh_highf),zhratio_list)
+#         ent_lt = centerScale(entropies[lem][0],lt_ent_list)
+#         ent_lto = centerScale(entropies[lem][1],lto_ent_list)
+        
+        if enWordToContextDict[lem][w1] == 'NaN' or enWordToContextDict[lem][w2] == 'NaN': enCtxtSim = 'NaN'
+        else: enCtxtSim = cosSim(enWordToContextDict[lem][w1],enWordToContextDict[lem][w2])
 
-#         inflect_tot = math.log(1+inflectot[lem],2)
-#         transn = math.log(1+transnums[lem],2)
-#         transnum_all = math.log(1+len(lem_translations[lem]),2)
-#         w1freq = math.log(1+counts[w1],2)
-#         w2freq = math.log(1+counts[w2],2)
-#         zh_lowfreq = min([w1freq,w2freq])
-#         zh_highfreq = max([w1freq,w2freq])
-#         zhratio = zh_lowfreq - float(zh_highfreq)
-#         ent_lt = entropies[lem][0]
-#         ent_lto = entropies[lem][1]
+        inflect_tot = math.log(1+inflectot[lem],2)
+        transn = math.log(1+transnums[lem],2)
+        transnum_all = math.log(1+len(lem_translations[lem]),2)
+        w1freq = math.log(1+counts[w1],2)
+        w2freq = math.log(1+counts[w2],2)
+        zh_lowfreq = min([w1freq,w2freq])
+        zh_highfreq = max([w1freq,w2freq])
+        zhratio = zh_lowfreq - float(zh_highfreq)
+        ent_lt = entropies[lem][0]
+        ent_lto = entropies[lem][1]
                                 
         ##inflect_tot is a sum, for a given lemma, over the counts of each of its inflections -- counts based on full alignment training bitext, and inflection list based on inflections of lemma found in Ontonotes bitext (only place we have lemma annotation)
         ##transn is based on number of word types that this lemma is aligned to in Ontonotes, post filtering
@@ -353,9 +399,10 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,
         ##entropies[lem][1] is the entropy over all alignments found in Ontonotes bitext for lemma (lemma annotation in Ontonotes means don't have to go via inflection dictionary for this entropy. but it's probably noisier, being a smaller sample size.)   
             
             
+#         featureset = [sim,enCtxtSim]
 #         featureset = [sim]
-#         featureset = [sim,inflect_tot,transn,transnum_all,ent_lt,ent_lto,w1freq,w2freq,zh_lowfreq,zh_highfreq,zhratio]
-        featureset = [sim,inflect_tot,transn,transnum_all,ent_lt,ent_lto]
+        featureset = [sim,enCtxtSim,inflect_tot,transn,transnum_all,ent_lt,ent_lto,w1freq,w2freq,zh_lowfreq,zh_highfreq,zhratio]
+#         featureset = [sim,inflect_tot,transn,transnum_all,ent_lt,ent_lto]
 #         featureset += dimensions
             
         itemset = [lem,w1,w2,str(sim),str(label)]
@@ -376,88 +423,88 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,pivotlang,
     print 'pairs added pre word2vec filtering: ' + str(pairs_added)
     print 'pairs added after word2vec filtering: ' + str(items_tot)
                     
-    print '\n'
-    polymean = numpy.mean(poly_sim_list)
-    print 'poly mean: ' + str(polymean)
-    synmean = numpy.mean(syn_sim_list)
-    print 'syn mean: ' + str(synmean)
-    
-    simthresh = numpy.mean([polymean,synmean])
-    print 'threshold: ' + str(simthresh)
-    test_tot = len(test)
-    
-    [t,p] = stats.ttest_ind(poly_sim_list_ALL,syn_sim_list_ALL)
-    print '\n'
-    print 'Full dataset t-test: '
-    print 't: ' + str(round(t,3)) + ' p: ' + str(round(p,6)) 
-    
-    pyplot.hist(poly_sim_list_ALL,bins = 200,alpha=.5,label = 'poly')
-    pyplot.hist(syn_sim_list_ALL,bins = 200,alpha=.5,label = 'syn')
-    pyplot.legend(loc='upper right')
-    pyplot.savefig('fullOntoDist.png')
-    pyplot.clf()
-            
-    syn_correct = 0
-    poly_correct = 0
-    vec_correct = 0
-    vec_syn_guesses = 0
-    vec_poly_guesses = 0
-    vec_poly_correct= 0
-    vec_syn_correct= 0
-    
-    errorfile = open('errorPairs.txt','w')
-    #run on held-out test set
-    for sim,label,w1,w2,engword in test:
-        simscore = float(sim)
-        if simscore >= simthresh: 
-            guess = 'syn'
-            vec_syn_guesses += 1
-        else: 
-            guess = 'poly'
-            vec_poly_guesses += 1
-        if label == 'poly': 
-            poly_correct += 1
-            if guess == label: vec_poly_correct += 1
-        elif label == 'syn': 
-            syn_correct += 1
-            if guess == label: vec_syn_correct += 1
-        if guess == label: vec_correct += 1
-        else: errorfile.write(engword + ' ' + w1 + ' ' + w2 + ' ' + str(round(float(sim),3)) + ' ' + label + '\n')
-    errorfile.close()
+#     print '\n'
+#     polymean = numpy.mean(poly_sim_list)
+#     print 'poly mean: ' + str(polymean)
+#     synmean = numpy.mean(syn_sim_list)
+#     print 'syn mean: ' + str(synmean)
+#     
+#     simthresh = numpy.mean([polymean,synmean])
+#     print 'threshold: ' + str(simthresh)
+#     test_tot = len(test)
+#     
+#     [t,p] = stats.ttest_ind(poly_sim_list_ALL,syn_sim_list_ALL)
+#     print '\n'
+#     print 'Full dataset t-test: '
+#     print 't: ' + str(round(t,3)) + ' p: ' + str(round(p,6)) 
+#     
+#     pyplot.hist(poly_sim_list_ALL,bins = 200,alpha=.5,label = 'poly')
+#     pyplot.hist(syn_sim_list_ALL,bins = 200,alpha=.5,label = 'syn')
+#     pyplot.legend(loc='upper right')
+#     pyplot.savefig('fullOntoDist.png')
+#     pyplot.clf()
+#             
+#     syn_correct = 0
+#     poly_correct = 0
+#     vec_correct = 0
+#     vec_syn_guesses = 0
+#     vec_poly_guesses = 0
+#     vec_poly_correct= 0
+#     vec_syn_correct= 0
+#     
+#     errorfile = open('errorPairs.txt','w')
+#     #run on held-out test set
+#     for sim,label,w1,w2,engword in test:
+#         simscore = float(sim)
+#         if simscore >= simthresh: 
+#             guess = 'syn'
+#             vec_syn_guesses += 1
+#         else: 
+#             guess = 'poly'
+#             vec_poly_guesses += 1
+#         if label == 'poly': 
+#             poly_correct += 1
+#             if guess == label: vec_poly_correct += 1
+#         elif label == 'syn': 
+#             syn_correct += 1
+#             if guess == label: vec_syn_correct += 1
+#         if guess == label: vec_correct += 1
+#         else: errorfile.write(engword + ' ' + w1 + ' ' + w2 + ' ' + str(round(float(sim),3)) + ' ' + label + '\n')
+#     errorfile.close()
     
     #precision = correct/guesses of that type
     #recall = correct/actual things of that type
-    p_p_precision = 100*round(poly_correct/float(test_tot),3)
-    p_p_recall = 100*round(poly_correct/float(poly_correct),3)
-    
-    s_s_precision = 100*round(syn_correct/float(test_tot),3)
-    s_s_recall = 100*round(syn_correct/float(syn_correct),3)
-    
-    v_p_precision = 100*round(vec_poly_correct/float(vec_poly_guesses),3)
-    v_p_recall = 100*round(vec_poly_correct/float(poly_correct),3)
-    v_s_precision = 100*round(vec_syn_correct/float(vec_syn_guesses),3)
-    v_s_recall = 100*round(vec_syn_correct/float(syn_correct),3)
-    
-    syn_accuracy = 100*round(syn_correct/float(test_tot),3)
-    poly_accuracy = 100*round(poly_correct/float(test_tot),3)
-    vec_accuracy = 100*round(vec_correct/float(test_tot),3)
-    
-    print '\n'
-    print 'Polysemy-only baseline: '
-    print 'Poly: precision = ' + str(p_p_precision) + ' recall = ' + str(p_p_recall)
-    print 'Syn: precision = 0 recall = 0'
-    print 'Total accuracy: ' + str(poly_accuracy)
-    print '\n'
-    print 'Synonymy-only baseline: '
-    print 'Poly: precision = 0 recall = 0'
-    print 'Syn: precision = ' + str(s_s_precision) + ' recall = ' + str(s_s_recall)
-    print 'Total accuracy: ' + str(syn_accuracy)
-    print '\n'
-    print 'Vectors: '
-    print 'Poly: precision = ' + str(v_p_precision) + ' recall = ' + str(v_p_recall)
-    print 'Syn: precision = ' + str(v_s_precision) + ' recall = ' + str(v_s_recall) 
-    print 'Total accuracy: ' + str(vec_accuracy) 
-    print '\n' 
+#     p_p_precision = 100*round(poly_correct/float(test_tot),3)
+#     p_p_recall = 100*round(poly_correct/float(poly_correct),3)
+#     
+#     s_s_precision = 100*round(syn_correct/float(test_tot),3)
+#     s_s_recall = 100*round(syn_correct/float(syn_correct),3)
+#     
+#     v_p_precision = 100*round(vec_poly_correct/float(vec_poly_guesses),3)
+#     v_p_recall = 100*round(vec_poly_correct/float(poly_correct),3)
+#     v_s_precision = 100*round(vec_syn_correct/float(vec_syn_guesses),3)
+#     v_s_recall = 100*round(vec_syn_correct/float(syn_correct),3)
+#     
+#     syn_accuracy = 100*round(syn_correct/float(test_tot),3)
+#     poly_accuracy = 100*round(poly_correct/float(test_tot),3)
+#     vec_accuracy = 100*round(vec_correct/float(test_tot),3)
+#     
+#     print '\n'
+#     print 'Polysemy-only baseline: '
+#     print 'Poly: precision = ' + str(p_p_precision) + ' recall = ' + str(p_p_recall)
+#     print 'Syn: precision = 0 recall = 0'
+#     print 'Total accuracy: ' + str(poly_accuracy)
+#     print '\n'
+#     print 'Synonymy-only baseline: '
+#     print 'Poly: precision = 0 recall = 0'
+#     print 'Syn: precision = ' + str(s_s_precision) + ' recall = ' + str(s_s_recall)
+#     print 'Total accuracy: ' + str(syn_accuracy)
+#     print '\n'
+#     print 'Vectors: '
+#     print 'Poly: precision = ' + str(v_p_precision) + ' recall = ' + str(v_p_recall)
+#     print 'Syn: precision = ' + str(v_s_precision) + ' recall = ' + str(v_s_recall) 
+#     print 'Total accuracy: ' + str(vec_accuracy) 
+#     print '\n' 
     
     return [X_train,Y_train,X_test,Y_test,X_train_items, X_test_items,lemma_div,training_length]         
 
@@ -681,7 +728,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang):
                     
                     if not words.has_key(lem): words[lem] = {}
                     if not words[lem].has_key(alignWord): words[lem][alignWord] = []
-                    words[lem][alignWord].append([sense, enParlPos, enLineWords])
+                    words[lem][alignWord].append([sense, enParlPos, enLineWords, zhLineWords, parlAligns[enParlPos]])
                     words_added += 1
                     if not wordfreqs.has_key(lem): wordfreqs[lem] = {}
                     if not wordfreqs[lem].has_key(alignWord): wordfreqs[lem][alignWord] = cZ
@@ -732,7 +779,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang):
             totct += ct
             inflectFile.write(inf+': '+str(ct)+',')
         inflectFile.write(';'+str(totct))
-        inflectot[lem] = totct
+        inflectot[lem] = float(totct)
         inflectFile.write('\n')
     inflectFile.close()
     
@@ -805,13 +852,9 @@ def cleanAlignments(aligndir, pivotlang):
 
     return [translations,counts,num_alignments,training_length]
     
-def centerScale(val,vec):
-    span = max(vec)-min(vec)
-    newval = (val-min(vec))/float(span)
-    return newval
     
 if __name__ == "__main__":
-    classify(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6],sys.argv[7],sys.argv[8])
+    classify(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6],sys.argv[7],sys.argv[8],sys.argv[9])
 
 # if __name__ == "__main__":
 #     cleanAlignments('/Users/allysonettinger/Desktop/300k_align')
