@@ -37,10 +37,6 @@ def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
     X_train_IS = s.transform(X_train_I)
     X_test_IS = s.transform(X_test_I)
     
-    print 'BEFORE PREPROCESSING\n\n\n'
-    print X_train
-    print '\n\n\n\n\n AFTER PREPROCESSING'
-    print X_train_IS
     
     print 'training SVM'
     clf.fit(X_train_IS, y_train)
@@ -120,12 +116,13 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
     entropies = {}
     testi = 0
     pairs_added = 0
-    stoplist = readStoplist('stoplist')
+    stoplist = readStoplist(os.path.abspath('stoplist'))
     print 'getting double alignment pairs'
     tokeninfo = open('token-level_info.txt','w')
     sensesets = open('sense-sets.txt','w')
     enWordToContextDict = {}
     zhWordToContextDict = {}
+    window = 6
     for w,alignwdict in senseDict.items():
         if len(alignwdict) < 2: continue
         encontextWordsDict = {}
@@ -134,21 +131,25 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
         pivotlist = []
         tokeninfo.write(w + '\n')
         lemsenses = {}
-#         print w
+        print w
         for alignw,tokList in alignwdict.items():
             zhcontextCount = Counter()
             encontextCount = Counter()
             alignwsenses = {}
             senseratios = {}
             tokeninfo.write('--' + alignw + ': ' + str(len(tokList)) + '\n')
-#             print alignw
+            print alignw
             for i in range(len(tokList)):
                 enWordPos = int(tokList[i][1].split('_')[1])
                 zhWordPos = int(tokList[i][4].split('_')[1])
                 enSentence = tokList[i][2]
                 zhSentence = tokList[i][3]
-                enTokContextCount = Counter([enSentence[p] for p in range(len(enSentence)) if enSentence[p] not in stoplist and p != enWordPos])
-                zhTokContextCount = Counter([zhSentence[p] for p in range(len(zhSentence)) if p != zhWordPos])
+                (enleft,enright) = getWindow(enWordPos,window,len(enSentence))
+                (zhleft,zhright) = getWindow(zhWordPos,window,len(zhSentence))
+#                 enTokContextCount = Counter([enSentence[p] for p in range(len(enSentence)) if enSentence[p] not in stoplist and p != enWordPos])
+#                 zhTokContextCount = Counter([zhSentence[p] for p in range(len(zhSentence)) if p != zhWordPos])
+                enTokContextCount = Counter([enSentence[p] for p in range(enleft,enright) if enSentence[p] not in stoplist and p != enWordPos])
+                zhTokContextCount = Counter([zhSentence[p] for p in range(zhleft,zhright) if p != zhWordPos])
                 zhcontextCount += zhTokContextCount
                 encontextCount += enTokContextCount
 #                 print tokList[i][1]
@@ -171,10 +172,11 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
                         mx = n
                         sense = s
                 pivotlist.append([alignw,sense,w])
-#             print encontextCount
+            print encontextCount
             enCntxtAvgVec = getAvgVec(encontextCount,5,vecmodelPivot)
+            zhCntxtAvgVec = getAvgVec(zhcontextCount,5,vecmodel)
             encontextWordsDict[alignw] = enCntxtAvgVec
-            zhcontextWordsDict[alignw] = zhcontextCount
+            zhcontextWordsDict[alignw] = zhCntxtAvgVec
         enWordToContextDict[w] = encontextWordsDict
         zhWordToContextDict[w] = zhcontextWordsDict
         sensesets.write(w + '\n')
@@ -193,8 +195,8 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
     tokeninfo.close()
     sensesets.close()
     
-#     print enWordToContextDict['plan-v']['计划']
-#     print zhWordToContextDict['plan-v']['计划']
+    print enWordToContextDict['plan-v']['计划']
+    print zhWordToContextDict['plan-v']['计划']
     
     lemma_dist = {}
     vocabmissing = {}
@@ -380,6 +382,8 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
         
         if enWordToContextDict[lem][w1] == 'NaN' or enWordToContextDict[lem][w2] == 'NaN': enCtxtSim = 'NaN'
         else: enCtxtSim = cosSim(enWordToContextDict[lem][w1],enWordToContextDict[lem][w2])
+        if zhWordToContextDict[lem][w1] == 'NaN' or zhWordToContextDict[lem][w2] == 'NaN': zhCtxtSim = 'NaN'
+        else: zhCtxtSim = cosSim(zhWordToContextDict[lem][w1],zhWordToContextDict[lem][w2])
 
         inflect_tot = math.log(1+inflectot[lem],2)
         transn = math.log(1+transnums[lem],2)
@@ -399,9 +403,9 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
         ##entropies[lem][1] is the entropy over all alignments found in Ontonotes bitext for lemma (lemma annotation in Ontonotes means don't have to go via inflection dictionary for this entropy. but it's probably noisier, being a smaller sample size.)   
             
             
-#         featureset = [sim,enCtxtSim]
+        featureset = [sim,enCtxtSim,zhCtxtSim]
 #         featureset = [sim]
-        featureset = [sim,enCtxtSim,inflect_tot,transn,transnum_all,ent_lt,ent_lto,w1freq,w2freq,zh_lowfreq,zh_highfreq,zhratio]
+#         featureset = [sim,enCtxtSim,inflect_tot,transn,transnum_all,ent_lt,ent_lto,w1freq,w2freq,zh_lowfreq,zh_highfreq,zhratio]
 #         featureset = [sim,inflect_tot,transn,transnum_all,ent_lt,ent_lto]
 #         featureset += dimensions
             

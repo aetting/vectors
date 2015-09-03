@@ -44,3 +44,10 @@ def getAvgVec(counter,numwords,vecmodel):
     
 def cosSim(u,v):
     return (1 - scipy.spatial.distance.cosine(u,v))
+    
+def getWindow(pos,window,listlen):
+    if pos - window > 0: left = pos - window
+    else: left = 0
+    if pos + window <= (listlen -1): right = pos + (window + 1)
+    else: right = listlen
+    return left,right
