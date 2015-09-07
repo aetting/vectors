@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 
-### python bclassifyAlignments.py 'newparl' 'zh' 'en' '/Users/allysonettinger/Desktop/alignments/300k_align' 'newmap2' '/Users/allysonettinger/Desktop/zhModels/zhModel3' 'en' 1
+### python bclassifyAlignments.py 'newparl' 'zh' 'en' '/Users/allysonettinger/Desktop/alignments/300k_align' 'newmap2' '/Users/allysonettinger/Desktop/zhModels/zhModel3' '/Users/allysonettinger/Desktop/engw2vModel/engModelB' 'en' 1
 
 import os, sys, re, itertools, gensim, numpy, math, scipy, sklearn, operator
 from scipy import stats
@@ -48,6 +48,7 @@ def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
     predictions = clf.predict(X_test_IS)
 #     predictions = clf.predict(X_test)
     evals = precision_recall_fscore_support(y_test,predictions)
+    evalsMacro = macroAvgByType(X_test_items,y_test,predictions)
     supp = clf.support_
     decf = clf.decision_function(X_test_IS)
     
@@ -103,11 +104,12 @@ def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
     print 'Lemma div: ' + str(lemma_div)
     print 'Training set length: ' + str(training_length)
     print evals
+    print evalsMacro
           
     
 def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPivot,pivotlang,typelvl):
     
-    [senseDict,counts,inflectot,lem_translations,lem_translations_onto,training_length] = combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang)
+    [senseDict,counts,inflectot,inflections,lem_translations_onto,training_length,translations,alignContexts,countsAll,num_wordsZh,num_wordsEn,num_alignments] = combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang)
     print 'loading model'
     vecmodel = gensim.models.Word2Vec.load(os.path.abspath(w2vmodel))
     vecmodelPivot = gensim.models.Word2Vec.load(os.path.abspath(w2vmodelPivot))
@@ -236,11 +238,37 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
     zh_lowfreq_list = []
     zh_highfreq_list = []
     zhratio_list = []
+    lem_translations = {}
+    lemmatized_context_counter = {}
     
     for pair in pairs:
         lem = pair[0][2]
         w1 = pair[0][0]
         w2 = pair[1][0]
+                            
+        if not lem_translations.has_key(lem): 
+            lem_translations[lem] = {}
+            for inf,ct in inflections[lem].items():
+                for alignw,ct2 in translations[inf].items():
+                    cE = counts[inf]
+                    cZ = counts[alignw]
+                    t = translations[inf][alignw]
+                    pxy = t/float(num_alignments)
+                    px = cE/float(num_alignments)
+                    py = cZ/float(num_alignments)
+                    pmi_frac = pxy/(px*py)
+                    pmi = math.log(pmi_frac,2)
+                    if pmi >= 8:
+                        if not lem_translations[lem].has_key(alignw): lem_translations[lem][alignw] = 0
+                        lem_translations[lem][alignw] += t
+        
+        if not lemmatized_context_counter.has_key(lem): 
+            lemmatized_context_counter[lem] = {}
+            for inf,ct in inflections[lem].items():
+                for alignw,ct2 in alignContexts[inf].items():
+                    if not lemmatized_context_counter[lem].has_key(alignw): lemmatized_context_counter[lem][alignw] = [Counter(),Counter()]
+                    lemmatized_context_counter[lem][alignw][0] += alignContexts[inf][alignw][0]
+                    lemmatized_context_counter[lem][alignw][1] += alignContexts[inf][alignw][1]
         
         ##extract two types of entropy (totals based on Ontonotes stuff, versus totals based on whole alignment training set)        
         if not entropies.has_key(lem): 
@@ -292,6 +320,29 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
             allsims.append(sim)
             if pair[0][1] == pair[1][1]: synsims.append(sim)
             else: polysims.append(sim)
+    
+    thresh = 3
+    context_pmi_dict = {}
+    alignmentsByEnContextWords = num_alignments*num_wordsEn
+    alignmentsByZhContextWords = num_alignments*num_wordsZh
+    for lem,alignwdict in lemmatized_context_counter.items():
+        context_pmi_dict[lem] = {}
+        for alignw,counterpair in alignwdict.items():
+            context_pmi_dict[lem][alignw] = [{},{}]
+            for cword,ccount in lemmatized_context_counter[lem][alignw][0]:
+                pxy = float(ccount)/alignmentsByEnContextWords
+                px = translations[lem][alignw]/float(num_alignments)
+                py = countsAll[cword]/float(num_wordsEn)
+                pmi = pxy/px*py
+                if pmi > thresh:
+                    context_pmi_dict[lem][alignw][0][cword] = pmi
+            for cword,ccount in lemmatized_context_counter[lem][alignw][1]:
+                pxy = float(ccount)/alignmentsByZhContextWords
+                px = translations[lem][alignw]/float(num_alignments)
+                py = countsAll[cword]/float(num_wordsZh)
+                pmi = pxy/px*py
+                if pmi > thresh:
+                    context_pmi_dict[lem][alignw][1][cword] = pmi
     
     
     meanSim = numpy.mean(allsims)
@@ -364,21 +415,6 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
 #             dim = (a*b)/(norm_A*norm_B)
 #             dimensions.append(dim)
 
-        w1f = math.log(1+counts[w1],2)
-        w2f = math.log(1+counts[w2],2)
-        zh_lowf = min([w1f,w2f])
-        zh_highf = max([w1f,w2f])
-        
-#         inflect_tot = centerScale(math.log(1+inflectot[lem],2),inflect_tot_list)
-#         transn = centerScale(math.log(1+transnums[lem],2),transn_list)
-#         transnum_all = centerScale(math.log(1+len(lem_translations[lem]),2),transnum_all_list)
-#         w1freq = centerScale(math.log(1+counts[w1],2),w1freq_list)
-#         w2freq = centerScale(math.log(1+counts[w2],2),w2freq_list)
-#         zh_lowfreq = centerScale(min([w1f,w2f]),zh_lowfreq_list)
-#         zh_highfreq = centerScale(max([w1f,w2f]),zh_highfreq_list)
-#         zhratio = centerScale(zh_lowf - float(zh_highf),zhratio_list)
-#         ent_lt = centerScale(entropies[lem][0],lt_ent_list)
-#         ent_lto = centerScale(entropies[lem][1],lto_ent_list)
         
         if enWordToContextDict[lem][w1] == 'NaN' or enWordToContextDict[lem][w2] == 'NaN': enCtxtSim = 'NaN'
         else: enCtxtSim = cosSim(enWordToContextDict[lem][w1],enWordToContextDict[lem][w2])
@@ -403,8 +439,8 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
         ##entropies[lem][1] is the entropy over all alignments found in Ontonotes bitext for lemma (lemma annotation in Ontonotes means don't have to go via inflection dictionary for this entropy. but it's probably noisier, being a smaller sample size.)   
             
             
-        featureset = [sim,enCtxtSim,zhCtxtSim]
-#         featureset = [sim]
+#         featureset = [sim,enCtxtSim,zhCtxtSim]
+        featureset = [sim]
 #         featureset = [sim,enCtxtSim,inflect_tot,transn,transnum_all,ent_lt,ent_lto,w1freq,w2freq,zh_lowfreq,zh_highfreq,zhratio]
 #         featureset = [sim,inflect_tot,transn,transnum_all,ent_lt,ent_lto]
 #         featureset += dimensions
@@ -543,7 +579,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang):
     zhAligndoc.close()
     
     #run cleanAlignments function and get alignments and numbers for the entire alignment corpus
-    [translations,counts,num_alignments,training_length] = cleanAlignments(aligndir,pivotlang)
+    [translations,counts,num_alignments,training_length,alignContexts,countsAll,num_wordsZh,num_wordsEn] = cleanAlignments(aligndir,pivotlang)
     
     enLemmaCounts = {}
 
@@ -741,21 +777,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang):
                     if not lem_translations_onto[lem].has_key(alignWord): lem_translations_onto[lem][alignWord] = 0
                     lem_translations_onto[lem][alignWord] += 1
                     
-                    if not lem_translations.has_key(lem): 
-                        lem_translations[lem] = {}
-                        for inf,ct in inflections[lem].items():
-                            for alignw,ct2 in translations[inf].items():
-                                cE = counts[inf]
-                                cZ = counts[alignw]
-                                t = translations[inf][alignw]
-                                pxy = t/float(num_alignments)
-                                px = cE/float(num_alignments)
-                                py = cZ/float(num_alignments)
-                                pmi_frac = pxy/(px*py)
-                                pmi = math.log(pmi_frac,2)
-                                if pmi >= 8:
-                                    if not lem_translations[lem].has_key(alignw): lem_translations[lem][alignw] = 0
-                                    lem_translations[lem][alignw] += t
+
             parl_i += 1
             align_i += 1
             lines_completed += 1
@@ -798,7 +820,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang):
     print 'all lines: ' + str(align_i)
     print 'words added: ' + str(words_added)
     
-    return [words,counts,inflectot,lem_translations,lem_translations_onto,training_length]
+    return [words,counts,inflectot,inflections,lem_translations_onto,training_length,translations,alignContexts,countsAll,num_wordsZh,num_wordsEn,num_alignments]
     
 def cleanAlignments(aligndir, pivotlang):
 
@@ -815,8 +837,12 @@ def cleanAlignments(aligndir, pivotlang):
     
             
     translations = {}
+    alignContexts = {}
     counts = {}
+    countsAll = Counter()
     num_alignments = 0
+    num_wordsZh = 0
+    num_wordsEn = 0
     training_length = len(alignLines)
     for i in range(len(alignLines)):
         if i % 5000 == 0:
@@ -825,6 +851,11 @@ def cleanAlignments(aligndir, pivotlang):
         alignLine = alignLines[i].split()
         zhLine = zhAlignLines[i].split()
         enLine = enAlignLines[i].split()
+        
+        countsAll += Counter(zhLine)
+        countsAll += Counter(enLine)
+        num_wordsZh += len(zhLine)
+        num_wordsEn += len(enLine)
 
         for j in range(len(alignLine)):
             zhPos = int(alignLine[j].split('-')[0])
@@ -852,9 +883,14 @@ def cleanAlignments(aligndir, pivotlang):
             if not translations.has_key(pivotWord): translations[pivotWord] = {}
             if not translations[pivotWord].has_key(pairWord): translations[pivotWord][pairWord] = 0
             translations[pivotWord][pairWord] += 1
+            
+            if not alignContexts.has_key(pivotWord): alignContexts[pivotWord] = {}
+            if not alignContexts[pivotWord].has_key(pairWord): alignContexts[pivotWord][pairWord] = [Counter(),Counter()]
+            alignContexts[pivotWord][pairWord][0] += Counter(enLine)
+            alignContexts[pivotWord][pairWord][1] += Counter(zhLine)
     print ''
-
-    return [translations,counts,num_alignments,training_length]
+    
+    return [translations,counts,num_alignments,training_length,alignContexts,countsAll,num_wordsZh,num_wordsEn]
     
     
 if __name__ == "__main__":

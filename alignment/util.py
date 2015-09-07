@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 
-import numpy, scipy
+import numpy, scipy, sklearn, re, operator
 from scipy import spatial
+from sklearn.metrics import precision_recall_fscore_support
 
 def readStoplist(f):
     stopwords = []
@@ -51,3 +52,32 @@ def getWindow(pos,window,listlen):
     if pos + window <= (listlen -1): right = pos + (window + 1)
     else: right = listlen
     return left,right
+    
+def macroAvgByType(itemset,labels,predictions):
+    byLemmaPredLabDict = {}
+    precList = []
+    recList = []
+    fList = []
+    countList = []
+    polycount = 0
+    syncount = 0
+    for i in range(len(itemset)):
+        lem = itemset[i][0]
+        if not byLemmaPredLabDict.has_key(lem): byLemmaPredLabDict[lem] = [[],[]]
+        byLemmaPredLabDict[lem][0].append(labels[i])
+        byLemmaPredLabDict[lem][1].append(predictions[i])
+        if labels[i] == 'poly': polycount += 1
+        else: syncount += 1
+    for lem,predlab in byLemmaPredLabDict.items():
+        (prec,rec,fmeas,counts) = precision_recall_fscore_support(predlab[0],predlab[1])
+        precList.append(prec)
+        recList.append(rec)
+        fList.append(fmeas)
+        countList.append(counts)
+    precMacro = numpy.average(precList,axis=0)
+    recMacro = numpy.average(recList,axis=0)
+    fMacro = numpy.average(fList,axis=0)
+    countMacro = numpy.sum(countList,axis=0)
+    results = [precMacro,recMacro,fMacro,[polycount,syncount]]
+    return results
+    
