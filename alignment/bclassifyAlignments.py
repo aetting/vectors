@@ -109,7 +109,7 @@ def classify(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
     
 def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPivot,pivotlang,typelvl):
     
-    [senseDict,counts,inflectot,inflections,lem_translations_onto,training_length,translations,alignContexts,countsAll,num_wordsZh,num_wordsEn,num_alignments] = combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang)
+    [senseDict,counts,inflectot,inflections,lem_translations_onto,training_length,translations,num_alignments] = combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang)
     print 'loading model'
     vecmodel = gensim.models.Word2Vec.load(os.path.abspath(w2vmodel))
     vecmodelPivot = gensim.models.Word2Vec.load(os.path.abspath(w2vmodelPivot))
@@ -133,14 +133,14 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
         pivotlist = []
         tokeninfo.write(w + '\n')
         lemsenses = {}
-        print w
+#         print w
         for alignw,tokList in alignwdict.items():
             zhcontextCount = Counter()
             encontextCount = Counter()
             alignwsenses = {}
             senseratios = {}
             tokeninfo.write('--' + alignw + ': ' + str(len(tokList)) + '\n')
-            print alignw
+#             print alignw
             for i in range(len(tokList)):
                 enWordPos = int(tokList[i][1].split('_')[1])
                 zhWordPos = int(tokList[i][4].split('_')[1])
@@ -174,7 +174,7 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
                         mx = n
                         sense = s
                 pivotlist.append([alignw,sense,w])
-            print encontextCount
+#             print encontextCount
             enCntxtAvgVec = getAvgVec(encontextCount,5,vecmodelPivot)
             zhCntxtAvgVec = getAvgVec(zhcontextCount,5,vecmodel)
             encontextWordsDict[alignw] = enCntxtAvgVec
@@ -197,8 +197,8 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
     tokeninfo.close()
     sensesets.close()
     
-    print enWordToContextDict['plan-v']['计划']
-    print zhWordToContextDict['plan-v']['计划']
+#     print enWordToContextDict['plan-v']['计划']
+#     print zhWordToContextDict['plan-v']['计划']
     
     lemma_dist = {}
     vocabmissing = {}
@@ -238,8 +238,12 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
     zh_lowfreq_list = []
     zh_highfreq_list = []
     zhratio_list = []
+    
     lem_translations = {}
-    lemmatized_context_counter = {}
+    lem_translations_unfiltered = {}
+    lemmaContextPMI = {}
+    
+    thresh = 5
     
     for pair in pairs:
         lem = pair[0][2]
@@ -262,13 +266,35 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
                         if not lem_translations[lem].has_key(alignw): lem_translations[lem][alignw] = 0
                         lem_translations[lem][alignw] += t
         
-        if not lemmatized_context_counter.has_key(lem): 
-            lemmatized_context_counter[lem] = {}
-            for inf,ct in inflections[lem].items():
-                for alignw,ct2 in alignContexts[inf].items():
-                    if not lemmatized_context_counter[lem].has_key(alignw): lemmatized_context_counter[lem][alignw] = [Counter(),Counter()]
-                    lemmatized_context_counter[lem][alignw][0] += alignContexts[inf][alignw][0]
-                    lemmatized_context_counter[lem][alignw][1] += alignContexts[inf][alignw][1]
+#         if not lemmaContextPMI.has_key(lem): 
+#             lem_translations_unfiltered = {}
+#             lemmaContextPMI[lem] = {}
+#             inflist = []
+#             for inf,ct in inflections[lem].items():
+#                 inflist.append(inf)
+#                 for alignw,ct2 in translations[inf].items():
+#                     if not lem_translations_unfiltered.has_key(alignw): lem_translations_unfiltered[alignw] = 0
+#                     lem_translations_unfiltered[alignw] += translations[inf][alignw]
+#             for alignw,one in lem_translations_unfiltered.items():
+#                 lemmaContextPMI[lem][alignw] = [[],[]]
+#                 lemmaContextCounts = getAlignPMI(aligndir,inflist,alignw)
+#                 for cword,ccount in lemmaContextCounts[0].items():
+#                     cwordCount = getWordFreq(cword,aligndir,'en')
+#                     pxy = float(ccount)
+#                     px = lem_translations_unfiltered[alignw]
+#                     py = cwordCount
+#                     pmi = float(pxy)/px*py
+#                     if pmi > thresh:
+#                         lemmaContextPMI[lem][alignw][0].append(cword)
+#                 for cword,ccount in lemmaContextCounts[1].items():
+#                     cwordCount = getWordFreq(cword,aligndir,'zh')
+#                     pxy = float(ccount)
+#                     px = lem_translations_unfiltered[alignw]
+#                     py = cwordCount
+#                     pmi = float(pxy)/px*py
+#                     if pmi > thresh:
+#                         lemmaContextPMI[lem][alignw][1].append(cword)
+
         
         ##extract two types of entropy (totals based on Ontonotes stuff, versus totals based on whole alignment training set)        
         if not entropies.has_key(lem): 
@@ -321,28 +347,6 @@ def getPairs(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,w2vmodel,w2vmodelPi
             if pair[0][1] == pair[1][1]: synsims.append(sim)
             else: polysims.append(sim)
     
-    thresh = 3
-    context_pmi_dict = {}
-    alignmentsByEnContextWords = num_alignments*num_wordsEn
-    alignmentsByZhContextWords = num_alignments*num_wordsZh
-    for lem,alignwdict in lemmatized_context_counter.items():
-        context_pmi_dict[lem] = {}
-        for alignw,counterpair in alignwdict.items():
-            context_pmi_dict[lem][alignw] = [{},{}]
-            for cword,ccount in lemmatized_context_counter[lem][alignw][0]:
-                pxy = float(ccount)/alignmentsByEnContextWords
-                px = translations[lem][alignw]/float(num_alignments)
-                py = countsAll[cword]/float(num_wordsEn)
-                pmi = pxy/px*py
-                if pmi > thresh:
-                    context_pmi_dict[lem][alignw][0][cword] = pmi
-            for cword,ccount in lemmatized_context_counter[lem][alignw][1]:
-                pxy = float(ccount)/alignmentsByZhContextWords
-                px = translations[lem][alignw]/float(num_alignments)
-                py = countsAll[cword]/float(num_wordsZh)
-                pmi = pxy/px*py
-                if pmi > thresh:
-                    context_pmi_dict[lem][alignw][1][cword] = pmi
     
     
     meanSim = numpy.mean(allsims)
@@ -579,7 +583,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang):
     zhAligndoc.close()
     
     #run cleanAlignments function and get alignments and numbers for the entire alignment corpus
-    [translations,counts,num_alignments,training_length,alignContexts,countsAll,num_wordsZh,num_wordsEn] = cleanAlignments(aligndir,pivotlang)
+    [translations,counts,num_alignments,training_length] = cleanAlignments(aligndir,pivotlang)
     
     enLemmaCounts = {}
 
@@ -820,7 +824,7 @@ def combineLayers(parldir,zh_annotdir,en_annotdir,aligndir,mapdir,pivotlang):
     print 'all lines: ' + str(align_i)
     print 'words added: ' + str(words_added)
     
-    return [words,counts,inflectot,inflections,lem_translations_onto,training_length,translations,alignContexts,countsAll,num_wordsZh,num_wordsEn,num_alignments]
+    return [words,counts,inflectot,inflections,lem_translations_onto,training_length,translations,num_alignments]
     
 def cleanAlignments(aligndir, pivotlang):
 
@@ -834,15 +838,10 @@ def cleanAlignments(aligndir, pivotlang):
     alignDoc.close()
     enAligndoc.close()
     zhAligndoc.close()
-    
-            
+         
     translations = {}
-    alignContexts = {}
     counts = {}
-    countsAll = Counter()
     num_alignments = 0
-    num_wordsZh = 0
-    num_wordsEn = 0
     training_length = len(alignLines)
     for i in range(len(alignLines)):
         if i % 5000 == 0:
@@ -852,10 +851,9 @@ def cleanAlignments(aligndir, pivotlang):
         zhLine = zhAlignLines[i].split()
         enLine = enAlignLines[i].split()
         
-        countsAll += Counter(zhLine)
-        countsAll += Counter(enLine)
-        num_wordsZh += len(zhLine)
-        num_wordsEn += len(enLine)
+
+#         num_wordsZh += len(zhLine)
+#         num_wordsEn += len(enLine)
 
         for j in range(len(alignLine)):
             zhPos = int(alignLine[j].split('-')[0])
@@ -883,21 +881,62 @@ def cleanAlignments(aligndir, pivotlang):
             if not translations.has_key(pivotWord): translations[pivotWord] = {}
             if not translations[pivotWord].has_key(pairWord): translations[pivotWord][pairWord] = 0
             translations[pivotWord][pairWord] += 1
-            
-            if not alignContexts.has_key(pivotWord): alignContexts[pivotWord] = {}
-            if not alignContexts[pivotWord].has_key(pairWord): alignContexts[pivotWord][pairWord] = [Counter(),Counter()]
-            alignContexts[pivotWord][pairWord][0] += Counter(enLine)
-            alignContexts[pivotWord][pairWord][1] += Counter(zhLine)
+    countsAll = counts
     print ''
     
-    return [translations,counts,num_alignments,training_length,alignContexts,countsAll,num_wordsZh,num_wordsEn]
-    
-    
+    return [translations,counts,num_alignments,training_length]
+
+def getAlignPMI(aligndir,inflist,alignw):
+    alignDoc = open(os.path.join(os.path.abspath(aligndir),'training.align'))
+    enAligndoc = open(os.path.join(os.path.abspath(aligndir),'training.tok.train.declass'))
+    zhAligndoc = open(os.path.join(os.path.abspath(aligndir),'training.tok.ne.train.declass'))
+    alignLines = alignDoc.read().split('\n')
+    enAlignLines = enAligndoc.read().split('\n') 
+    zhAlignLines = zhAligndoc.read().split('\n') 
+    alignDoc.close()
+    enAligndoc.close()
+    zhAligndoc.close()
+
+    contextCounts = [Counter(), Counter()]
+    training_length = len(alignLines)
+    for i in range(len(alignLines)):
+        if i % 1000000 == 0:
+            stdout.write('.')
+            stdout.flush()
+        alignLine = alignLines[i].split()
+        zhLine = zhAlignLines[i].split()
+        enLine = enAlignLines[i].split() 
+        
+        for j in range(len(alignLine)):
+            zhPos = int(alignLine[j].split('-')[0])
+            enPos = int(alignLine[j].split('-')[1])
+            if zhPos >= len(zhLine) or enPos >= len(enLine): 
+#                 print zhLine
+#                 print enLine
+#                 print alignLine
+                break 
+            zhWord = zhLine[zhPos]
+            enWord = enLine[enPos]
+            
+            if zhWord == alignw and enWord in inflist:
+                contextCounts[0] += Counter(enLine)
+                contextCounts[1] += Counter(zhLine)
+    print '' 
+    return contextCounts 
+
+def getWordFreq(cword,aligndir,lang):
+    if lang == 'en': file = 'training.tok.train.declass'
+    else: file = 'training.tok.ne.train.declass'
+    with open (os.path.join(os.path.abspath(aligndir),file)) as alignDoc:
+        r = alignDoc.read().split()
+        wordCount = r.count(cword)
+    return wordCount
+
 if __name__ == "__main__":
     classify(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6],sys.argv[7],sys.argv[8],sys.argv[9])
 
 # if __name__ == "__main__":
-#     cleanAlignments('/Users/allysonettinger/Desktop/300k_align')
+#     cleanAlignments('/Users/allysonettinger/Desktop/alignments/300k_align/little','en')
     
 # if __name__ == "__main__":
 #     combineLayers(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6])
