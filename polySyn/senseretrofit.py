@@ -10,6 +10,7 @@ import getopt
 import numpy
 import gzip
 import gensim
+import re
 
 from scipy.sparse import lil_matrix
 from copy import deepcopy
@@ -117,9 +118,10 @@ def readWordVectors(filename):
 def loadWordVectors(filename):
     sys.stderr.write('Loading vectors from array...\n')
     
-    wordVectors = gensim.models.Word2Vec.load(filename)
-    
-    vectorDim = len(wordVectors['the'])    
+    genVectors = gensim.models.Word2Vec.load(filename) 
+       
+    wordVectors = {k:genVectors[k] for k in genVectors.vocab}
+    vectorDim = len(wordVectors['the'])
     
     sys.stderr.write('Finished reading vectors.\n')
     
@@ -226,7 +228,11 @@ def retrofit(wordVectors, vectorDim, senseVocab, ontologyAdjacency, numIters, ep
                        for k in senseVocab}
     # create dummy sense vectors for words that aren't in the ontology (these won't be updated)
     newSenseVectors.update({k+senseSeparator+'0:00:00::':wordVectors[k] for k in wordVectors
-                            if k not in ontologyWords})
+                            if k not in ontologyWords and re.match('[a-zA-Z]+(\-[a-zA-Z]+)*$',k)})
+#     newSenseVectors.update({k[0]+senseSeparator+'0:00:00::':wordVectors[k[0]] for k in wordVectors.vocab.items()
+#                             if k[0] not in ontologyWords})
+#     newSenseVectors.update({k[0]+senseSeparator+'0:00:00::':wordVectors[k[0]] for k in wordVectors.vocab.items()
+#                             if k[0] not in ontologyWords and if re.match('[a-zA-Z]+(\-[a-zA-Z]+)*$',k[0]})
     
     # create a copy of the sense vectors to check for convergence
     oldSenseVectors = deepcopy(newSenseVectors)
@@ -276,7 +282,7 @@ if __name__ == "__main__":
     
     #try opening the specified files    
     try:
-        vectors, vectorDim = readWordVectors(commandParse[0])
+        vectors, vectorDim = loadWordVectors(commandParse[0])
         senseVocab, ontologyAdjacency = readOntology(commandParse[1], vectors)
         numIters = commandParse[3]
         epsilon = commandParse[4]
