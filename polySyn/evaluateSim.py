@@ -4,13 +4,13 @@
 
 ##python evaluateSim.py /Users/allysonettinger/Desktop/vectors/polySyn/enModelg.sense /Users/allysonettinger/Desktop/similarity-datasets/MEN/MEN_dataset_natural_form_full
 
-import numpy, scipy, gzip, sys
+import numpy, scipy, gzip, sys, gensim
 from scipy import stats, spatial
 
 def cosSim(u,v):
     return (1 - scipy.spatial.distance.cosine(u,v))
 
-def getVectors(filename):
+def readVectors(filename):
     if filename.endswith('.gz'):
         fileObject = gzip.open(filename, 'r')
     else:
@@ -32,6 +32,18 @@ def getVectors(filename):
     
     fileObject.close()
     print len(wordVectors)
+    
+    return wordVectors
+
+def loadVectors(filename):
+    sys.stderr.write('Loading vectors from array...\n')
+    
+    genVectors = gensim.models.Word2Vec.load(filename) 
+       
+    wordVectors = {k:genVectors[k] for k in genVectors.vocab}
+    vectorDim = len(wordVectors['the'])
+    
+    sys.stderr.write('Finished reading vectors.\n')
     
     return wordVectors
     
@@ -57,9 +69,13 @@ def avgSimPair(w1,w2,vecDict):
     
     return avgSim
 
-def compareSimSets(vectorFile,simSetFile):
+def compareSimSets(vectorFile,simSetFile,genFormat):
 
-    vectorDict = getVectors(vectorFile)
+    if genFormat == 'gen': vectorDict = loadVectors(vectorFile)
+    elif genFormat == 'text': vectorDict = readVectors(vectorFile)
+    else:
+        sys.stderr.write('Specify format: \'text\' or \'gen\'\n') 
+        return
     simSet = numpy.loadtxt(simSetFile,dtype='str')
     
     vecSims = []
@@ -76,8 +92,8 @@ def compareSimSets(vectorFile,simSetFile):
         print vecSim
         
     rho,p = scipy.stats.spearmanr(vecSims,simSetSims)
-    print 'RHO' + str(rho)
+    print 'RHO ' + str(rho)
     
 if __name__ == "__main__":
-#     compareSimSets(sys.argv[1],sys.argv[2])
-    getVectors(sys.argv[1])
+    compareSimSets(sys.argv[1],sys.argv[2],sys.argv[3])
+#     getVectors(sys.argv[1])
