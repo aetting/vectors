@@ -43,6 +43,8 @@ def loadVectors(filename):
     wordVectors = {k:genVectors[k] for k in genVectors.vocab}
     vectorDim = len(wordVectors['the'])
     
+    print len(wordVectors)
+    
     sys.stderr.write('Finished reading vectors.\n')
     
     return wordVectors
