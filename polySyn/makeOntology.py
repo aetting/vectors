@@ -63,11 +63,12 @@ def cleanAlignments(aligndir, pivotlang):
     return [translations,counts,num_alignments,training_length]
     
 def filterOntology(translations,counts,num_alignments):
-    ##so we need to generate the ontology document, with each line holding all of the English words well-aligned to a given ZH word
-    ##so index dict by zh words ... and each zh word will be a line in the file. set weights to 1 for now.
     #filter by PMI and filter out pronouns and auxiliary/light verbs
+    #we want to use the logistic function for the weights that will determine how much we want to move toward vectors in the cluster
+    #but first we need to decide which alignments to keep in identifying senses
     ontologyDict = {}
     for pivotword,alignwordsdict in translations.items():
+        print '\n'+ pivotword
         for alignw, t in alignwordsdict.items():
             cP = counts[pivotword]
             cA = counts[alignw]
@@ -78,28 +79,33 @@ def filterOntology(translations,counts,num_alignments):
             pmi_frac = pxy/(px*py)
             pmi = math.log(pmi_frac,2)
             perc = t/float(cP)
-#             b = re.match('(have|be|do|get)\-.*',lem)
-#             p = re.match('(我们|你们|你|我|他|她|他们|您|您们)',alignWord)
-            if pmi < 8: continue 
+            if pmi < 8 or t < 3: continue
+            print alignw
+            print str(pmi) 
             if not pivotword in ontologyDict: ontologyDict[pivotword] = {}
-            ontologyDict[pivotword][alignw] = t
+#             ontologyDict[pivotword][alignw] = logisticFunction(pmi,1,
     return ontologyDict
     
 def printOntology(ontologyDict):
-    first = 1
+    senseagWgt = 1.
     with open('ontology','w') as ontolDoc:
         for pivotword,alignwordsdict in ontologyDict.items():
             for alignw, t in alignwordsdict.items(): 
                 otherWords = [a[0] for a in alignwordsdict.items() if a[0] != alignw]
-                ontolDoc.write(alignw + '%' + pivotword + '#1.0 ')
+                ontolDoc.write(alignw + '%' + pivotword + '#' + str(alignwWgt))
                 for word in otherWords:
-                    ontolDoc.write(word + '%' + pivotword + '#1.0 ')
+                    ontolDoc.write(word + '%' + pivotword + '#' + + str(senseagWgt))
                 ontolDoc.write('\n')
+                
+def logisticFunction(x,top,k,mid):
+    y = top/(1+math.exp(-k*(x-mid)))
+    return y
+    
                     
 def compileOntology(aligndir,pivotlang):
     [translations,counts,num_alignments,training_length] = cleanAlignments(aligndir, pivotlang)
     ontologyDict = filterOntology(translations,counts,num_alignments)
-    printOntology(ontologyDict)
+#     printOntology(ontologyDict)
     
 if __name__ == "__main__":
     compileOntology(sys.argv[1],sys.argv[2])

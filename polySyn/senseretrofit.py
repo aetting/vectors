@@ -282,7 +282,8 @@ if __name__ == "__main__":
     
     #try opening the specified files    
     try:
-        vectors, vectorDim = loadWordVectors(commandParse[0])
+#         vectors, vectorDim = loadWordVectors(commandParse[0])
+        vectors, vectorDim = readWordVectors(commandParse[0])
         senseVocab, ontologyAdjacency = readOntology(commandParse[1], vectors)
         numIters = commandParse[3]
         epsilon = commandParse[4]

@@ -4,7 +4,7 @@
 
 ##python evaluateSim.py /Users/allysonettinger/Desktop/vectors/polySyn/enModelg.sense /Users/allysonettinger/Desktop/similarity-datasets/MEN/MEN_dataset_natural_form_full
 
-import numpy, scipy, gzip, sys, gensim
+import numpy, scipy, gzip, sys, gensim, re
 from scipy import stats, spatial
 
 def cosSim(u,v):
@@ -56,6 +56,7 @@ def avgSimPair(w1,w2,vecDict):
 #     print w1list
 #     print w2list
     simSum = 0
+    maxSim = 0
     normalizer = float(len(w1list)*len(w2list))
     print 'lengths:' + str(len(w1list)) + ' ' + str(len(w2list))
     
@@ -66,36 +67,57 @@ def avgSimPair(w1,w2,vecDict):
         for w2 in w2list:
             sim = cosSim(vecDict[w1],vecDict[w2])
             simSum += sim
+            if sim > maxSim: maxSim = sim
             
     avgSim = simSum/normalizer
     
-    return avgSim
+    return (avgSim, maxSim)
+    
+def getSpearman(vectorDict,simSet):
+    vecSimsAvg = []
+    vecSimsMax = []
+    simSetSims = []
+    for w1,w2,s in simSet:
+        m1 = re.match('([a-z]+)\-[a-z]',w1)
+        m2 = re.match('([a-z]+)\-[a-z]',w2)
+        if m1: w1 = m1.group(1)
+        if m2: w2 = m2.group(1)
+        vecSim = avgSimPair(w1,w2,vectorDict)
+        if vecSim is None: 
+            print '\n' + w1 + ' or ' + w2 + ' missing!\n'
+            continue
+        vecSimAvg = vecSim[0]
+        vecSimMax = vecSim[1]
+        
+        simSetSims.append(float(s))
+        vecSimsAvg.append(vecSimAvg)
+        vecSimsMax.append(vecSimMax)
+        
+        print s
+        print vecSim
+        
+    rho,p = scipy.stats.spearmanr(vecSimsAvg,simSetSims)
+    rho2,p2 = scipy.stats.spearmanr(vecSimsMax,simSetSims)
+    print 'RHO (avg): ' + str(rho)
+    print 'RHO (max): ' + str(rho2)
+    return rho, rho2,p
 
-def compareSimSets(vectorFile,simSetFile,genFormat):
+def iterSimSets(vectorFile, genFormat, simSetFiles):
 
     if genFormat == 'gen': vectorDict = loadVectors(vectorFile)
     elif genFormat == 'text': vectorDict = readVectors(vectorFile)
     else:
         sys.stderr.write('Specify format: \'text\' or \'gen\'\n') 
         return
-    simSet = numpy.loadtxt(simSetFile,dtype='str')
-    
-    vecSims = []
-    simSetSims = []
-    
-    for w1,w2,s in simSet:
-        vecSim = avgSimPair(w1,w2,vectorDict)
-        if vecSim is None: continue
+    rhoList = []
+    for set in simSetFiles:
+        simSet = numpy.loadtxt(set,dtype='str')
+        rho,rho2,p = getSpearman(vectorDict,simSet)
+        rhoList.append((set,rho,rho2))
         
-        simSetSims.append(float(s))
-        vecSims.append(vecSim)
-        
-        print s
-        print vecSim
-        
-    rho,p = scipy.stats.spearmanr(vecSims,simSetSims)
-    print 'RHO ' + str(rho)
+    for item in rhoList: print item
     
+        
 if __name__ == "__main__":
-    compareSimSets(sys.argv[1],sys.argv[2],sys.argv[3])
+    iterSimSets(sys.argv[1],sys.argv[2],sys.argv[3:])
 #     getVectors(sys.argv[1])
