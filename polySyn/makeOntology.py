@@ -97,9 +97,9 @@ def printOntology(ontologyDict):
         for pivotword,alignwordsdict in ontologyDict.items():
             for alignw, alignwWgt in alignwordsdict.items(): 
                 otherWords = [a for a in alignwordsdict.items() if a[0] != alignw]
-                ontolDoc.write(alignw + '%' + pivotword + '#' + str(senseagWgt))
+                ontolDoc.write(alignw + '%' + pivotword + '#' + str(senseagWgt)+ ' ')
                 for word,alignWgt in otherWords:
-                    ontolDoc.write(word + '%' + pivotword + '#' + str(alignWgt))
+                    ontolDoc.write(word + '%' + pivotword + '#' + str(alignWgt) + ' ')
                 ontolDoc.write('\n')
                 
 def logisticFunction(x,top,k,mid):
