@@ -1,3 +1,5 @@
+#!/bin/bash
+
 sg_vecs='/Users/allysonettinger/Desktop/SenseRetrofit-master/mik-sg-80.txt'
 wordnet_sensevecs='/Users/allysonettinger/Desktop/SenseRetrofit-master/data/mik.sampont.sense'
 genformat='text'
