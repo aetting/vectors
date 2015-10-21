@@ -67,6 +67,9 @@ def filterOntology(translations,counts,num_alignments):
     #we want to use the logistic function for the weights that will determine how much we want to move toward vectors in the cluster
     #but first we need to decide which alignments to keep in identifying senses
     ontologyDict = {}
+    k = 1
+    top = 1
+    mid = 8
     for pivotword,alignwordsdict in translations.items():
         print '\n'+ pivotword
         for alignw, t in alignwordsdict.items():
@@ -83,18 +86,20 @@ def filterOntology(translations,counts,num_alignments):
             print alignw
             print str(pmi) 
             if not pivotword in ontologyDict: ontologyDict[pivotword] = {}
-#             ontologyDict[pivotword][alignw] = logisticFunction(pmi,1,
+            w = logisticFunction(pmi,top,k,mid)
+            ontologyDict[pivotword][alignw] = w
+            print w
     return ontologyDict
     
 def printOntology(ontologyDict):
     senseagWgt = 1.
     with open('ontology','w') as ontolDoc:
         for pivotword,alignwordsdict in ontologyDict.items():
-            for alignw, t in alignwordsdict.items(): 
-                otherWords = [a[0] for a in alignwordsdict.items() if a[0] != alignw]
-                ontolDoc.write(alignw + '%' + pivotword + '#' + str(alignwWgt))
-                for word in otherWords:
-                    ontolDoc.write(word + '%' + pivotword + '#' + + str(senseagWgt))
+            for alignw, alignwWgt in alignwordsdict.items(): 
+                otherWords = [a for a in alignwordsdict.items() if a[0] != alignw]
+                ontolDoc.write(alignw + '%' + pivotword + '#' + str(senseagWgt))
+                for word,alignWgt in otherWords:
+                    ontolDoc.write(word + '%' + pivotword + '#' + str(alignWgt))
                 ontolDoc.write('\n')
                 
 def logisticFunction(x,top,k,mid):
@@ -105,7 +110,7 @@ def logisticFunction(x,top,k,mid):
 def compileOntology(aligndir,pivotlang):
     [translations,counts,num_alignments,training_length] = cleanAlignments(aligndir, pivotlang)
     ontologyDict = filterOntology(translations,counts,num_alignments)
-#     printOntology(ontologyDict)
+    printOntology(ontologyDict)
     
 if __name__ == "__main__":
     compileOntology(sys.argv[1],sys.argv[2])
