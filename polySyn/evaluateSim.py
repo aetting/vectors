@@ -78,6 +78,8 @@ def getSpearman(vectorDict,simSet):
     vecSimsMax = []
     simSetSims = []
     for w1,w2,s in simSet:
+        w1 = w1.lower()
+        w2 = w2.lower()
         m1 = re.match('([a-z]+)\-[a-z]',w1)
         m2 = re.match('([a-z]+)\-[a-z]',w2)
         if m1: w1 = m1.group(1)
