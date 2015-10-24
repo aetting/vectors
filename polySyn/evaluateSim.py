@@ -49,7 +49,7 @@ def loadVectors(filename):
     
     return wordVectors
     
-def avgSimPair(w1,w2,vecDict):
+def avgSimPair(w1,w2,vecDict,senSum,wordTot):
     w1list = [k for k in vecDict if k.split('%')[0] == w1] 
     w2list = [k for k in vecDict if k.split('%')[0] == w2]
     
@@ -60,23 +60,29 @@ def avgSimPair(w1,w2,vecDict):
     normalizer = float(len(w1list)*len(w2list))
     print 'lengths:' + str(len(w1list)) + ' ' + str(len(w2list))
     
-    if normalizer == 0: return None
+    if normalizer == 0: return None 
+    senSum += (len(w1list) + len(w2list))
+    wordTot += 2
     
     '''iterate over senses'''
     for w1 in w1list:
         for w2 in w2list:
             sim = cosSim(vecDict[w1],vecDict[w2])
             simSum += sim
-            if sim > maxSim: maxSim = sim
+            if sim > maxSim: 
+                maxSim = sim
+                maxpair = (w1,w2)
             
     avgSim = simSum/normalizer
     
-    return (avgSim, maxSim)
+    return (avgSim, maxSim, maxpair,senSum, wordTot)
     
 def getSpearman(vectorDict,simSet):
     vecSimsAvg = []
     vecSimsMax = []
     simSetSims = []
+    senSum = 0
+    wordTot = 0
     for w1,w2,s in simSet:
         w1 = w1.lower()
         w2 = w2.lower()
@@ -84,24 +90,30 @@ def getSpearman(vectorDict,simSet):
         m2 = re.match('([a-z]+)\-[a-z]',w2)
         if m1: w1 = m1.group(1)
         if m2: w2 = m2.group(1)
-        vecSim = avgSimPair(w1,w2,vectorDict)
+        vecSim = avgSimPair(w1,w2,vectorDict,senSum,wordTot)
         if vecSim is None: 
             print '\n' + w1 + ' or ' + w2 + ' missing!\n'
             continue
         vecSimAvg = vecSim[0]
         vecSimMax = vecSim[1]
         
+        senSum = vecSim[3]
+        wordTot = vecSim[4]
+        
         simSetSims.append(float(s))
         vecSimsAvg.append(vecSimAvg)
         vecSimsMax.append(vecSimMax)
         
         print s
-        print vecSim
+        print vecSim[:2]
+        print ' '.join([str(e) for e in vecSim[2]]) 
+        
         
     rho,p = scipy.stats.spearmanr(vecSimsAvg,simSetSims)
     rho2,p2 = scipy.stats.spearmanr(vecSimsMax,simSetSims)
     print 'RHO (avg): ' + str(rho)
     print 'RHO (max): ' + str(rho2)
+    print 'Avg # senses: ' + str(senSum/float(wordTot))
     return rho, rho2,p
 
 def iterSimSets(vectorFile, genFormat, simSetFiles):

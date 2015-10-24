@@ -62,14 +62,18 @@ def cleanAlignments(aligndir, pivotlang):
     
     return [translations,counts,num_alignments,training_length]
     
-def filterOntology(translations,counts,num_alignments):
+def filterOntology(translations,counts,num_alignments,pmiThresh,countThresh,top,k,mid):
     #filter by PMI and filter out pronouns and auxiliary/light verbs
     #we want to use the logistic function for the weights that will determine how much we want to move toward vectors in the cluster
     #but first we need to decide which alignments to keep in identifying senses
+    print 'HYPERPARAMETERS'
+    print 'pthresh,cthresh,top,k,mid: ' + ','.join([pmiThresh,countThresh,top,k,mid])
     ontologyDict = {}
-    k = 1
-    top = 1
-    mid = 8
+    pmiThresh = float(pmiThresh)
+    countThresh = float(countThresh)
+    k = float(k)
+    top = float(top)
+    mid = float(mid)
     for pivotword,alignwordsdict in translations.items():
         print '\n'+ pivotword
         for alignw, t in alignwordsdict.items():
@@ -82,7 +86,7 @@ def filterOntology(translations,counts,num_alignments):
             pmi_frac = pxy/(px*py)
             pmi = math.log(pmi_frac,2)
             perc = t/float(cP)
-            if pmi < 8 or t < 3: continue
+            if pmi < pmiThresh or t < countThresh: continue
             print alignw
             print str(pmi) 
             if not pivotword in ontologyDict: ontologyDict[pivotword] = {}
@@ -91,9 +95,10 @@ def filterOntology(translations,counts,num_alignments):
             print w
     return ontologyDict
     
-def printOntology(ontologyDict):
+def printOntology(ontologyDict,ontdir,pmiThresh,countThresh,top,k,mid):
     senseagWgt = 1.
-    with open('ontology','w') as ontolDoc:
+    ontname = os.path.join(ontdir,'ontology-' + '-'.join([pmiThresh,countThresh,top,k,mid]))
+    with open(ontname,'w') as ontolDoc:
         for pivotword,alignwordsdict in ontologyDict.items():
             for alignw, alignwWgt in alignwordsdict.items(): 
                 otherWords = [a for a in alignwordsdict.items() if a[0] != alignw]
@@ -107,10 +112,10 @@ def logisticFunction(x,top,k,mid):
     return y
     
                     
-def compileOntology(aligndir,pivotlang):
+def compileOntology(aligndir,pivotlang,ontdir,pmiThresh,countThresh,top,k,mid):
     [translations,counts,num_alignments,training_length] = cleanAlignments(aligndir, pivotlang)
-    ontologyDict = filterOntology(translations,counts,num_alignments)
-    printOntology(ontologyDict)
+    ontologyDict = filterOntology(translations,counts,num_alignments,pmiThresh,countThresh,top,k,mid)
+    printOntology(ontologyDict,ontdir,pmiThresh,countThresh,top,k,mid)
     
 if __name__ == "__main__":
-    compileOntology(sys.argv[1],sys.argv[2])
+    compileOntology(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6],sys.argv[7],sys.argv[8])
