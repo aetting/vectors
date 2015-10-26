@@ -130,6 +130,7 @@ def iterSimSets(vectorFile, genFormat, simSetFiles):
         rhoList.append((set,rho,rho2))
         
     for item in rhoList: print item
+    print vectorFile
     
         
 if __name__ == "__main__":
