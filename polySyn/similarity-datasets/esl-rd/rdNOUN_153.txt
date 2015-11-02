@@ -1,0 +1,160 @@
+# Subset of the 100 questions from Peter Turney's lsit
+
+resolve | determination | self-reliance | willfulness | protest 
+tether | rope | relationship | type of support | knot 
+hearing | preliminary examination | rehearsal | challenge | possible solution 
+seascape | picture | wave top | ocean debris | boating accident 
+acumen | shrewdness | exactness | potential | assurance 
+lingo | jargon | pidgin English | enunciation | type of dance 
+mural | wall painting | reflection | prototype | soft sculpture 
+concession | admission | courtesy | head injury | addition 
+decorum | innocence | propriety | style of decoration | clutter 
+ethic | standard of behavior | racial group | precision | reliability 
+anarchy | lawlessness | self-rule | mandate | ignorance 
+catnap | short sleep | scented herb | fur piece | smooth surface 
+smirk | self-satisfied smile | withering look | burst of laughter | pettiness or meanness 
+pigment | coloring substance | skin | farming | size 
+refrain | recurring melody | pause | stanza | sustained note 
+canopy | hanging cover | jacket | sphere | appetizer 
+memento | souvenir | suggestion | report | announcement 
+contempt | scorn | skepticism | anger | judgment 
+deterrence | preventative | cleanser | warning | disadvantage 
+swatch | sample of cloth | quick blow | petty theft | repair of clothing 
+ovation | applause | event | act of kindness | peak point 
+agenda | schedule | assignment | addition | common practice 
+garrison | military post | horse stable | execution by choking | square tower 
+tariff | tax | payoff | warning | price increase 
+atoll | ring-shaped coral island | arched passageway | island of volcanic rock | life buoy 
+sediment | particles in a liquid | noble feeling | cast-off material | shallow-rooted organism 
+glut | excessive supply | growing quantity | core | congestion 
+vapor | mist | bad odor | prism | wind 
+gridlock | traffic jam | computer error | immune reaction | wrestling move 
+collateral | security for a loan | financial statement | money stacked in two piles | reconciliation of accounts 
+quandary | perplexing difficulty | decisive thought | open question | slight fear or mistrust 
+pang | sudden pain | pungent odor | violent jolt | annoying twitch 
+hinterland | back country | prairie | mountain range | fantasy island 
+gulch | small ravine | untimely error | act of choking | plateau 
+jeopardy | danger | venture | gamble | challenge 
+lore | knowledge | fascination | trap | feeling 
+mulch | ground covering | garden path | organic fertilizer | seed mixture 
+ally | partner | a rival | an equal | a relative 
+compassion | sympathy | congeniality | spirituality | tolerance 
+asteroid | tiny planet | robot | space creature | black hole 
+abode | dwelling | situation | throne | hindrance 
+resource | available supply | protection | urgent claim | beginning or origin 
+whiplash | neck injury | deep gash | rope burn | back fracture 
+flippancy | frivolous disrespect | alertness | amusing irony | informality 
+stamina | staying power | eagerness | intensity | criterion 
+anchor | newscaster | chief executive | savings account | archbishop 
+data | information | ideas | beliefs | point of origin
+
+
+# Subset of the 200 questions from the Canadian edition of Reader's Digest 
+
+eddy | whirlpool | current | wave | wind 
+bough | branch | barricade | shaded area | fallen tree 
+heath | overgrown open land | burned-over area | thin forest | pasture 
+williwaw | sudden windblast | rainsquall | songbird | meadow flower 
+verge | brink | middle path | bare ground | vantage point 
+dale | valley | retreat | shelter | plain 
+floe | floating ice | frozen stream | lump | driftwood 
+cascade | waterfall | thunder | swift current | edge 
+undulation | rise and fall | faint motion | ebb and flow | quivering 
+crag | steep rock | headland | barren hill | niche 
+truss | cluster of flowers | main stem | bunch of grass | fallen petals 
+slough | deep mire | quicksand | shower | erosion 
+lee | shelter | cove | grassland | riverbank 
+precipice | vertical rockface | wide gap | broken path | descent 
+chasm | deep fissure | wide opening | mountain pass | series of falls 
+torrent | violent flow | drift | swell | deep sound
+buffer | protection from damage | amateur fight | bright light | small dog 
+sundries | unspecified articles | washables | cheap materials | leftovers 
+recoil | strong reaction | a memory | threat | fear 
+pantheon | temple for gods | dance hall | jazz festival | art gallery 
+nomad | wanderer | exile | loner | enemy 
+dexterity | nimbleness | insight | courage | versatility 
+acquisition | purchase | greediness | passive consent | inquiry 
+average down | buy at lower prices | ease requirements | exchange | lower interest rates 
+demand deposit | bank deposit | certified cheque | bank holdup | credit card 
+book value | company | report | collectible | loan 
+asset | property | profit | agreement | estimate 
+rebate | discount | tax | refund | debt payment 
+IPO | initial public offering | international policy organization | inflation probability opinion | in-depth proof offered 
+liquidity | cash | stock | real estate | gold 
+tycoon | powerful leader | sales rep | skilled worker | financial adviser 
+vested interest | special claim | any financial transaction | illegal procedure | propaganda 
+paradigm | model | discovery | limit | novelty 
+stratagem | rue | objective | disguise | orders 
+demarcation | marking of a boundary | outline | dismantling | barricade 
+pact | agreement | armistice | understanding | insurance 
+ordnance | guns | food | regulations | postings 
+flotilla | small fleet | coastal patrol | convoy | tugboat 
+signatory | signer | guarantor | commander | censor 
+bivouac | camp | shelter | halting place | field of tents 
+sovereignty | total authority | jurisdiction | absolute right | possession 
+vanguard | foremost part | protector | honour guard | early warning 
+beret | round cap | cap with horizontal peak | wedge cap | helmet 
+martial | combat | instruction | parades | police duty 
+cordon | chain of guard posts | no-man's-land | outpost | supply route 
+quartermaster | lodging and rations | security | combat records | equipment 
+sapper | engineers | chaplaincy | field hospital | transport unit
+flotsam | objects | life preserver | person | dock 
+barnacle | sea animal in a shell | old sailor | starfish | jellyfish 
+riptide | turbulent current | canal | high tide | tidal wave 
+scuba | diver's equipment | underwater flora | fins | small fish 
+spindrift | sea spray | whirlpool | big waves | surfboard 
+waterspout | column if water | tidal pool | rising tide | ripple 
+mollusk | shellfish | sea flower | dune | break water 
+snorkel | breathing tube | shell collection | beach umbrella | dune buggy 
+sandpiper | shorebird | weird birdcall | diving bird | sand flea 
+algae | seaweed | sea horses | driftwood | coloured pebbles 
+shoal | shallow place | deep water | rocky shore | headland 
+conch | shell | water snake | beach chair | beach house 
+littoral | shore | beach trash | beach plum | beach treasures 
+seascape | sea picture | seaside getaway | sea adventure | coral reef 
+comber | breaker | beach cleanup | scavenger | pelican 
+aquaplane | towed board | seaplane | sandbar | channel 
+aquatic | water | rippling effect | sand castles | shifting sands 
+angler | fisherman | water snake | barracuda | sand sifter
+therapy | healing | heat | side dish | repeating melody 
+hoi polloi | common people | Hawaiian food | mass confusion | royalty 
+phobia | fear | virus | backache | lip 
+cataclysm | disaster | mixing machine | excitement | weakness 
+thesaurus | book of synonyms | flesh-eating dinosaur | argument | road map 
+ode | poem | heavy debt | sweet smell | surprise 
+mania | craze | entertainment | cheerfulness | cleverness 
+panacea | cure-all | widespread disease | gland | flashiness 
+theology | religion | idea | rules | Greek history 
+fillet | boneless piece of meat | thin slice | small serving | casserole 
+hors d'oeuvre | appetizer | pastry | salad | grilled vegetable 
+entree | main dish | restaurant waiting room | unfinished meal | special seasoning 
+morsel | small portion | saltwater fish | frying pan | chocolate 
+confection | sweet food | type of oven | mold | blender 
+bisque | cream soup | buttered biscuit | tablecloth | cafeteria 
+archeology | ancient societies | rare birds | arches and columns | myths 
+anthropology | human beings | insect behaviour | exotic flowers | group of islands 
+pathology | disease | emotions | philosophy | crime 
+psychology | the mind | nymphs | horror movies | evolving societies 
+gerontology | old people | medications | babies | family histories 
+gynecology | female health | habits | athletics | brain 
+numerology | numbers | events | animal signs | eclipses 
+neurology | nerves | bones | the occult | antibodies 
+embryology | development of organisms | vital forces | sexuality | tidal deposits 
+endocrinology | glands and hormones | brains | heart inflammation | human formation 
+dermatology | the skin | winged insects | moulds | radioactivity 
+hematology | blood | trauma | marine animals| parasites 
+astrology | influence of the stars | space travel | earth's origin | light 
+cosmology | the universe | plastic surgery | asteroids | comets 
+cardiology | the heart | gambling | breathing disorders | sounds 
+audiology | hearing | testing methods | performance | strength 
+sociology | human societies | aggression | organic structures | depression 
+physiology | the functions of the body | education | energy | chemicals 
+etymology | word derivation | butterflies | dinosaurs | communication 
+entomology | insects | tombs | origins | ancient languages
+etiquette | customs |fussiness |snobbery | ignorance 
+civility | politeness | legal procedure | obedience | serenity 
+contempt | scorn | doubt | anger | persuasion 
+deportment | conduct | banishment | separation | lack of merit 
+protocol | procedures | peace making | disarmament | statecraft 
+faux pas | social blunder | humorous remark | mild warning | delicate suggestion 
+propriety | respectability | punctuality | honesty | fussiness

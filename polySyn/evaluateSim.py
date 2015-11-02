@@ -7,6 +7,8 @@
 import numpy, scipy, gzip, sys, gensim, re
 from scipy import stats, spatial
 
+oov = {}
+
 def cosSim(u,v):
     return (1 - scipy.spatial.distance.cosine(u,v))
 
@@ -55,6 +57,8 @@ def avgSimPair(w1,w2,vecDict,senSum,wordTot):
     
 #     print w1list
 #     print w2list
+    if len(w1list) == 0: oov[w1] = 1
+    if len(w2list) == 0: oov[w2] = 1
     simSum = 0
     maxSim = 0
     normalizer = float(len(w1list)*len(w2list))
@@ -114,6 +118,7 @@ def getSpearman(vectorDict,simSet):
     print 'RHO (avg): ' + str(rho)
     print 'RHO (max): ' + str(rho2)
     print 'Avg # senses: ' + str(senSum/float(wordTot))
+    print oov
     return rho, rho2,p
 
 def iterSimSets(vectorFile, genFormat, simSetFiles):

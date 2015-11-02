@@ -1,0 +1,27 @@
+
+
+Notes on the RD Collection
+==========================
+
+The RD (Reader's Digest) collection includes:
+
+(1) readers-digest.dat = 100 Readers Digest questions 
+    - collected by Peter Turney
+
+(2) rdCanada_200.txt = 200 Readers Digest questions 
+    - collected by Mario Jarmasz
+
+(3) rdNOUN_153.txt = the subset of the union of (1) 
+    and (2) that involves only nouns
+    - collected by Mario Jarmasz and Peter Turney
+
+We (Peter Turney, Mario Jarmasz, Stan Szpakowicz) request that you:
+
+(1) Please do not distribute the questions further. Please direct 
+    interested researchers to us.
+
+(2) Please use the questions only for research. 
+
+We would be very interested in knowing how your experiments
+turn out. Good luck!
+
