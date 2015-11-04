@@ -14,5 +14,8 @@ cthresh=3
 ceil=1
 k=1
 mid=8
+gthresh=30
 
-python makeOntology.py $aligndir $pivotlang $ontdir $pthresh $cthresh $ceil $k $mid
+#python makeOntology.py $aligndir $pivotlang $ontdir $pthresh $cthresh $ceil $k $mid
+python makeOntology.py $aligndir $pivotlang $ontdir $gthresh $ceil $k $mid
+

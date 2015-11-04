@@ -55,15 +55,24 @@ def getPhraseMax(p1,p2,vecDict):
     print 'PROCESSING PHRASE'
     maxSim = 0
     maxPair = (None,None)
+
     for w1 in p1.split():
         for w2 in p2.split():
-            try: sim = cosSim(vecDict[w1],vecDict[w2])
-            except:
+            simSum = 0
+            w1list = [k for k in vecDict if k.split('%')[0] == w1] 
+            w2list = [k for k in vecDict if k.split('%')[0] == w2]
+            normalizer = float(len(w1list)*len(w2list))
+            if normalizer == 0: 
                 print w1 + ' or ' + w2 + ' missing'
                 continue
+            for w1l in w1list:
+                for w2l in w2list:
+                    sim = cosSim(vecDict[w1l],vecDict[w2l])
+                    simSum += sim
+            avgSim = simSum/normalizer
             print 'PAIR: ' + w1 + ' + ' + w2 
-            if sim > maxSim: 
-                maxSim = sim
+            if avgSim > maxSim:
+                maxSim = avgSim
                 maxPair = (w1,w2)
     print 'TOP PAIR = ' + str(maxPair)
     return maxPair
