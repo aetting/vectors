@@ -61,6 +61,7 @@ def avgSimPair(w1,w2,vecDict,senSum,wordTot):
     if len(w2list) == 0: oov[w2] = 1
     simSum = 0
     maxSim = 0
+    maxPair = ()
     normalizer = float(len(w1list)*len(w2list))
     print 'lengths:' + str(len(w1list)) + ' ' + str(len(w2list))
     
@@ -75,11 +76,11 @@ def avgSimPair(w1,w2,vecDict,senSum,wordTot):
             simSum += sim
             if sim > maxSim: 
                 maxSim = sim
-                maxpair = (w1,w2)
+                maxPair = (w1,w2)
             
     avgSim = simSum/normalizer
     
-    return (avgSim, maxSim, maxpair,senSum, wordTot)
+    return (avgSim, maxSim, maxPair,senSum, wordTot)
     
 def getSpearman(vectorDict,simSet):
     vecSimsAvg = []

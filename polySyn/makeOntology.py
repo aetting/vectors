@@ -4,7 +4,20 @@
 import math,sys,re,os
 from sys import stdout
 
+def readLemmatizer():
+    d = {}
+    f = open('morph_english.flat')
+    for line in f:
+        if line.startswith(';;;'): continue
+        list = line.split()
+        d[list[0]] = list[1]
+    return d
+
 def cleanAlignments(aligndir, pivotlang):
+    
+    ##first line to remove if not lemmatizing
+    lemmaDict = readLemmatizer()
+    
     print 'getting alignment counts'
     alignDoc = open(os.path.join(os.path.abspath(aligndir),'training.align'))
     enAligndoc = open(os.path.join(os.path.abspath(aligndir),'training.tok.train.declass'))
@@ -42,6 +55,9 @@ def cleanAlignments(aligndir, pivotlang):
             
             enWord = re.sub('[#|%]','-',enWord)
             zhWord = re.sub('[#|%]','-',zhWord)
+            
+            ##second line to remove if not lemmatizing
+            if enWord in lemmaDict: enWord = lemmaDict[enWord]
             
             if not counts.has_key(enWord): counts[enWord] = 0
             if not counts.has_key(zhWord): counts[zhWord] = 0

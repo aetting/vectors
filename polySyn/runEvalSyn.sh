@@ -8,4 +8,4 @@ ESL=/Users/allysonettinger/Desktop/vectors/polySyn/similarity-datasets/esl-rd/ES
 RD=/Users/allysonettinger/Desktop/vectors/polySyn/similarity-datasets/esl-rd/RD-300
 
 
-python evaluateSyn.py $sg_vecs $genformat $RD
+python evaluateSyn.py $sg_vecs $genformat $ESL $RD $TOEFL
