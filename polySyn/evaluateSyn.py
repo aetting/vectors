@@ -4,7 +4,7 @@
 
 ##python evaluateSim.py /Users/allysonettinger/Desktop/vectors/polySyn/enModelg.sense /Users/allysonettinger/Desktop/similarity-datasets/MEN/MEN_dataset_natural_form_full
 
-import numpy, scipy, gzip, sys, gensim, re
+import numpy, scipy, gzip, sys, gensim, re, os
 from scipy import stats, spatial
 
 oov = {}
@@ -115,12 +115,15 @@ def iterPairSenses(w1,w2,vecDict):
     
     return (maxSim,maxPair,avgSim,len(w1list),len(w2list))
     
-def getSynAccuracy(vectorDict,synSetFile):
+def getSynAccuracy(vectorDict,synSetFile,vecName,setName):
     numCorr = 0
     numCounted = 0
+    numLines = 0
     skiplines = 0
     synSet = open(synSetFile)
+    outFile = open(os.path.join(os.path.abspath('synResults'),setName+'-breakdown'),'w')
     for l in synSet:
+        numLines += 1
         line = l.strip().split(' | ')
         maxSimCounter = 0
         probe = line[0].lower()
@@ -140,15 +143,30 @@ def getSynAccuracy(vectorDict,synSetFile):
                 maxSimCounter = maxSim
                 winner = op
         if not winner: 
-            print probe + ' LINE SKIPPED\n'
+            print probe + ' line skipped\n'
             skiplines += 1
+            outFile.write('	'.join([probe,corr]))
+            outFile.write('	SKIPPED\n')
             continue
         print 'WINNER: ' + winner + '\n'
+        outFile.write('	'.join([probe,corr,winner]))
         numCounted += 1
-        if winner == corr: numCorr += 1
-    acc = (100*numCorr/float(numCounted))
-    print str(skiplines) + ' lines skipped'
-    return acc
+        if winner == corr: 
+            numCorr += 1
+            outFile.write('	1\n')
+        else: outFile.write('	0\n')
+    
+    outFile.write(str(skiplines) + ' lines skipped\n')
+    outFile.write(vecName)
+    outFile.close()
+    synSet.close()    
+    acc = (100*numCorr/float(numLines))
+    print 'ACC: ' + str(acc)
+    print 'Num Corr: ' + str(numCorr)
+    print 'Num Counted: ' + str(numCounted)
+    print str(skiplines) + ' LINES SKIPPED FROM ' + setName
+    print '\n\n'
+    return acc,skiplines
     
 def iterSynSets(vectorFile, genFormat, synSetFiles):
 
@@ -158,12 +176,17 @@ def iterSynSets(vectorFile, genFormat, synSetFiles):
         sys.stderr.write('Specify format: \'text\' or \'gen\'\n') 
         return
     accList = []
+    m = re.match('.+/([^/]+/[^/]+)$',vectorFile)
+    vecName = m.group(1)
     for set in synSetFiles:
-        acc = getSynAccuracy(vectorDict,set)
-        accList.append((set,acc))
+        m = re.match('.+/([^/]+)$',set)
+        setName = m.group(1)
+        acc,skipped = getSynAccuracy(vectorDict,set,vecName,setName)
+        accList.append((setName,acc,str(skipped)+' skipped'))
         
+    print 'SYN RESULTS'
     for item in accList: print item
-    print vectorFile
+    print vecName
     print oov
     
         

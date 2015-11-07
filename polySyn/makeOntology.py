@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 
-import math,sys,re,os
+import math,sys,re,os,getopt
 from sys import stdout
 
 def readLemmatizer():
@@ -12,11 +12,60 @@ def readLemmatizer():
         list = line.split()
         d[list[0]] = list[1]
     return d
+    
+def readCommandLineInput(argv):
+    try:
+        try:
+            #specify the possible option switches
+            opts, _ = getopt.getopt(sys.argv[1:], "a:p:o:s:h:c:t:k:m:l:g:", ["aligndir=", "pivotlang=", "ontdir=", "stat=",
+                                                              "statthresh=", "counthresh=", "top=", "k=", "mid=", "lemmatize=","logistic="])
+        except: print 'INPUT INCORRECT'
+        aligndir = None
+        pivotlang = None
+        ontdir = None
+        statThresh = None
+        countThresh = 5
+        top=None
+        k = None
+        mid = None
+        lemmatize = None
+        logistic = None
+        stat = None
+        # option processing
+        for option, value in opts:
+            if option in ("-a", "--aligndir"):
+                aligndir = value
+            elif option in ("-p", "--pivotlang"):
+                pivotlang = value
+            elif option in ("-o", "--ontdir"):
+                ontdir = value
+            elif option in ("-s", "--stat"):
+                stat = value
+            elif option in ("-h", "--statthresh"):
+                statThresh = value
+            elif option in ("-c", "--counthresh"):
+                countThresh = value
+            elif option in ("-t", "--top"):
+                top = value
+            elif option in ("-k", "--k"):
+                k = value
+            elif option in ("-m", "--mid"):
+                mid = value
+            elif option in ("-l", "--lemmatize"):
+                lemmatize = bool(int(value))
+            elif option in ("-g", "--logistic"):
+                logistic = bool(int(value))
+            else:
+                print "Doesn't match any option"
+        return (aligndir,pivotlang,ontdir,stat,statThresh,countThresh,top,k,mid,lemmatize,logistic)
+    except: print "Something else went wrong??"
+        
 
-def cleanAlignments(aligndir, pivotlang):
+def cleanAlignments(aligndir, pivotlang,lemmatize):
     
     ##first line to remove if not lemmatizing
-#     lemmaDict = readLemmatizer()
+    if lemmatize:
+        lemmaDict = readLemmatizer()
     
     print 'getting alignment counts'
     alignDoc = open(os.path.join(os.path.abspath(aligndir),'training.align'))
@@ -57,7 +106,8 @@ def cleanAlignments(aligndir, pivotlang):
             zhWord = re.sub('[#|%]','-',zhWord)
             
             ##second line to remove if not lemmatizing
-#             if enWord in lemmaDict: enWord = lemmaDict[enWord]
+            if lemmatize:
+                if enWord in lemmaDict: enWord = lemmaDict[enWord]
             
             if not counts.has_key(enWord): counts[enWord] = 0
             if not counts.has_key(zhWord): counts[zhWord] = 0
@@ -78,21 +128,52 @@ def cleanAlignments(aligndir, pivotlang):
     
     return [translations,counts,num_alignments,training_length]
     
-def filterOntology(translations,counts,num_alignments,pmiThresh,countThresh,top,k,mid):
+def filterOntology(translations,counts,num_alignments,stat,statThresh,countThresh,top,k,mid,logistic):
     #filter by PMI and filter out pronouns and auxiliary/light verbs
     #we want to use the logistic function for the weights that will determine how much we want to move toward vectors in the cluster
     #but first we need to decide which alignments to keep in identifying senses
-    print 'HYPERPARAMETERS'
-    print 'pthresh,cthresh,top,k,mid: ' + ','.join([pmiThresh,countThresh,top,k,mid])
-    ontologyDict = {}
-    pmiThresh = float(pmiThresh)
+    senseWgt = 1.
+    parList = [stat,statThresh,top,k,mid]
+    ontName = 'ontology-' + '-'.join(parList)
+    num_alignments = float(num_alignments)
+    statThresh = float(statThresh)
     countThresh = float(countThresh)
-    k = float(k)
     top = float(top)
+    k = float(k)
     mid = float(mid)
+    ontologyDict = {}
+    if stat == 'P':
+        for pivotword,alignw,pmi in getPMI(translations,counts,num_alignments,statThresh,countThresh):
+            if logistic: w = logisticFunction(pmi,top,k,mid)
+            else: 
+                w = senseWgt
+            if not pivotword in ontologyDict: ontologyDict[pivotword] = {}
+            ontologyDict[pivotword][alignw] = w
+            print pmi
+            print w
+        print 'GOT ONTOLOGY FROM PMI'
+    elif stat == 'G':
+        for pivotword,alignw,gVal in getG(translations,counts,num_alignments,statThresh):
+            if logistic: w = logisticFunction(gVal,top,k,mid) 
+            else: 
+                w = senseWgt          
+            if not pivotword in ontologyDict: ontologyDict[pivotword] = {}
+            ontologyDict[pivotword][alignw] = w
+            print gVal
+            print w
+        print 'GOT ONTOLOGY FROM G'
+    
+    return ontologyDict,ontName
+
+        
+def getPMI(translations,counts,num_alignments,pmiThresh,countThresh):
+    print 'GETTING PMI'
+    pmiThresh = float(pmiThresh)
+    countThresh = float(countThresh)       
     for pivotword,alignwordsdict in translations.items():
         print '\n'+ pivotword
         for alignw, t in alignwordsdict.items():
+            print alignw
             cP = counts[pivotword]
             cA = counts[alignw]
             t = translations[pivotword][alignw]
@@ -102,26 +183,18 @@ def filterOntology(translations,counts,num_alignments,pmiThresh,countThresh,top,
             pmi_frac = pxy/(px*py)
             pmi = math.log(pmi_frac,2)
             perc = t/float(cP)
+
             if pmi < pmiThresh or t < countThresh: continue
-            print alignw
-            print str(pmi) 
-            if not pivotword in ontologyDict: ontologyDict[pivotword] = {}
-            w = logisticFunction(pmi,top,k,mid)
-            ontologyDict[pivotword][alignw] = w
-            print w
-    return ontologyDict
+            yield (pivotword,alignw,pmi)
+
     
-def filterOntologyG(translations,counts,num_alignments,gthresh,top,k,mid):
-    gthresh = float(gthresh)
-    print 'HYPERPARAMETERS'
-    ontologyDict = {}
-    num_alignments = float(num_alignments)
-    k = float(k)
-    top = float(top)
-    mid = float(mid)
+def getG(translations,counts,num_alignments,gThresh):
+    gThresh = float(gThresh)
+    print 'GETTING G TEST'
     for pivotword,alignwordsdict in translations.items():
         print '\n'+ pivotword
         for alignw, t in alignwordsdict.items():
+            print alignw
             cP = float(counts[pivotword])
             notP = num_alignments - cP
             cA = float(counts[alignw])
@@ -147,19 +220,14 @@ def filterOntologyG(translations,counts,num_alignments,gthresh,top,k,mid):
                 gSum += term
             gVal = 2*gSum
             
-            if gVal < gthresh: continue
-            print alignw
-            print gVal
- 
-            if not pivotword in ontologyDict: ontologyDict[pivotword] = {}
-            w = logisticFunction(gVal,top,k,mid)
-            ontologyDict[pivotword][alignw] = w
-            print w
-    return ontologyDict
+            if gVal < gThresh: continue
+            
+            yield (pivotword,alignw,gVal)
     
-def printOntology(ontologyDict,ontdir,pmiThresh,countThresh,top,k,mid):
+    
+def printOntology(ontologyDict,ontdir,ontName):
     senseagWgt = 1.
-    ontname = os.path.join(ontdir,'ontology-' + '-'.join([pmiThresh,countThresh,top,k,mid]))
+    ontname = os.path.join(ontdir,ontName)
     with open(ontname,'w') as ontolDoc:
         for pivotword,alignwordsdict in ontologyDict.items():
             for alignw, alignwWgt in alignwordsdict.items(): 
@@ -169,33 +237,13 @@ def printOntology(ontologyDict,ontdir,pmiThresh,countThresh,top,k,mid):
                     ontolDoc.write(word + '%' + pivotword + '#' + str(alignWgt) + ' ')
                 ontolDoc.write('\n')
                 
-def printOntoloG(ontologyDict,ontdir,gthresh,top,k,mid):
-    senseagWgt = 1.
-    ontname = os.path.join(ontdir,'ontology-' + '-'.join([gthresh,top,k,mid]))
-    with open(ontname,'w') as ontolDoc:
-        for pivotword,alignwordsdict in ontologyDict.items():
-            for alignw, alignwWgt in alignwordsdict.items(): 
-                otherWords = [a for a in alignwordsdict.items() if a[0] != alignw]
-                ontolDoc.write(alignw + '%' + pivotword + '#' + str(senseagWgt)+ ' ')
-                for word,alignWgt in otherWords:
-                    ontolDoc.write(word + '%' + pivotword + '#' + str(alignWgt) + ' ')
-                ontolDoc.write('\n')
                 
 def logisticFunction(x,top,k,mid):
     y = top/(1+math.exp(-k*(x-mid)))
     return y
     
-                    
-def compileOntology(aligndir,pivotlang,ontdir,pmiThresh,countThresh,top,k,mid):
-    [translations,counts,num_alignments,training_length] = cleanAlignments(aligndir, pivotlang)
-#     ontologyDict = filterOntology(translations,counts,num_alignments,pmiThresh,countThresh,top,k,mid)
-    ontologyDict = filterOntologyG(translations,counts,num_alignments,top,k,mid)
-    printOntology(ontologyDict,ontdir,pmiThresh,countThresh,top,k,mid)
-    
-def compileOntoloG(aligndir,pivotlang,ontdir,gThresh,top,k,mid):
-    [translations,counts,num_alignments,training_length] = cleanAlignments(aligndir, pivotlang)
-    ontologyDict = filterOntologyG(translations,counts,num_alignments,gThresh,top,k,mid)
-    printOntoloG(ontologyDict,ontdir,gThresh,top,k,mid)
-    
 if __name__ == "__main__":
-    compileOntoloG(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6],sys.argv[7])
+    (aligndir,pivotlang,ontdir,stat,statThresh,countThresh,top,k,mid,lemmatize,logistic) = readCommandLineInput(sys.argv) 
+    [translations,counts,num_alignments,training_length] = cleanAlignments(aligndir, pivotlang,lemmatize)
+    ontologyDict,ontName = filterOntology(translations,counts,num_alignments,stat,statThresh,countThresh,top,k,mid,logistic)
+    printOntology(ontologyDict,ontdir,ontName)

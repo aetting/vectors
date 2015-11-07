@@ -4,7 +4,7 @@
 
 ##python evaluateSim.py /Users/allysonettinger/Desktop/vectors/polySyn/enModelg.sense /Users/allysonettinger/Desktop/similarity-datasets/MEN/MEN_dataset_natural_form_full
 
-import numpy, scipy, gzip, sys, gensim, re
+import numpy, scipy, gzip, sys, gensim, re, os
 from scipy import stats, spatial
 
 oov = {}
@@ -82,15 +82,19 @@ def avgSimPair(w1,w2,vecDict,senSum,wordTot):
     
     return (avgSim, maxSim, maxPair,senSum, wordTot)
     
-def getSpearman(vectorDict,simSet):
+def getSpearman(vectorDict,simSetFile,setName):
     vecSimsAvg = []
     vecSimsMax = []
     simSetSims = []
+    simSet = open(simSetFile)
     senSum = 0
     wordTot = 0
-    for w1,w2,s in simSet:
-        w1 = w1.lower()
-        w2 = w2.lower()
+    pairs_skipped = 0
+    for line in simSet:
+        split = line.split()
+        w1 = split[0].lower()
+        w2 = split[1].lower()
+        s = split[2]
         m1 = re.match('([a-z]+)\-[a-z]',w1)
         m2 = re.match('([a-z]+)\-[a-z]',w2)
         if m1: w1 = m1.group(1)
@@ -98,6 +102,7 @@ def getSpearman(vectorDict,simSet):
         vecSim = avgSimPair(w1,w2,vectorDict,senSum,wordTot)
         if vecSim is None: 
             print '\n' + w1 + ' or ' + w2 + ' missing!\n'
+            pairs_skipped += 1
             continue
         vecSimAvg = vecSim[0]
         vecSimMax = vecSim[1]
@@ -119,8 +124,9 @@ def getSpearman(vectorDict,simSet):
     print 'RHO (avg): ' + str(rho)
     print 'RHO (max): ' + str(rho2)
     print 'Avg # senses: ' + str(senSum/float(wordTot))
-    print oov
-    return rho, rho2,p
+    print str(pairs_skipped) + ' PAIRS SKIPPED FROM ' + setName
+    print '\n\n'
+    return rho, rho2,p,pairs_skipped
 
 def iterSimSets(vectorFile, genFormat, simSetFiles):
 
@@ -130,13 +136,18 @@ def iterSimSets(vectorFile, genFormat, simSetFiles):
         sys.stderr.write('Specify format: \'text\' or \'gen\'\n') 
         return
     rhoList = []
+    m = re.match('.+/([^/]+/[^/]+)$',vectorFile)
+    vecName = m.group(1)
     for set in simSetFiles:
-        simSet = numpy.loadtxt(set,dtype='str')
-        rho,rho2,p = getSpearman(vectorDict,simSet)
-        rhoList.append((set,rho,rho2))
-        
+        m = re.match('.+/([^/]+)$',set)
+        setName = m.group(1)
+        rho,rho2,p,skipped = getSpearman(vectorDict,set,setName)
+        rhoList.append((setName,rho,rho2,str(skipped) + ' skipped'))
+
+    print 'SIM RESULTS'    
     for item in rhoList: print item
-    print vectorFile
+    print vecName
+    print oov
     
         
 if __name__ == "__main__":
