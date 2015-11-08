@@ -41,8 +41,8 @@ def readCommandLineInput(argv):
     try:
         try:
             #specify the possible option switches
-            opts, _ = getopt.getopt(argv[1:], "hv:q:o:n:e:", ["help", "vectors=", "ontology=",
-                                                              "output=", "numiters=", "epsilon="])
+            opts, _ = getopt.getopt(argv[1:], "hv:q:o:n:e:g:", ["help", "vectors=", "ontology=",
+                                                              "output=", "numiters=", "epsilon=","genformat="])
         except getopt.error, msg:
             raise Usage(msg)
         
@@ -52,6 +52,7 @@ def readCommandLineInput(argv):
         outputFile = None
         numIters = 10
         epsilon = 0.001
+        genFormat = False
         
         setOutput = False
         # option processing
@@ -65,6 +66,8 @@ def readCommandLineInput(argv):
             elif option in ("-o", "--output"):
                 outputFile = value
                 setOutput = True
+            elif option in ("-g", "--genformat"):
+                genFormat = bool(int(value))
             elif option in ("-n", "--numiters"):
                 try:
                     numIters = int(value)
@@ -83,7 +86,7 @@ def readCommandLineInput(argv):
         else:
             if not setOutput:
                 outputFile = vectorsFile + '.sense'
-            return (vectorsFile, ontologyFile, outputFile, numIters, epsilon)
+            return (vectorsFile, ontologyFile, outputFile, numIters, epsilon, genFormat)
     
     except Usage, err:
         print str(err.msg)
@@ -282,8 +285,10 @@ if __name__ == "__main__":
     
     #try opening the specified files    
     try:
-#         vectors, vectorDim = loadWordVectors(commandParse[0])
-        vectors, vectorDim = readWordVectors(commandParse[0])
+        if commandParse[5]:
+            vectors, vectorDim = loadWordVectors(commandParse[0])
+        else:
+            vectors, vectorDim = readWordVectors(commandParse[0])
         senseVocab, ontologyAdjacency = readOntology(commandParse[1], vectors)
         numIters = commandParse[3]
         epsilon = commandParse[4]

@@ -26,9 +26,11 @@ sg_lemvecs=/Users/allysonettinger/Desktop/SenseRetrofit-master/mik-sg-80.txt
 if [ $lem == 1 ]; then 
     ontdir=/Users/allysonettinger/Desktop/polysyn/ontVecs-lem
     inputvecs=$sg_vecs
+    retro_gform=0
 else 
     ontdir=/Users/allysonettinger/Desktop/polysyn/ontVecs
     inputvecs=$sg_lemvecs
+    retro_gform=1
 fi
 
 ont=$ontdir/ontology-$stat-$statthresh-$ceil-$k-$mid
@@ -45,7 +47,7 @@ testvecs=$outputvecs
 
 
 python makeOntology.py -a $aligndir -p $pivotlang -o $ontdir -s $stat -h $statthresh -t $ceil -k $k -m $mid -l $lem -g $log
-python senseretrofit.py -v $inputvecs -q $ont -o $outputvecs
+python senseretrofit.py -v $inputvecs -q $ont -o $outputvecs -g $retro_gform
 python evaluateSim.py $testvecs $genformat $MENdev
 
 echo $notes

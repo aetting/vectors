@@ -5,8 +5,9 @@
 #PBS -m ae
 #PBS -l pmem=10gb
 
-vecs='/Users/allysonettinger/Desktop/vectors/polySyn/SenseRetrofit-master/mik-sg-80.txt'
-ont='/Users/allysonettinger/Desktop/vectors/polySyn/ontology'
-out='/Users/allysonettinger/Desktop/vectors/polySyn/test-alignont.sense'
+vecs=/Users/allysonettinger/Desktop/SenseRetrofit-master/mik-sg-80.txt
+gvecs=/Users/allysonettinger/Desktop/engw2vModel/enModel
+ont=/Users/allysonettinger/Desktop/SenseRetrofit-master/data/sampleonto.txt.gz
+out=/Users/allysonettinger/Desktop/polysyn/ontVecs/testing-gformat.sense
 
-python senseretrofit.py -v $vecs -q $ont -o $out
+python senseretrofit.py -v $gvecs -q $ont -o $out -g 1
