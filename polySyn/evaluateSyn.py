@@ -121,18 +121,20 @@ def getSynAccuracy(vectorDict,synSetFile,vecName,setName):
     numLines = 0
     skiplines = 0
     synSet = open(synSetFile)
-    outFile = open(os.path.join(os.path.abspath('synResults'),setName+'-breakdown'),'w')
+    m = re.match('.+/([^/]+)$',vecName)
+    vecName_trunc = m.group(1)
+    outFile = open(os.path.join(os.path.abspath('synResults'),vecName_trunc+'-'+setName+'-breakdown'),'w')
     for l in synSet:
         numLines += 1
         line = l.strip().split(' | ')
         maxSimCounter = 0
-        probe = line[0].lower()
-        corr = line[1].lower()
+        probe = line[0].lower().strip()
+        corr = line[1].lower().strip()
         options = line[1:]
         print 'PROBE: ' + probe
         print 'CORRECT: ' + corr
         for op in options:
-            op = op.lower()
+            op = op.lower().strip()
             print op
             maxSim,maxPair,avgSim,prlen,oplen = iterPairSenses(probe,op,vectorDict)
             if prlen == 0 or oplen == 0: 

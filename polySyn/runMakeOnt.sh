@@ -10,7 +10,7 @@ statthresh=10
 ceil=1
 k=1
 mid=11
-lem=0
+lem=1
 log=1
 
 notes='count thresh unchanged'
@@ -47,8 +47,8 @@ testvecs=$outputvecs
 
 
 python makeOntology.py -a $aligndir -p $pivotlang -o $ontdir -s $stat -h $statthresh -t $ceil -k $k -m $mid -l $lem -g $log
-python senseretrofit.py -v $inputvecs -q $ont -o $outputvecs -g $retro_gform
-python evaluateSim.py $testvecs $genformat $MENdev
+#python senseretrofit.py -v $inputvecs -q $ont -o $outputvecs -g $retro_gform
+#python evaluateSim.py $testvecs $genformat $MENdev
 
 echo $notes
 echo $stat,$statthresh,$ceil,$k,$mid

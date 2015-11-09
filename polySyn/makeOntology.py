@@ -65,6 +65,7 @@ def cleanAlignments(aligndir, pivotlang,lemmatize):
     
     ##first line to remove if not lemmatizing
     if lemmatize:
+        print 'YES'
         lemmaDict = readLemmatizer()
     
     print 'getting alignment counts'
@@ -107,6 +108,7 @@ def cleanAlignments(aligndir, pivotlang,lemmatize):
             
             ##second line to remove if not lemmatizing
             if lemmatize:
+                'TRYING LEMMAS'
                 if enWord in lemmaDict: enWord = lemmaDict[enWord]
             
             if not counts.has_key(enWord): counts[enWord] = 0
