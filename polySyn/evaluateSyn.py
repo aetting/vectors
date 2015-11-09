@@ -115,7 +115,7 @@ def iterPairSenses(w1,w2,vecDict):
     
     return (maxSim,maxPair,avgSim,len(w1list),len(w2list))
     
-def getSynAccuracy(vectorDict,synSetFile,vecName,setName):
+def getSynAccuracy(vectorDict,synSetFile,vecName,setName,vectorFile):
     numCorr = 0
     numCounted = 0
     numLines = 0
@@ -123,7 +123,7 @@ def getSynAccuracy(vectorDict,synSetFile,vecName,setName):
     synSet = open(synSetFile)
     m = re.match('.+/([^/]+)$',vecName)
     vecName_trunc = m.group(1)
-    outFile = open(os.path.join(os.path.abspath('synResults'),vecName_trunc+'-'+setName+'-breakdown'),'w')
+    outFile = open(vectorFile+'-'+setName+'-breakdown','w')
     for l in synSet:
         numLines += 1
         line = l.strip().split(' | ')
@@ -183,7 +183,7 @@ def iterSynSets(vectorFile, genFormat, synSetFiles):
     for set in synSetFiles:
         m = re.match('.+/([^/]+)$',set)
         setName = m.group(1)
-        acc,skipped = getSynAccuracy(vectorDict,set,vecName,setName)
+        acc,skipped = getSynAccuracy(vectorDict,set,vecName,setName,vectorFile)
         accList.append((setName,acc,str(skipped)+' skipped'))
         
     print 'SYN RESULTS'
