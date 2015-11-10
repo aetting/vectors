@@ -8,4 +8,8 @@ TOEFL=/Users/allysonettinger/Desktop/vectors/polySyn/similarity-datasets/toefl/T
 ESL=/Users/allysonettinger/Desktop/vectors/polySyn/similarity-datasets/esl-rd/ESL-50
 RD=/Users/allysonettinger/Desktop/vectors/polySyn/similarity-datasets/esl-rd/RD-300
 
+ESL=/Users/allysonettinger/Desktop/vectors/polySyn/similarity-datasets/esl-rd/ESL-50-single-word
+RD=/Users/allysonettinger/Desktop/vectors/polySyn/similarity-datasets/esl-rd/RD-300-single-word
+
+
 python evaluateSyn.py $sg_vecs $genformat $ESL $TOEFL
