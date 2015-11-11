@@ -78,8 +78,8 @@ def loadVectors(filename):
     
     return wordVectors
     
-def getPhraseMax(p1,p2,vecDict):
-    print 'PROCESSING PHRASE'
+def getPhraseMax(p1,p2,vecDict,out):
+    out.write('PROCESSING PHRASE'+'\n')
     maxSim = 0
     maxPair = (None,None)
 
@@ -92,24 +92,24 @@ def getPhraseMax(p1,p2,vecDict):
 #             print w2list
             normalizer = float(len(w1list)*len(w2list))
             if normalizer == 0: 
-                print w1 + ' or ' + w2 + ' missing'
+                out.write(w1 + ' or ' + w2 + ' missing'+'\n')
                 continue
             for w1l in w1list:
                 for w2l in w2list:
                     sim = cosSim(vecDict[w1l],vecDict[w2l])
                     simSum += sim
             avgSim = simSum/normalizer
-            print 'PAIR: ' + w1 + ' + ' + w2 
+            out.write('PAIR: ' + w1 + ' + ' + w2 +'\n')
             if avgSim > maxSim:
                 maxSim = avgSim
                 maxPair = (w1,w2)
-    print 'TOP PAIR = ' + str(maxPair)
+    out.write('TOP PAIR = ' + str(maxPair)+'\n')
     return maxPair
     
-def iterPairSenses(w1,w2,vecDict):
+def iterPairSenses(w1,w2,vecDict,out):
 
     if len(w1.split()) > 1 or len(w2.split()) > 1:
-        w1,w2 = getPhraseMax(w1,w2,vecDict)
+        w1,w2 = getPhraseMax(w1,w2,vecDict,out)
     if not w1 or not w2: return (0,0,0,0,0)
     
     w1list = [k for k in vecDict if k.split('%')[0] == w1] 
@@ -119,10 +119,10 @@ def iterPairSenses(w1,w2,vecDict):
 #     print w2list
     if len(w1list) == 0: 
         oov[w1] = 1
-        print w1 + ' missing'
+        out.write(w1 + ' missing'+'\n')
     if len(w2list) == 0: 
         oov[w2] = 1
-        print w2 + ' missing'
+        out.write(w2 + ' missing'+'\n')
     simSum = 0
     maxSim = 0
     maxPair = ()
@@ -134,7 +134,7 @@ def iterPairSenses(w1,w2,vecDict):
     for w1 in w1list:
         for w2 in w2list:
             sim = cosSim(vecDict[w1],vecDict[w2])
-            print 'PAIR: ' + w1 + ' + ' + w2 
+            out.write('PAIR: ' + w1 + ' + ' + w2 +'\n')
             simSum += sim
             if sim > maxSim: 
                 maxSim = sim
@@ -144,7 +144,7 @@ def iterPairSenses(w1,w2,vecDict):
     
     return (maxSim,maxPair,avgSim,len(w1list),len(w2list))
     
-def getSynAccuracy(vectorDict,synSetFile,vecName,setName,vectorFile):
+def getSynAccuracy(vectorDict,synSetFile,vecName,setName,vectorFile,sync):
     numCorr = 0
     numCounted = 0
     numLines = 0
@@ -152,7 +152,10 @@ def getSynAccuracy(vectorDict,synSetFile,vecName,setName,vectorFile):
     synSet = open(synSetFile)
     m = re.match('.+/([^/]+)$',vecName)
     vecName_trunc = m.group(1)
-    outFile = open(vectorFile+'-'+setName+'-breakdown','w')
+    if sync: ss = '-sync'
+    else: ss = '-raw'
+    outFile = open(vectorFile+'-'+setName+ss+'-breakdown','w')
+    outFile3 = open(vectorFile+'-'+setName+ss+'-fulloutput','w')
     lineInd = -1
     summaryList = []
     probeList = []
@@ -165,27 +168,27 @@ def getSynAccuracy(vectorDict,synSetFile,vecName,setName,vectorFile):
         probeList.append(probe)
         corr = line[1].lower().strip()
         options = line[1:]
-        print 'PROBE: ' + probe
-        print 'CORRECT: ' + corr
+        outFile3.write('PROBE: ' + probe+ '\n')
+        outFile3.write('CORRECT: ' + corr+ '\n')
         for op in options:
             op = op.lower().strip()
-            print op
-            maxSim,maxPair,avgSim,prlen,oplen = iterPairSenses(probe,op,vectorDict)
+            outFile3.write(op+ '\n')
+            maxSim,maxPair,avgSim,prlen,oplen = iterPairSenses(probe,op,vectorDict,outFile3)
             if prlen == 0 or oplen == 0: 
                 winner = None
                 break
-            print str(maxSim) + ': ' + ' '.join(maxPair)
+            outFile3.write(str(maxSim) + ': ' + ' '.join(maxPair)+ '\n')
             if maxSim > maxSimCounter:
                 maxSimCounter = maxSim
                 winner = op
         if not winner: 
-            print probe + ' line skipped\n'
+            outFile3.write(probe + ' line skipped\n')
             skiplines += 1
             outFile.write('	'.join([probe,corr]))
             outFile.write('	SKIPPED\n')
             summaryList.append(None)
             continue
-        print 'WINNER: ' + winner + '\n'
+        outFile3.write('WINNER: ' + winner + '\n\n')
         outFile.write('	'.join([probe,corr,winner]))
         numCounted += 1
         if winner == corr: 
@@ -201,12 +204,11 @@ def getSynAccuracy(vectorDict,synSetFile,vecName,setName,vectorFile):
     outFile.close()
     synSet.close()    
     acc = (100*numCorr/float(numLines))
-    print 'ACC: ' + str(acc)
-    print 'Num Corr: ' + str(numCorr)
-    print 'Num Counted: ' + str(numCounted)
-    print str(skiplines) + ' LINES SKIPPED FROM ' + setName
-    print '\n\n'
-    print summaryList
+    outFile3.write('ACC: ' + str(acc)+ '\n')
+    outFile3.write('Num Corr: ' + str(numCorr)+ '\n')
+    outFile3.write('Num Counted: ' + str(numCounted)+ '\n')
+    outFile3.write(str(skiplines) + ' LINES SKIPPED FROM ' + setName+ '\n\n')
+    outFile3.close()
     return acc,skiplines,summaryList,probeList
     
 def iterSynSets(vectorFile, genFormat, synSetFiles):
@@ -246,8 +248,9 @@ def syncSynSets(vectorList, genFormatList, synSetFiles, sync):
     for set in synSetFiles:
         ms = re.match('.+/([^/]+)$',set)
         setName = ms.group(1)
-        out = open(vectorList[0]+'-'+setName+'-sync-full-summary.csv','w')
-        out2 = open(vectorList[0]+'-'+setName+'-sync-overlap-summary.csv','w')
+        if sync:
+            out = open(vectorList[0]+'-'+setName+'-sync-full-summary.csv','w')
+            out2 = open(vectorList[0]+'-'+setName+'-sync-overlap-summary.csv','w')
         allLists = []
         accList = []
         for i in range(len(vectorList)):
@@ -255,15 +258,16 @@ def syncSynSets(vectorList, genFormatList, synSetFiles, sync):
             vectorDict = vecDictList[i]
             m = re.match('.+/([^/]+/[^/]+)$',vectorFile)
             vecName = m.group(1)
-            out.write(vecName + ',')
-            out2.write(vecName + ',')
-            acc,skipped,summaryList,probeList = getSynAccuracy(vectorDict,set,vecName,setName,vectorFile)
+            if sync:
+                out.write(vecName + ',')
+                out2.write(vecName + ',')
+            acc,skipped,summaryList,probeList = getSynAccuracy(vectorDict,set,vecName,setName,vectorFile,sync)
             if not sync:
                 accList.append((setName,vecName,acc,str(skipped)+' skipped'))
             else:
                 allLists.append(summaryList)
-        out.write('\n')
         if sync:
+            out.write('\n')
             toSkip = []
             for j in range(len(allLists[0])):
                 skip = 0
@@ -290,8 +294,9 @@ def syncSynSets(vectorList, genFormatList, synSetFiles, sync):
                 
         accListsAll.append(accList)
         
-        out.close()
-        out2.close()
+        if sync:
+            out.close()
+            out2.close()
         
     print 'SYN RESULTS'
     for list in accListsAll: 
