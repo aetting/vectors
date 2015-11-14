@@ -16,5 +16,5 @@ ESL_sw=/Users/allysonettinger/Desktop/vectors/polySyn/similarity-datasets/esl-rd
 RD_sw=/Users/allysonettinger/Desktop/vectors/polySyn/similarity-datasets/esl-rd/RD-300-single-word
 
 
-python evaluateSyn.py -v $sg_vecs -g text -s $ESL $TOEFL
+python evaluateSyn.py -v $retroA_PMI -g text -s $ESL $TOEFL
 #python evaluateSyn.py -v $sg_vecs -g text -v $retroA_PMI -g text -s $TOEFL -y 1 

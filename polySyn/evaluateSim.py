@@ -4,13 +4,38 @@
 
 ##python evaluateSim.py /Users/allysonettinger/Desktop/vectors/polySyn/enModelg.sense /Users/allysonettinger/Desktop/similarity-datasets/MEN/MEN_dataset_natural_form_full
 
-import numpy, scipy, gzip, sys, gensim, re
+import numpy, scipy, gzip, sys, gensim, re, os, getopt
 from scipy import stats, spatial
 
 oov = {}
 
 def cosSim(u,v):
     return (1 - scipy.spatial.distance.cosine(u,v))
+
+def readCommandLineInput(argv):
+    try:
+        #specify the possible option switches
+        opts, _ = getopt.getopt(sys.argv[1:], "v:s:g:", ["vectors=","set=","genformat="])
+    except: print 'INPUT INCORRECT'
+    vecList = []
+    setList = []
+    genFormatList = []
+    sync = None
+    # option processing
+    for option, value in opts:
+        if option in ("-v", "--vectors"):
+            vecList.append(value)
+        elif option in ("-s", "--set"):
+            setList.append(value)
+        elif option in ("-g", "--genformat"):
+            genFormatList.append(value)
+        else:
+            print "Doesn't match any option"
+    if len(vecList) != len(genFormatList):
+        print "Need equal number of vector files and format specifications!"
+        sys.exit()
+    print (vecList,setList,genFormatList)
+    return (vecList,setList,genFormatList)
 
 def readVectors(filename):
     if filename.endswith('.gz'):
@@ -51,19 +76,19 @@ def loadVectors(filename):
     
     return wordVectors
     
-def avgSimPair(w1,w2,vecDict,senSum,wordTot):
+def avgSimPair(w1,w2,vecDict,senSum,wordTot,out):
     w1list = [k for k in vecDict if k.split('%')[0] == w1] 
     w2list = [k for k in vecDict if k.split('%')[0] == w2]
     
-#     print w1list
-#     print w2list
+    out.write(' '.join(w1list) + '\n')
+    out.write(' '.join(w2list) + '\n')
     if len(w1list) == 0: oov[w1] = 1
     if len(w2list) == 0: oov[w2] = 1
     simSum = 0
     maxSim = 0
     maxPair = ()
     normalizer = float(len(w1list)*len(w2list))
-    print 'lengths:' + str(len(w1list)) + ' ' + str(len(w2list))
+    out.write('lengths:' + str(len(w1list)) + ' ' + str(len(w2list))+ '\n')
     
     if normalizer == 0: return None 
     senSum += (len(w1list) + len(w2list))
@@ -82,22 +107,29 @@ def avgSimPair(w1,w2,vecDict,senSum,wordTot):
     
     return (avgSim, maxSim, maxPair,senSum, wordTot)
     
-def getSpearman(vectorDict,simSet):
+def getSpearman(vectorDict,simSetFile,setName,vectorFile):
     vecSimsAvg = []
     vecSimsMax = []
     simSetSims = []
+    out = open(vectorFile+'-'+setName+'-fulloutput','w')
+    simSet = open(simSetFile)
     senSum = 0
     wordTot = 0
-    for w1,w2,s in simSet:
-        w1 = w1.lower()
-        w2 = w2.lower()
+    pairs_skipped = 0
+    for line in simSet:
+        split = line.split()
+        w1 = split[0].lower()
+        w2 = split[1].lower()
+        out.write(w1 + ' ' + w2 + '\n')
+        s = split[2]
         m1 = re.match('([a-z]+)\-[a-z]',w1)
         m2 = re.match('([a-z]+)\-[a-z]',w2)
         if m1: w1 = m1.group(1)
         if m2: w2 = m2.group(1)
-        vecSim = avgSimPair(w1,w2,vectorDict,senSum,wordTot)
+        vecSim = avgSimPair(w1,w2,vectorDict,senSum,wordTot,out)
         if vecSim is None: 
-            print '\n' + w1 + ' or ' + w2 + ' missing!\n'
+            out.write('\n' + w1 + ' or ' + w2 + ' missing!\n')
+            pairs_skipped += 1
             continue
         vecSimAvg = vecSim[0]
         vecSimMax = vecSim[1]
@@ -109,38 +141,50 @@ def getSpearman(vectorDict,simSet):
         vecSimsAvg.append(vecSimAvg)
         vecSimsMax.append(vecSimMax)
         
-        print s
-        print vecSim[:2]
-        print ' '.join([str(e) for e in vecSim[2]]) 
+        out.write(s + '\n')
+        out.write(' '.join(str(e) for e in vecSim[:2]) + '\n')
+        out.write('MAX: ' + ' '.join([str(e) for e in vecSim[2]])+ '\n\n')
         
         
     rho,p = scipy.stats.spearmanr(vecSimsAvg,simSetSims)
     rho2,p2 = scipy.stats.spearmanr(vecSimsMax,simSetSims)
-    print 'RHO (avg): ' + str(rho)
-    print 'RHO (max): ' + str(rho2)
-    print 'Avg # senses: ' + str(senSum/float(wordTot))
-    print oov
-    return rho, rho2,p
-
-def iterSimSets(vectorFile, genFormat, simSetFiles):
-
-    if genFormat == 'gen': vectorDict = loadVectors(vectorFile)
-    elif genFormat == 'text': vectorDict = readVectors(vectorFile)
-    else:
-        sys.stderr.write('Specify format: \'text\' or \'gen\'\n') 
-        return
-    rhoList = []
+    out.write('RHO (avg): ' + str(rho)+ '\n')
+    out.write('RHO (max): ' + str(rho2)+ '\n')
+    out.write('Avg # senses: ' + str(senSum/float(wordTot))+ '\n')
+    out.write(str(pairs_skipped) + ' PAIRS SKIPPED FROM ' + setName+ '\n')
+    out.close()
+    return rho, rho2,p,pairs_skipped
+    
+def iterSimSets(vectorList, genFormatList, simSetFiles):
+    vecDictList = []
+    for i in range(len(vectorList)):  
+        if genFormatList[i] == 'gen': 
+            vecDictList.append(loadVectors(vectorList[i]))
+        elif genFormatList[i] == 'text': 
+            vecDictList.append(readVectors(vectorList[i]))
+        else:
+            sys.stderr.write('Specify format: \'text\' or \'gen\'\n') 
+            sys.exit()
+    rhoListsAll = []
     for set in simSetFiles:
-        simSet = numpy.loadtxt(set,dtype='str')
-        rho,rho2,p = getSpearman(vectorDict,simSet)
         m = re.match('.+/([^/]+)$',set)
-        rhoList.append((m.group(1),rho,rho2))
-        
-    for item in rhoList: print item
-    m = re.match('.+/([^/]+)$',vectorFile)
-    print m.group(1)
+        setName = m.group(1)
+        rhoList = []
+        for i in range(len(vectorList)):
+            vectorFile = vectorList[i]
+            vectorDict = vecDictList[i]
+            mv = re.match('.+/([^/]+/[^/]+)$',vectorFile)
+            vecName = mv.group(1) 
+            rho,rho2,p,skipped = getSpearman(vectorDict,set,setName,vectorFile)
+            rhoList.append((setName,vecName,rho,rho2,str(skipped) + ' skipped'))
+        rhoListsAll.append(rhoList)
+
+    print 'SIM RESULTS'    
+    for list in rhoListsAll:
+        for item in list: print item
+    print oov
     
         
 if __name__ == "__main__":
-    iterSimSets(sys.argv[1],sys.argv[2],sys.argv[3:])
-#     getVectors(sys.argv[1])
+    vecList,setList,genFormatList = readCommandLineInput(sys.argv)
+    iterSimSets(vecList,genFormatList,setList)

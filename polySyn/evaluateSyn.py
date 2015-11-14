@@ -88,8 +88,8 @@ def getPhraseMax(p1,p2,vecDict,out):
             simSum = 0
             w1list = [k for k in vecDict if k.split('%')[0] == w1] 
             w2list = [k for k in vecDict if k.split('%')[0] == w2]
-#             print w1list
-#             print w2list
+#             out.write(' '.join(w1list) + '\n')
+#             out.write(' '.join(w2list) + '\n')
             normalizer = float(len(w1list)*len(w2list))
             if normalizer == 0: 
                 out.write(w1 + ' or ' + w2 + ' missing'+'\n')
@@ -115,8 +115,8 @@ def iterPairSenses(w1,w2,vecDict,out):
     w1list = [k for k in vecDict if k.split('%')[0] == w1] 
     w2list = [k for k in vecDict if k.split('%')[0] == w2]
     
-#     print w1list
-#     print w2list
+#     out.write(' '.join(w1list) + '\n')
+#     out.write(' '.join(w2list) + '\n')
     if len(w1list) == 0: 
         oov[w1] = 1
         out.write(w1 + ' missing'+'\n')
