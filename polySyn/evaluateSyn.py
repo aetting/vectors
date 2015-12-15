@@ -15,11 +15,12 @@ def cosSim(u,v):
 def readCommandLineInput(argv):
     try:
         #specify the possible option switches
-        opts, _ = getopt.getopt(sys.argv[1:], "v:s:g:y:", ["vectors=","set=","genformat=,sync="])
+        opts, _ = getopt.getopt(sys.argv[1:], "v:s:g:y:c:", ["vectors=","set=","genformat=","sync=","combo="])
     except: print 'INPUT INCORRECT'
     vecList = []
     setList = []
     genFormatList = []
+    comboList = []
     sync = None
     # option processing
     for option, value in opts:
@@ -31,11 +32,15 @@ def readCommandLineInput(argv):
             genFormatList.append(value)
         elif option in ("-y", "--sync"):
             sync = bool(int(value))
+        elif option in ("-c", "--combo"):
+            comboList.append(value)
         else:
             print "Doesn't match any option"
     if len(vecList) != len(genFormatList):
         print "Need equal number of vector files and format specifications!"
         sys.exit()
+    if len(comboList) > 0:
+        vecList.append(comboList)
     print (vecList,setList,genFormatList,sync)
     return (vecList,setList,genFormatList,sync)
 
@@ -182,7 +187,7 @@ def getSynAccuracy(vectorDict,synSetFile,vecName,setName,vectorFile,sync):
                 maxSimCounter = maxSim
                 winner = op
         if not winner: 
-            outFile3.write(probe + ' line skipped\n')
+            outFile3.write(probe + ' line skipped\n\n')
             skiplines += 1
             outFile.write('	'.join([probe,corr]))
             outFile.write('	SKIPPED\n')
@@ -201,6 +206,84 @@ def getSynAccuracy(vectorDict,synSetFile,vecName,setName,vectorFile,sync):
     
     outFile.write(str(skiplines) + ' lines skipped\n')
     outFile.write(vecName)
+    outFile.close()
+    synSet.close()    
+    acc = (100*numCorr/float(numLines))
+    outFile3.write('ACC: ' + str(acc)+ '\n')
+    outFile3.write('Num Corr: ' + str(numCorr)+ '\n')
+    outFile3.write('Num Counted: ' + str(numCounted)+ '\n')
+    outFile3.write(str(skiplines) + ' LINES SKIPPED FROM ' + setName+ '\n\n')
+    outFile3.close()
+    return acc,skiplines,summaryList,probeList
+    
+def getComboAccuracy(vectorList,vecDictList,synSetFile,setName,sync):
+    print 'DOING COMBO'
+    numCorr = 0
+    numCounted = 0
+    numLines = 0
+    skiplines = 0
+    synSet = open(synSetFile)
+#     m = re.match('.+/([^/]+)$',vecName)
+#     vecName_trunc = m.group(1)
+    if sync: ss = '-sync'
+    else: ss = '-raw'
+    outFile = open(vectorList[0]+'-COMBO-'+setName+ss+'-breakdown','w')
+    outFile3 = open(vectorList[0]+'-COMBO-'+setName+ss+'-fulloutput','w')
+    lineInd = -1
+    summaryList = []
+    probeList = []
+    for l in synSet:
+        numLines += 1
+        lineInd += 1
+        line = l.strip().split(' | ')
+        maxSimCounter = 0
+        probe = line[0].lower().strip()
+        probeList.append(probe)
+        corr = line[1].lower().strip()
+        options = line[1:]
+        outFile3.write('PROBE: ' + probe+ '\n')
+        outFile3.write('CORRECT: ' + corr+ '\n')
+        for op in options:
+            maxSimCountWithinOp = 0
+            op = op.lower().strip()
+            outFile3.write(op+ '\n')
+            prlenF = 0
+            oplenF = 0
+            maxList = []
+            for vDict in vecDictList:
+                maxSim,maxPair,avgSim,prlen,oplen = iterPairSenses(probe,op,vDict,outFile3)
+                if maxSim > maxSimCountWithinOp:
+                    maxSimCountWithinOp = maxSim
+                    maxPairWithinOp = maxPair
+                prlenF += prlen
+                oplenF += oplen
+            if prlenF == 0 or oplenF == 0: 
+                winner = None
+                break
+            outFile3.write(str(maxSimCountWithinOp) + ': ' + ' '.join(maxPairWithinOp)+ '\n')
+            if maxSimCountWithinOp > maxSimCounter:
+                maxSimCounter = maxSimCountWithinOp
+                winner = op
+        if not winner: 
+            outFile3.write(probe + ' line skipped\n\n')
+            skiplines += 1
+            outFile.write('	'.join([probe,corr]))
+            outFile.write('	SKIPPED\n')
+            summaryList.append(None)
+            continue
+        outFile3.write('WINNER: ' + winner + '\n\n')
+        outFile.write('	'.join([probe,corr,winner]))
+        numCounted += 1
+        if winner == corr: 
+            numCorr += 1
+            outFile.write('	1\n')
+            summaryList.append(1)
+        else: 
+            outFile.write('	0\n')
+            summaryList.append(0)
+    
+    outFile.write(str(skiplines) + ' lines skipped\n')
+    for l in vectorList: outFile.write(l)
     outFile.close()
     synSet.close()    
     acc = (100*numCorr/float(numLines))
@@ -236,7 +319,12 @@ def iterSynSets(vectorFile, genFormat, synSetFiles):
 def syncSynSets(vectorList, genFormatList, synSetFiles, sync):
 
     vecDictList = []
-    for i in range(len(vectorList)):  
+    for i in range(len(vectorList)):
+        if type(vectorList[i]) == list:
+            cVecDicts = []
+            for cVec in vectorList[i]:
+                cVecDicts.append(readVectors(cVec))
+            break  
         if genFormatList[i] == 'gen': 
             vecDictList.append(loadVectors(vectorList[i]))
         elif genFormatList[i] == 'text': 
@@ -255,30 +343,36 @@ def syncSynSets(vectorList, genFormatList, synSetFiles, sync):
         accList = []
         for i in range(len(vectorList)):
             vectorFile = vectorList[i]
-            vectorDict = vecDictList[i]
-            m = re.match('.+/([^/]+/[^/]+)$',vectorFile)
-            vecName = m.group(1)
+            if type(vectorFile) != list:
+                vectorDict = vecDictList[i]
+                m = re.match('.+/([^/]+/[^/]+)$',vectorFile)
+                vecName = m.group(1)
+            else: vecName = 'COMBO-'+','.join(vectorFile)
             if sync:
                 out.write(vecName + ',')
                 out2.write(vecName + ',')
-            acc,skipped,summaryList,probeList = getSynAccuracy(vectorDict,set,vecName,setName,vectorFile,sync)
+            if type(vectorFile) == list:
+                acc,skipped,summaryList,probeList = getComboAccuracy(vectorFile,cVecDicts,set,setName,sync)
+            else:
+                acc,skipped,summaryList,probeList = getSynAccuracy(vectorDict,set,vecName,setName,vectorFile,sync)
             if not sync:
                 accList.append((setName,vecName,acc,str(skipped)+' skipped'))
             else:
                 allLists.append(summaryList)
         if sync:
             out.write('\n')
+            out2.write('\n')
             toSkip = []
             for j in range(len(allLists[0])):
                 skip = 0
-                for list in allLists:
-                    if list[j] is None: skip = 1
+                for listT in allLists:
+                    if listT[j] is None: skip = 1
                 if skip: toSkip.append(j)
                 out.write(probeList[j] + ',')
-                out.write(','.join([str(list[j]) for list in allLists])+'\n')
+                out.write(','.join([str(listT[j]) for listT in allLists])+'\n')
                 if not skip: 
                     out2.write(probeList[j] + ',')
-                    out2.write(','.join([str(list[j]) for list in allLists])+'\n')
+                    out2.write(','.join([str(listT[j]) for listT in allLists])+'\n')
             print 'TOSKIP'
             print setName
             print toSkip
@@ -288,8 +382,11 @@ def syncSynSets(vectorList, genFormatList, synSetFiles, sync):
                 norm = float(len(syncedCorrList))
                 print norm
                 accSync = sum(syncedCorrList)/norm
-                m = re.match('.+/([^/]+/[^/]+)$',vectorList[i])
-                vecName = m.group(1)
+                if type(vectorList[i]) == list:
+                    vecName = 'COMBO-'+','.join(vectorList[i])
+                else:
+                    m = re.match('.+/([^/]+/[^/]+)$',vectorList[i])
+                    vecName = m.group(1)
                 accList.append((setName,vecName,accSync,str(syncSkipped)+' skipped'))      
                 
         accListsAll.append(accList)
@@ -299,8 +396,8 @@ def syncSynSets(vectorList, genFormatList, synSetFiles, sync):
             out2.close()
         
     print 'SYN RESULTS'
-    for list in accListsAll: 
-        for item in list: print item
+    for listT in accListsAll: 
+        for item in listT: print item
     print oov
     
         
