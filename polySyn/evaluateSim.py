@@ -15,12 +15,14 @@ def cosSim(u,v):
 def readCommandLineInput(argv):
     try:
         #specify the possible option switches
-        opts, _ = getopt.getopt(sys.argv[1:], "v:s:g:", ["vectors=","set=","genformat="])
+        opts, _ = getopt.getopt(sys.argv[1:], "v:s:g:c:m:", ["vectors=","set=","genformat=","combo=","combomix="])
     except: print 'INPUT INCORRECT'
     vecList = []
     setList = []
     genFormatList = []
+    comboList = []
     sync = None
+    mix = None
     # option processing
     for option, value in opts:
         if option in ("-v", "--vectors"):
@@ -29,13 +31,19 @@ def readCommandLineInput(argv):
             setList.append(value)
         elif option in ("-g", "--genformat"):
             genFormatList.append(value)
+        elif option in ("-c", "--combo"):
+            comboList.append(value)
+        elif option in ("-m", "--combomix"):
+            mix = value
         else:
             print "Doesn't match any option"
     if len(vecList) != len(genFormatList):
         print "Need equal number of vector files and format specifications!"
         sys.exit()
+    if len(comboList) > 0:
+        vecList.append(comboList)
     print (vecList,setList,genFormatList)
-    return (vecList,setList,genFormatList)
+    return (vecList,setList,genFormatList,mix)
 
 def readVectors(filename):
     if filename.endswith('.gz'):
@@ -155,9 +163,74 @@ def getSpearman(vectorDict,simSetFile,setName,vectorFile):
     out.close()
     return rho, rho2,p,pairs_skipped
     
-def iterSimSets(vectorList, genFormatList, simSetFiles):
+def getComboSpearman(vectorDicts,simSetFile,setName,vectorList,mix):
+    vecSimsAvg = []
+    vecSimsMax = []
+    simSetSims = []
+    out = open(vectorList[0]+'-COMBO-'+setName+'-fulloutput','w')
+    simSet = open(simSetFile)
+    senSum = 0
+    wordTot = 0
+    pairs_skipped = 0
+    for line in simSet:
+        split = line.split()
+        w1 = split[0].lower()
+        w2 = split[1].lower()
+        out.write(w1 + ' ' + w2 + '\n')
+        s = split[2]
+        m1 = re.match('([a-z]+)\-[a-z]',w1)
+        m2 = re.match('([a-z]+)\-[a-z]',w2)
+        if m1: w1 = m1.group(1)
+        if m2: w2 = m2.group(1)
+        cAvgList = []
+        cMaxList = []
+        for vDict in vectorDicts:
+            vecSim = avgSimPair(w1,w2,vDict,senSum,wordTot,out)
+            if vecSim is None: 
+                out.write('\n' + w1 + ' or ' + w2 + ' missing!\n')
+                pairs_skipped += 1
+                continue
+            cAvgList.append(vecSim[0])
+            cMaxList.append(vecSim[1])
+        if mix in ('a','avg'):
+            vecSimAvg = numpy.mean(cAvgList)
+            vecSimMax = numpy.mean(cMaxList)
+        elif mix in ('m','max'):
+            vecSimAvg = max(cAvgList)
+            vecSimMax = max(cMaxList)
+        else: 
+            print 'Specify mix type for combo!'
+            sys.exit()
+        
+        senSum = vecSim[3]
+        wordTot = vecSim[4]
+        
+        simSetSims.append(float(s))
+        vecSimsAvg.append(vecSimAvg)
+        vecSimsMax.append(vecSimMax)
+        
+        out.write(s + '\n')
+        out.write(' '.join(str(e) for e in vecSim[:2]) + '\n')
+        out.write('MAX: ' + ' '.join([str(e) for e in vecSim[2]])+ '\n\n')
+        
+        
+    rho,p = scipy.stats.spearmanr(vecSimsAvg,simSetSims)
+    rho2,p2 = scipy.stats.spearmanr(vecSimsMax,simSetSims)
+    out.write('RHO (avg): ' + str(rho)+ '\n')
+    out.write('RHO (max): ' + str(rho2)+ '\n')
+    out.write('Avg # senses: ' + str(senSum/float(wordTot))+ '\n')
+    out.write(str(pairs_skipped) + ' PAIRS SKIPPED FROM ' + setName+ '\n')
+    out.close()
+    return rho, rho2,p,pairs_skipped
+    
+def iterSimSets(vectorList, genFormatList, simSetFiles, mix):
     vecDictList = []
-    for i in range(len(vectorList)):  
+    for i in range(len(vectorList)):
+        if type(vectorList[i]) == list:
+            cVecDicts = []
+            for cVec in vectorList[i]:
+                cVecDicts.append(readVectors(cVec))
+            break  
         if genFormatList[i] == 'gen': 
             vecDictList.append(loadVectors(vectorList[i]))
         elif genFormatList[i] == 'text': 
@@ -172,19 +245,24 @@ def iterSimSets(vectorList, genFormatList, simSetFiles):
         rhoList = []
         for i in range(len(vectorList)):
             vectorFile = vectorList[i]
-            vectorDict = vecDictList[i]
-            mv = re.match('.+/([^/]+/[^/]+)$',vectorFile)
-            vecName = mv.group(1) 
-            rho,rho2,p,skipped = getSpearman(vectorDict,set,setName,vectorFile)
+            if type(vectorFile) != list:
+                vectorDict = vecDictList[i]
+                mv = re.match('.+/([^/]+/[^/]+)$',vectorFile)
+                vecName = mv.group(1) 
+            else: vecName = 'COMBO-'+','.join(vectorFile)
+            if type(vectorFile) == list:
+                rho,rho2,p,skipped = getComboSpearman(cVecDicts,set,setName,vectorFile,mix)
+            else:
+                rho,rho2,p,skipped = getSpearman(vectorDict,set,setName,vectorFile)
             rhoList.append((setName,vecName,rho,rho2,str(skipped) + ' skipped'))
         rhoListsAll.append(rhoList)
 
     print 'SIM RESULTS'    
-    for list in rhoListsAll:
-        for item in list: print item
+    for listA in rhoListsAll:
+        for item in listA: print item
     print oov
     
         
 if __name__ == "__main__":
-    vecList,setList,genFormatList = readCommandLineInput(sys.argv)
-    iterSimSets(vecList,genFormatList,setList)
+    vecList,setList,genFormatList,mix = readCommandLineInput(sys.argv)
+    iterSimSets(vecList,genFormatList,setList,mix)
