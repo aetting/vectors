@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import string, numpy, gzip
-f = "TEST.txt"
+f = "/Users/allysonettinger/Desktop/SenseRetrofit-master/TEST.txt"
 if f.endswith(".gz"):
     o = gzip.open(f, "rb")
 else:
