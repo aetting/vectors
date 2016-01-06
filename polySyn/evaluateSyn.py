@@ -113,12 +113,17 @@ def getPhraseMax(p1,p2,vecDict,out):
     
 def iterPairSenses(w1,w2,vecDict,out):
 
+    nu = 0
+    
     if len(w1.split()) > 1 or len(w2.split()) > 1:
         w1,w2 = getPhraseMax(w1,w2,vecDict,out)
-    if not w1 or not w2: return (0,0,0,0,0)
+    if not w1 or not w2: return (0,0,0,0,0,0)
     
     w1list = [k for k in vecDict if k.split('%')[0] == w1] 
     w2list = [k for k in vecDict if k.split('%')[0] == w2]
+    
+    if len(w1list) == 1 and re.match('.*00:00:', w1list[0]): nu = 1
+    if len(w2list) == 1 and re.match('.*00:00:', w2list[0]): nu = 1
     
 #     out.write(' '.join(w1list) + '\n')
 #     out.write(' '.join(w2list) + '\n')
@@ -132,7 +137,7 @@ def iterPairSenses(w1,w2,vecDict,out):
     maxSim = 0
     maxPair = ()
     normalizer = float(len(w1list)*len(w2list))
-    if normalizer == 0: return (0,0,0,0,0)
+    if normalizer == 0: return (0,0,0,0,0,0)
 #     print 'lengths:' + str(len(w1list)) + ' ' + str(len(w2list)) 
     
     '''iterate over senses'''
@@ -146,8 +151,8 @@ def iterPairSenses(w1,w2,vecDict,out):
                 maxPair = (w1,w2)
             
     avgSim = simSum/normalizer
-    
-    return (maxSim,maxPair,avgSim,len(w1list),len(w2list))
+
+    return (maxSim,maxPair,avgSim,len(w1list),len(w2list),nu)
     
 def getSynAccuracy(vectorDict,synSetFile,vecName,setName,vectorFile,sync):
     numCorr = 0
@@ -164,6 +169,7 @@ def getSynAccuracy(vectorDict,synSetFile,vecName,setName,vectorFile,sync):
     lineInd = -1
     summaryList = []
     probeList = []
+    nu_num = 0
     for l in synSet:
         numLines += 1
         lineInd += 1
@@ -178,9 +184,14 @@ def getSynAccuracy(vectorDict,synSetFile,vecName,setName,vectorFile,sync):
         for op in options:
             op = op.lower().strip()
             outFile3.write(op+ '\n')
-            maxSim,maxPair,avgSim,prlen,oplen = iterPairSenses(probe,op,vectorDict,outFile3)
+            maxSim,maxPair,avgSim,prlen,oplen,nu = iterPairSenses(probe,op,vectorDict,outFile3)
             if prlen == 0 or oplen == 0: 
                 winner = None
+                break
+            if nu: 
+                print 'Non updated!! ' + probe + ' ' + op
+                winner = None
+                nu_num += 1
                 break
             outFile3.write(str(maxSim) + ': ' + ' '.join(maxPair)+ '\n')
             if maxSim > maxSimCounter:
@@ -214,6 +225,7 @@ def getSynAccuracy(vectorDict,synSetFile,vecName,setName,vectorFile,sync):
     outFile3.write('Num Counted: ' + str(numCounted)+ '\n')
     outFile3.write(str(skiplines) + ' LINES SKIPPED FROM ' + setName+ '\n\n')
     outFile3.close()
+    print 'Num NU: ' + str(nu_num)
     return acc,skiplines,summaryList,probeList
     
 def getComboAccuracy(vectorList,vecDictList,synSetFile,setName,sync):
@@ -251,7 +263,7 @@ def getComboAccuracy(vectorList,vecDictList,synSetFile,setName,sync):
             oplenF = 0
             maxList = []
             for vDict in vecDictList:
-                maxSim,maxPair,avgSim,prlen,oplen = iterPairSenses(probe,op,vDict,outFile3)
+                maxSim,maxPair,avgSim,prlen,oplen,nu = iterPairSenses(probe,op,vDict,outFile3)
                 if maxSim > maxSimCountWithinOp:
                     maxSimCountWithinOp = maxSim
                     maxPairWithinOp = maxPair

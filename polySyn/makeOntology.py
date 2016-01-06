@@ -90,6 +90,10 @@ def cleanAlignments(aligndir, pivotlang,lemmatize):
         alignLine = alignLines[i].split()
         zhLine = zhAlignLines[i].split()
         enLine = enAlignLines[i].split()
+        
+        if len(enLine) < 15:
+            print enLine
+            print ' '.join(zhLine)
 
         for j in range(len(alignLine)):
             zhPos = int(alignLine[j].split('-')[0])
@@ -105,6 +109,7 @@ def cleanAlignments(aligndir, pivotlang,lemmatize):
             
             enWord = re.sub('[#|%]','-',enWord)
             zhWord = re.sub('[#|%]','-',zhWord)
+            if len(enLine) < 15: print enWord + ' ' + zhWord
             
             ##second line to remove if not lemmatizing
             if lemmatize:
