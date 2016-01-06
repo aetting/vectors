@@ -122,8 +122,8 @@ def iterPairSenses(w1,w2,vecDict,out):
     w1list = [k for k in vecDict if k.split('%')[0] == w1] 
     w2list = [k for k in vecDict if k.split('%')[0] == w2]
     
-    if len(w1list) == 1 and re.match('.*00:00:', w1list[0]): nu = 1
-    if len(w2list) == 1 and re.match('.*00:00:', w2list[0]): nu = 1
+    if len(w1list) == 1 and re.match('.*%0:00:00::', w1list[0]): nu = 1
+    if len(w2list) == 1 and re.match('.*%0:00:00::', w2list[0]): nu = 1
     
 #     out.write(' '.join(w1list) + '\n')
 #     out.write(' '.join(w2list) + '\n')
