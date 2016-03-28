@@ -188,11 +188,11 @@ def getSynAccuracy(vectorDict,synSetFile,vecName,setName,vectorFile,sync):
             if prlen == 0 or oplen == 0: 
                 winner = None
                 break
-            if nu: 
-                print 'Non updated!! ' + probe + ' ' + op
-                winner = None
-                nu_num += 1
-                break
+#             if nu: 
+#                 print 'Non updated!! ' + probe + ' ' + op
+#                 winner = None
+#                 nu_num += 1
+#                 break
             outFile3.write(str(maxSim) + ': ' + ' '.join(maxPair)+ '\n')
             if maxSim > maxSimCounter:
                 maxSimCounter = maxSim
@@ -225,7 +225,7 @@ def getSynAccuracy(vectorDict,synSetFile,vecName,setName,vectorFile,sync):
     outFile3.write('Num Counted: ' + str(numCounted)+ '\n')
     outFile3.write(str(skiplines) + ' LINES SKIPPED FROM ' + setName+ '\n\n')
     outFile3.close()
-    print 'Num NU: ' + str(nu_num)
+#     print 'Num NU: ' + str(nu_num)
     return acc,skiplines,summaryList,probeList
     
 def getComboAccuracy(vectorList,vecDictList,synSetFile,setName,sync):
