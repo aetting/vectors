@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 
-import math,sys,re,os,getopt,numpy
+import math,sys,re,os,getopt
 from sys import stdout
 
 def readLemmatizer():
@@ -17,9 +17,8 @@ def readCommandLineInput(argv):
     try:
         try:
             #specify the possible option switches
-            opts, _ = getopt.getopt(sys.argv[1:], "a:p:o:s:h:c:t:k:m:l:g:y:", ["aligndir=", "pivotlang=", "ontdir=", "stat=",
-                                                              "statthresh=", "counthresh=", "top=", "k=", "mid=", "lemmatize=","logistic=","symm="])
-            print opts
+            opts, _ = getopt.getopt(sys.argv[1:], "a:p:o:s:h:c:t:k:m:l:g:", ["aligndir=", "pivotlang=", "ontdir=", "stat=",
+                                                              "statthresh=", "counthresh=", "top=", "k=", "mid=", "lemmatize=","logistic="])
         except: print 'INPUT INCORRECT'
         aligndir = None
         pivotlang = None
@@ -32,7 +31,6 @@ def readCommandLineInput(argv):
         lemmatize = None
         logistic = None
         stat = None
-        symm = None
         # option processing
         for option, value in opts:
             if option in ("-a", "--aligndir"):
@@ -57,11 +55,9 @@ def readCommandLineInput(argv):
                 lemmatize = bool(int(value))
             elif option in ("-g", "--logistic"):
                 logistic = bool(int(value))
-            elif option in ("-y", "--symm"):
-                symm = bool(int(value))
             else:
                 print "Doesn't match any option"
-        return (aligndir,pivotlang,ontdir,stat,statThresh,countThresh,top,k,mid,lemmatize,logistic,symm)
+        return (aligndir,pivotlang,ontdir,stat,statThresh,countThresh,top,k,mid,lemmatize,logistic)
     except: print "Something else went wrong??"
         
 
@@ -139,12 +135,12 @@ def cleanAlignments(aligndir, pivotlang,lemmatize):
     
     return [translations,counts,num_alignments,training_length]
     
-def filterOntology(translations,counts,num_alignments,stat,statThresh,countThresh,top,k,mid,logistic,symm):
+def filterOntology(translations,counts,num_alignments,stat,statThresh,countThresh,top,k,mid,logistic):
     #filter by PMI and filter out pronouns and auxiliary/light verbs
     #we want to use the logistic function for the weights that will determine how much we want to move toward vectors in the cluster
     #but first we need to decide which alignments to keep in identifying senses
     senseWgt = 1.
-    parList = [stat,statThresh,top,k,mid,str(int(symm))]
+    parList = [stat,statThresh,top,k,mid]
     ontName = 'ontology-' + '-'.join(parList)
     num_alignments = float(num_alignments)
     statThresh = float(statThresh)
@@ -236,7 +232,7 @@ def getG(translations,counts,num_alignments,gThresh):
             yield (pivotword,alignw,gVal)
     
     
-def printOntology(ontologyDict,ontdir,ontName,symm):
+def printOntology(ontologyDict,ontdir,ontName):
     senseagWgt = 1.
     ontname = os.path.join(ontdir,ontName)
     with open(ontname,'w') as ontolDoc:
@@ -245,10 +241,7 @@ def printOntology(ontologyDict,ontdir,ontName,symm):
                 otherWords = [a for a in alignwordsdict.items() if a[0] != alignw]
                 ontolDoc.write(alignw + '%' + pivotword + '#' + str(senseagWgt)+ ' ')
                 for word,alignWgt in otherWords:
-                    symmetWgt = numpy.mean([alignWgt,alignwWgt])
-                    if symm: printWgt = symmetWgt
-                    else: printWgt = alignWgt
-                    ontolDoc.write(word + '%' + pivotword + '#' + str(printWgt) + ' ')
+                    ontolDoc.write(word + '%' + pivotword + '#' + str(alignWgt) + ' ')
                 ontolDoc.write('\n')
                 
                 
@@ -257,7 +250,7 @@ def logisticFunction(x,top,k,mid):
     return y
     
 if __name__ == "__main__":
-    (aligndir,pivotlang,ontdir,stat,statThresh,countThresh,top,k,mid,lemmatize,logistic,symm) = readCommandLineInput(sys.argv) 
+    (aligndir,pivotlang,ontdir,stat,statThresh,countThresh,top,k,mid,lemmatize,logistic) = readCommandLineInput(sys.argv) 
     [translations,counts,num_alignments,training_length] = cleanAlignments(aligndir, pivotlang,lemmatize)
-    ontologyDict,ontName = filterOntology(translations,counts,num_alignments,stat,statThresh,countThresh,top,k,mid,logistic,symm)
-    printOntology(ontologyDict,ontdir,ontName,symm)
+    ontologyDict,ontName = filterOntology(translations,counts,num_alignments,stat,statThresh,countThresh,top,k,mid,logistic)
+    printOntology(ontologyDict,ontdir,ontName)

@@ -5,13 +5,14 @@
 #PBS -m ae
 #PBS -l pmem=10gb
 
-stat=P
-statthresh=10
+stat=G
+statthresh=100
 ceil=1
 k=1
-mid=11
+mid=110
 lem=1
 log=1
+symm=1
 
 notes='count thresh unchanged'
 
@@ -25,16 +26,16 @@ sg_lemvecs=/Users/allysonettinger/Desktop/SenseRetrofit-master/mik-sg-80.txt
 
 if [ $lem == 1 ]; then 
     ontdir=/Users/allysonettinger/Desktop/polysyn/ontVecs-lem
-    inputvecs=$sg_vecs
+    inputvecs=$sg_lemvecs
     retro_gform=0
 else 
     ontdir=/Users/allysonettinger/Desktop/polysyn/ontVecs
-    inputvecs=$sg_lemvecs
-    retro_gform=1
+    inputvecs=$sg_vecs
+    retro_gform=0
 fi
 
-ont=$ontdir/ontology-$stat-$statthresh-$ceil-$k-$mid
-outputvecs=$ontdir/$stat-$statthresh-$ceil-$k-$mid.sense
+ont=$ontdir/ontology-$stat-$statthresh-$ceil-$k-$mid-$symm
+outputvecs=$ontdir/$stat-$statthresh-$ceil-$k-$mid-$symm.sense
 iters=500
 
 
@@ -46,7 +47,7 @@ MENdev=$simdir/MEN/MEN_dataset_lemma_form.dev
 testvecs=$outputvecs
 
 
-python makeOntology.py -a $aligndir -p $pivotlang -o $ontdir -s $stat -h $statthresh -t $ceil -k $k -m $mid -l $lem -g $log
+python makeOntologyTesting.py -a $aligndir -p $pivotlang -o $ontdir -s $stat -h $statthresh -t $ceil -k $k -m $mid -l $lem -g $log -y $symm
 #python senseretrofit.py -v $inputvecs -q $ont -o $outputvecs -g $retro_gform
 #python evaluateSim.py $testvecs $genformat $MENdev
 
